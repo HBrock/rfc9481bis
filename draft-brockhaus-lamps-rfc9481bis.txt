@@ -19,8 +19,8 @@ Abstract
    This document describes the conventions for using several
    cryptographic algorithms with the Certificate Management Protocol
    (CMP).  CMP is used to enroll and further manage the lifecycle of
-   X.509 certificates.  This document also updates the algorithm use
-   profile from Appendix D.2 of RFC 4210.
+   X.509 certificates.  This document adds conventions for several post-
+   quantum algorithms.  It updates rfc4210bis and obsoleted RFC 9481.
 
 Discussion Venues
 
@@ -71,20 +71,31 @@ Table of Contents
    2.  Message Digest Algorithms
      2.1.  SHA2
      2.2.  SHAKE
+     2.3.  SHA3
    3.  Signature Algorithms
      3.1.  RSA
      3.2.  ECDSA
      3.3.  EdDSA
+     3.4.  ML-DSA
+     3.5.  Composite ML-DSA
+     3.6.  SLH-DSA
+     3.7.  LMS/HSS
+     3.8.  XMSS/XMSSMT
    4.  Key Management Algorithms
      4.1.  Key Agreement Algorithms
        4.1.1.  Diffie-Hellman
        4.1.2.  ECDH
      4.2.  Key Transport Algorithms
        4.2.1.  RSA
-     4.3.  Symmetric Key-Encryption Algorithms
-       4.3.1.  AES Key Wrap
-     4.4.  Key Derivation Algorithms
-       4.4.1.  PBKDF2
+     4.3.  Key Encapsulation Mechanism
+     4.4.  RSA-KEM
+     4.5.  ML-KEM
+     4.6.  Composite ML-KEM
+     4.7.  Symmetric Key-Encryption Algorithms
+       4.7.1.  AES Key Wrap
+     4.8.  Key Derivation Algorithms
+       4.8.1.  PBKDF2
+     4.9.  HKDF
    5.  Content-Encryption Algorithms
      5.1.  AES-CBC
    6.  Message Authentication Code Algorithms
@@ -215,6 +226,10 @@ Table of Contents
 
    Specific conventions to be considered are specified in Section 3.1 of
    [RFC8702].
+
+2.3.  SHA3
+
+   ...
 
 3.  Signature Algorithms
 
@@ -355,6 +370,26 @@ Table of Contents
    signed using Ed25519 or SHAKE256 with d=512 if the certificate to be
    confirmed has been signed using Ed448.
 
+3.4.  ML-DSA
+
+   ...
+
+3.5.  Composite ML-DSA
+
+   ...
+
+3.6.  SLH-DSA
+
+   ...
+
+3.7.  LMS/HSS
+
+   ...
+
+3.8.  XMSS/XMSSMT
+
+   ...
+
 4.  Key Management Algorithms
 
    CMP utilizes the following general key management techniques: key
@@ -372,7 +407,7 @@ Table of Contents
    Key agreement algorithms are only used in CMP when using CMS
    EnvelopedData [RFC5652] together with the key agreement key
    management technique.  When a key agreement algorithm is used, a key-
-   encryption algorithm (Section 4.3) is needed next to the content-
+   encryption algorithm (Section 4.7) is needed next to the content-
    encryption algorithm (Section 5).
 
    Key agreement algorithm identifiers are located in the:
@@ -504,7 +539,23 @@ Table of Contents
    Further conventions to be considered for PKCS #1 v1.5 are specified
    in Section 4.2.1 of [RFC3370] and for RSAES-OAEP in [RFC3560].
 
-4.3.  Symmetric Key-Encryption Algorithms
+4.3.  Key Encapsulation Mechanism
+
+   ...
+
+4.4.  RSA-KEM
+
+   ...
+
+4.5.  ML-KEM
+
+   ...
+
+4.6.  Composite ML-KEM
+
+   ...
+
+4.7.  Symmetric Key-Encryption Algorithms
 
    The symmetric key-encryption algorithm is also referred to as
    KM_KW_ALG in Section 7.2 and the Lightweight CMP Profile [RFC9483].
@@ -524,7 +575,7 @@ Table of Contents
    *  encryptedKey field of RecipientEncryptedKeys (for key agreement)
       and PasswordRecipientInfo (for password-based key management).
 
-4.3.1.  AES Key Wrap
+4.7.1.  AES Key Wrap
 
    The AES encryption algorithm is defined in FIPS Pub 197
    [NIST.FIPS.197], and the key wrapping is defined in [RFC3394].
@@ -549,7 +600,7 @@ Table of Contents
    Further conventions to be considered for AES key wrap are specified
    in Section 2.2 of [RFC3394] and Section 2.3.2 of [RFC3565].
 
-4.4.  Key Derivation Algorithms
+4.8.  Key Derivation Algorithms
 
    The key derivation algorithm is also referred to as KM_KD_ALG in
    Section 7.2 and the Lightweight CMP Profile [RFC9483].
@@ -569,7 +620,7 @@ Table of Contents
    must be chosen independently to ensure usage of independent symmetric
    keys.
 
-4.4.1.  PBKDF2
+4.8.1.  PBKDF2
 
    Password-based key derivation function 2 (PBKDF2) is defined in
    [RFC8018].
@@ -581,6 +632,10 @@ Table of Contents
 
    Further conventions to be considered for PBKDF2 are specified in
    Section 4.4.1 of [RFC3370] and Section 5.2 of [RFC8018].
+
+4.9.  HKDF
+
+   ...
 
 5.  Content-Encryption Algorithms
 
@@ -669,7 +724,7 @@ Table of Contents
 
    Password-Based Message Authentication Code 1 (PBMAC1) is defined in
    [RFC8018].  PBMAC1 combines a password-based key derivation function,
-   like PBKDF2 (Section 4.4.1), with an underlying symmetric key-based
+   like PBKDF2 (Section 4.8.1), with an underlying symmetric key-based
    message authentication scheme.
 
    PBMAC1 has the following OID:
@@ -684,7 +739,7 @@ Table of Contents
 
    Symmetric key-based message authentication code (MAC) algorithms are
    used for deriving the symmetric encryption key when using PBKDF2, as
-   described in Section 4.4.1, as well as with password-based MAC, as
+   described in Section 4.8.1, as well as with password-based MAC, as
    described in Section 6.1.
 
    MAC algorithm identifiers are located in the:
@@ -991,14 +1046,14 @@ Table of Contents
       as the mac parameter, see Section 6.2.1)
 
    PBMAC1:  id-PBMAC1, see Section 6.1.2 (with id-PBKDF2 as the key
-      derivation function, see Section 4.4.1 and id-hmacWithSHA256 as
+      derivation function, see Section 4.8.1 and id-hmacWithSHA256 as
       the message authentication scheme, see Section 6.2.1).  It is
       RECOMMENDED to prefer the usage of PBMAC1 instead of
       PasswordBasedMac.
 
    DH:  id-alg-ESDH, see Section 4.1.1
 
-   AES-wrap:  id-aes128-wrap, see Section 4.3.1
+   AES-wrap:  id-aes128-wrap, see Section 4.7.1
 
    AES-CBC:  id-aes128-CBC, see Section 5.1
 
@@ -1332,6 +1387,18 @@ Appendix A.  History of Changes
 
    [RFC Editor: Please remove this appendix in the release version of
    the document.]
+
+   Changes from 00 -> 01:
+
+   *  Added SHA3 to Section 2
+
+   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, LMS/HSS, XMSS/XMSSMT to
+      Section 3
+
+   *  Added new Section 4.3 for Key Encapsulation Mechanisms containing
+      RSA-KEM, ML-KEM, Composite ML-KEM
+
+   *  Added HKDF to Section 4.5
 
    draft-brockhaus-lamps-rfc9481bis version 00:
 
