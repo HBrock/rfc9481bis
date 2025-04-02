@@ -142,6 +142,8 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
 
 # Introduction {#Introduction}
 
+[ToDo: To be updated]
+
 {{Section D.2 of RFC4210}} contains a set of algorithms that is
 mandatory to be supported by implementations conforming to {{RFC4210}}.
 These algorithms were appropriate at the time CMP was released, but as
@@ -892,7 +894,7 @@ Specific conventions to be considered for the AES-GMAC are specified in {{RFC904
 ### SHAKE-Based KMAC {#SHAKE-KMAC}
 
 The KMAC algorithm is defined in {{RFC8702}} and
-[FIPS SP 800-185](#NIST.SP.800-185).
+[NIST SP 800-185](#NIST.SP.800-185).
 
 The SHAKE-based KMAC algorithm is identified by the following OIDs:
 
@@ -1141,6 +1143,7 @@ Changes from 00 -> 01:
 
 * Added HKDF to Section 4.5
 
+* Fixed erratum 7800
 
 draft-brockhaus-lamps-rfc9481bis version 00:
 
