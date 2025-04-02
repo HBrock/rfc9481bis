@@ -95,7 +95,7 @@ Table of Contents
        4.4.1.  AES Key Wrap
      4.5.  Key Derivation Algorithms
        4.5.1.  PBKDF2
-     4.6.  HKDF
+       4.5.2.  HKDF
    5.  Content-Encryption Algorithms
      5.1.  AES-CBC
    6.  Message Authentication Code Algorithms
@@ -633,7 +633,7 @@ Table of Contents
    Further conventions to be considered for PBKDF2 are specified in
    Section 4.4.1 of [RFC3370] and Section 5.2 of [RFC8018].
 
-4.6.  HKDF
+4.5.2.  HKDF
 
    ...
 
