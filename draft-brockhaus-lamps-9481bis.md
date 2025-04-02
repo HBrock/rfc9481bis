@@ -1,6 +1,6 @@
 ---
 v: 3
-docname: draft-ietf-lamps-cmp-algorithms-16
+docname: draft-brockhaus-lamps-9481bis-latest
 cat: std
 number: '9481'
 updates: '4210'
