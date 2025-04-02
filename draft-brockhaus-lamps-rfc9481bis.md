@@ -1,8 +1,8 @@
 ---
 v: 3
-docname: draft-brockhaus-lamps-9481bis-latest
+docname: draft-brockhaus-lamps-rfc9481bis-latest
 cat: std
-number: '9481'
+obsoletes: '9481'
 updates: '4210'
 consensus: 'true'
 submissiontype: IETF
@@ -14,10 +14,13 @@ pi:
   sortrefs: 'true'
 title: Certificate Management Protocol (CMP) Algorithms
 abbrev: CMP Algorithms
-area: ""
+area: sec
 wg: lamps
-kw: CMP
-date: 2024-07
+kw:
+- CMP
+- certificate management
+- PKI
+date: 2025
 
 author:
 - name: Hendrik Brockhaus
@@ -951,7 +954,7 @@ RSA:
 : sha256WithRSAEncryption with 2048 bit, see {{RSASig}}
 
 PasswordBasedMac:
-: id-PasswordBasedMac, see {{PBMac}} (with id-sha256 as the owf parameter, see {{SHA2}} and id-hmacWithSHA256 as the mac parameter, see {{HMAC-SHA2}})
+: id-PasswordBasedMac, see {{P-BMac}} (with id-sha256 as the owf parameter, see {{SHA2}} and id-hmacWithSHA256 as the mac parameter, see {{HMAC-SHA2}})
 
 PBMAC1:
 : id-PBMAC1, see {{PBMAC1}} (with id-PBKDF2 as the key derivation function, see {{PBKDF2}} and id-hmacWithSHA256 as the message authentication scheme, see {{HMAC-SHA2}}). It is RECOMMENDED to prefer the usage of PBMAC1 instead of PasswordBasedMac.
@@ -1061,13 +1064,16 @@ scope of the profile.
 
 --- back
 
+# History of Changes {#history}
+
+[RFC Editor: Please remove this appendix in the release version of the document.]
+
+draft-brockhaus-lamps-rfc9481bis version 00:
+
+* Initial version of the document including some minor fixes
+
 # Acknowledgements {#Acknowledgements}
 {: numbered="false"}
 
-Thanks to {{{Russ Housley}}} for his work on {{RFC9044}} and {{RFC9045}} upon
-which this RFC relies heavily.
-
-May thanks also to all reviewers like {{{Serge Mister}}}, {{{Mark Ferreira}}},
-{{{Yuefei Lu}}}, {{{Tomas Gustavsson}}}, {{{Lijun Liao}}}, {{{David von Oheimb}}}, and
-{{{Steffen Fries}}} for their input and feedback to this
+May thanks also to all reviewers like ... for their input and feedback to this
 document. Apologies to all not mentioned reviewers and supporters.
