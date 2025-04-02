@@ -134,8 +134,8 @@ normative:
 
 This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document also updates
-the algorithm use profile from Appendix D.2 of RFC 4210.
+further manage the lifecycle of X.509 certificates.  This document adds conventions
+for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 9481.
 
 --- middle
 
@@ -246,6 +246,9 @@ following OIDs:
 
 Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}}.
 
+## SHA3 {#SHA3}
+
+...
 
 
 # Signature Algorithms {#Sig}
@@ -400,6 +403,26 @@ Note: The hash algorithm used to calculate the certHash in certConf
 messages MUST be SHA512 if the certificate to be confirmed has been
 signed using Ed25519 or SHAKE256 with d=512 if the certificate to be
 confirmed has been signed using Ed448.
+
+## ML-DSA {#ML-DSA}
+
+...
+
+## Composite ML-DSA {#C-ML-DSA}
+
+...
+
+## SLH-DSA {#SLH-DSA}
+
+...
+
+## LMS/HSS {#LMS}
+
+...
+
+## XMSS/XMSSMT {#XMSS}
+
+...
 
 # Key Management Algorithms {#KeyMan}
 
@@ -567,6 +590,22 @@ The algorithm identifier for RSAES-OAEP is:
 Further conventions to be considered for PKCS #1 v1.5 are specified in
 {{Section 4.2.1 of RFC3370}} and for RSAES-OAEP in {{RFC3560}}.
 
+## Key Encapsulation Mechanism {#KEM}
+
+...
+
+### RSA-KEM {#RSA-KEM}
+
+...
+
+### ML-KEM {#ML-KEM}
+
+...
+
+### Composite ML-KEM {#C-ML-KEM}
+
+...
+
 ## Symmetric Key-Encryption Algorithms {#SymKeyEnc}
 
 The symmetric key-encryption algorithm is also referred to as
@@ -647,6 +686,10 @@ PBKDF2 has the algorithm identifier:
 
 Further conventions to be considered for PBKDF2 are specified in
 {{Section 4.4.1 of RFC3370}} and {{Section 5.2 of RFC8018}}.
+
+### HKDF {#HKDF}
+
+...
 
 # Content-Encryption Algorithms {#Enc}
 
@@ -1067,6 +1110,17 @@ scope of the profile.
 # History of Changes {#history}
 
 [RFC Editor: Please remove this appendix in the release version of the document.]
+
+Changes from 00 -> 01:
+
+* Added SHA3 to Section 2
+
+* Added ML-DSA, Composite ML-DSA, SLH-DSA, LMS/HSS, XMSS/XMSSMT to Section 3
+
+* Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM
+
+* Added HKDF to Section 4.5
+
 
 draft-brockhaus-lamps-rfc9481bis version 00:
 
