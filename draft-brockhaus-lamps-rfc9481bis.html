@@ -1489,7 +1489,26 @@ following OIDs:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
         <h3 id="name-sha3">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-sha3" class="section-name selfRef">SHA3</a>
         </h3>
-<p id="section-2.3-1">...<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">The SHA3 algorithm family is defined in <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">The message digest algorithms SHA3-224, SHA3-256, SHA3-384, and SHA3-512 are
+identified by the following OIDs:<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-2.3-3">
+<pre>
+   id-sha3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 7 }
+   id-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 8 }
+   id-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 9 }
+   id-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 10 }
+</pre><a href="#section-2.3-3" class="pilcrow">¶</a>
+</div>
+<p id="section-2.3-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-2" class="relref">Section 2</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-2.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2846,8 +2865,12 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Certificate Management Protocol (CMP) Updates"</span>, <span class="seriesInfo">RFC 9480</span>, <span class="seriesInfo">DOI 10.17487/RFC9480</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9480">https://www.rfc-editor.org/rfc/rfc9480</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9483">[RFC9483]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, and <span class="refAuthor">S. Fries</span>, <span class="refTitle">"Lightweight Certificate Management Protocol (CMP) Profile"</span>, <span class="seriesInfo">RFC 9483</span>, <span class="seriesInfo">DOI 10.17487/RFC9483</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9483">https://www.rfc-editor.org/rfc/rfc9483</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9688">[RFC9688]</dt>
+      <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of the SHA3 One-Way Hash Functions in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9688</span>, <span class="seriesInfo">DOI 10.17487/RFC9688</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9688">https://www.rfc-editor.org/rfc/rfc9688</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
