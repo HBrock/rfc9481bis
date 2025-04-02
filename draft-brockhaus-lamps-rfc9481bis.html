@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="RFC">
+<html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>RFC 9481: Certificate Management Protocol (CMP) Algorithms</title>
+<title>Certificate Management Protocol (CMP) Algorithms</title>
 <meta content="Hendrik Brockhaus" name="author">
 <meta content="Hans Aschauer" name="author">
 <meta content="Mike Ounsworth" name="author">
@@ -17,7 +17,9 @@ the algorithm use profile from Appendix D.2 of RFC 4210.
     " name="description">
 <meta content="xml2rfc 3.28.0" name="generator">
 <meta content="CMP" name="keyword">
-<meta content="9481" name="rfc.number">
+<meta content="certificate management" name="keyword">
+<meta content="PKI" name="keyword">
+<meta content="draft-brockhaus-lamps-rfc9481bis-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.28.0
     Python 3.12.9
@@ -33,7 +35,7 @@ the algorithm use profile from Appendix D.2 of RFC 4210.
     setuptools 70.3.0
     wcwidth 0.2.13
 -->
-<link href="draft-brockhaus-lamps-9481bis.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-brockhaus-lamps-rfc9481bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1044,41 +1046,41 @@ svg :is([fill="white"], [fill^="#fff"]) {
 }
 </style>
 
-<link href="https://dx.doi.org/10.17487/rfc9481" rel="alternate">
-  <link href="urn:issn:2070-1721" rel="alternate">
-  <link href="https://datatracker.ietf.org/doc/draft-ietf-lamps-cmp-algorithms-16" rel="prev">
-  </head>
+</head>
 <body class="xml2rfc">
 <table class="ears">
 <thead><tr>
-<td class="left">RFC 9481</td>
+<td class="left">Internet-Draft</td>
 <td class="center">CMP Algorithms</td>
-<td class="right">July 2024</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Brockhaus, et al.</td>
-<td class="center">Standards Track</td>
+<td class="center">Expires 4 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
 <div id="external-metadata" class="document-information"></div>
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
-<dt class="label-stream">Stream:</dt>
-<dd class="stream">Internet Engineering Task Force (IETF)</dd>
-<dt class="label-rfc">RFC:</dt>
-<dd class="rfc"><a href="https://www.rfc-editor.org/rfc/rfc9481" class="eref">9481</a></dd>
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">lamps</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-brockhaus-lamps-rfc9481bis-latest</dd>
+<dt class="label-obsoletes">Obsoletes:</dt>
+<dd class="obsoletes">
+<a href="https://www.rfc-editor.org/rfc/rfc9481" class="eref">9481</a> (if approved)</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc4210" class="eref">4210</a> </dd>
-<dt class="label-category">Category:</dt>
-<dd class="category">Standards Track</dd>
+<a href="https://www.rfc-editor.org/rfc/rfc4210" class="eref">4210</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07" class="published">July 2024</time>
+<time datetime="2025-04-02" class="published">2 April 2025</time>
     </dd>
-<dt class="label-issn">ISSN:</dt>
-<dd class="issn">2070-1721</dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1102,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="rfcnum">RFC 9481</h1>
 <h1 id="title">Certificate Management Protocol (CMP) Algorithms</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
@@ -1109,24 +1110,37 @@ with the Certificate Management Protocol (CMP).  CMP is used to enroll and
 further manage the lifecycle of X.509 certificates.  This document also updates
 the algorithm use profile from Appendix D.2 of RFC 4210.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Discussion of this document takes place on the
+    Limited Additional Mechanisms for PKIX and SMIME  mailing list (spasm@ietf.org),
+    which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/spasm/">https://mailarchive.ietf.org/arch/browse/spasm/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+    <span><a href="https://github.com/HBrock/rfc9481bis">https://github.com/HBrock/rfc9481bis</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
         <h2 id="name-status-of-this-memo">
 <a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
         </h2>
 <p id="section-boilerplate.1-1">
-            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-2">
-            This document is a product of the Internet Engineering Task Force
-            (IETF).  It represents the consensus of the IETF community.  It has
-            received public review and has been approved for publication by
-            the Internet Engineering Steering Group (IESG).  Further
-            information on Internet Standards is available in Section 2 of 
-            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-3">
-            Information about the current status of this document, any
-            errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9481">https://www.rfc-editor.org/info/rfc9481</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1135,7 +1149,7 @@ the algorithm use profile from Appendix D.2 of RFC 4210.<a href="#section-abstra
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1295,10 +1309,13 @@ the algorithm use profile from Appendix D.2 of RFC 4210.<a href="#section-abstra
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-history-of-changes" class="internal xref">History of Changes</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -2383,7 +2400,7 @@ Management Message Profiles, as defined in <span><a href="https://rfc-editor.org
           <dd class="break"></dd>
 <dt id="section-7.1-6.3">PasswordBasedMac:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-6.4">
-            <p id="section-7.1-6.4.1">id-PasswordBasedMac, see <a href="#PBMac" class="auto internal xref">Section 6.1</a> (with id-sha256 as the owf parameter, see <a href="#SHA2" class="auto internal xref">Section 2.1</a> and id-hmacWithSHA256 as the mac parameter, see <a href="#HMAC-SHA2" class="auto internal xref">Section 6.2.1</a>)<a href="#section-7.1-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-6.4.1">id-PasswordBasedMac, see <a href="#P-BMac" class="auto internal xref">Section 6.1.1</a> (with id-sha256 as the owf parameter, see <a href="#SHA2" class="auto internal xref">Section 2.1</a> and id-hmacWithSHA256 as the mac parameter, see <a href="#HMAC-SHA2" class="auto internal xref">Section 6.2.1</a>)<a href="#section-7.1-6.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-6.5">PBMAC1:</dt>
@@ -2732,21 +2749,31 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="Acknowledgements">
+<div id="history">
 <section id="appendix-A">
+      <h2 id="name-history-of-changes">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-history-of-changes" class="section-name selfRef">History of Changes</a>
+      </h2>
+<p id="appendix-A-1">[RFC Editor: Please remove this appendix in the release version of the document.]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">draft-brockhaus-lamps-rfc9481bis version 00:<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-3.1">
+          <p id="appendix-A-3.1.1">Initial version of the document including some minor fixes<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="Acknowledgements">
+<section id="appendix-B">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-A-1">Thanks to <span class="contact-name">Russ Housley</span> for his work on <span>[<a href="#RFC9044" class="cite xref">RFC9044</a>]</span> and <span>[<a href="#RFC9045" class="cite xref">RFC9045</a>]</span> upon
-which this RFC relies heavily.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">May thanks also to all reviewers like <span class="contact-name">Serge Mister</span>, <span class="contact-name">Mark Ferreira</span>,
-<span class="contact-name">Yuefei Lu</span>, <span class="contact-name">Tomas Gustavsson</span>, <span class="contact-name">Lijun Liao</span>, <span class="contact-name">David von Oheimb</span>, and
-<span class="contact-name">Steffen Fries</span> for their input and feedback to this
-document. Apologies to all not mentioned reviewers and supporters.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">May thanks also to all reviewers like ... for their input and feedback to this
+document. Apologies to all not mentioned reviewers and supporters.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

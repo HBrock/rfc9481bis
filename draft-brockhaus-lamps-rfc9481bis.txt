@@ -2,16 +2,17 @@
 
 
 
-Internet Engineering Task Force (IETF)                      H. Brockhaus
-Request for Comments: 9481                                   H. Aschauer
-Updates: 4210                                                    Siemens
-Category: Standards Track                                   M. Ounsworth
-ISSN: 2070-1721                                                  J. Gray
-                                                                 Entrust
-                                                               July 2024
+lamps                                                       H. Brockhaus
+Internet-Draft                                               H. Aschauer
+Obsoletes: 9481 (if approved)                                    Siemens
+Updates: 4210 (if approved)                                 M. Ounsworth
+Intended status: Standards Track                                 J. Gray
+Expires: 4 October 2025                                          Entrust
+                                                            2 April 2025
 
 
             Certificate Management Protocol (CMP) Algorithms
+                draft-brockhaus-lamps-rfc9481bis-latest
 
 Abstract
 
@@ -21,34 +22,47 @@ Abstract
    X.509 certificates.  This document also updates the algorithm use
    profile from Appendix D.2 of RFC 4210.
 
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Discussion of this document takes place on the Limited Additional
+   Mechanisms for PKIX and SMIME mailing list (spasm@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/spasm/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/HBrock/rfc9481bis.
+
 Status of This Memo
 
-   This is an Internet Standards Track document.
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
 
-   This document is a product of the Internet Engineering Task Force
-   (IETF).  It represents the consensus of the IETF community.  It has
-   received public review and has been approved for publication by the
-   Internet Engineering Steering Group (IESG).  Further information on
-   Internet Standards is available in Section 2 of RFC 7841.
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   https://www.rfc-editor.org/info/rfc9481.
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 4 October 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Revised BSD License text as described in Section 4.e of the
-   Trust Legal Provisions and are provided without warranty as described
-   in the Revised BSD License.
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
@@ -90,6 +104,7 @@ Table of Contents
    10. References
      10.1.  Normative References
      10.2.  Informative References
+   Appendix A.  History of Changes
    Acknowledgements
    Authors' Addresses
 
@@ -971,7 +986,7 @@ Table of Contents
 
    RSA:  sha256WithRSAEncryption with 2048 bit, see Section 3.1
 
-   PasswordBasedMac:  id-PasswordBasedMac, see Section 6.1 (with id-
+   PasswordBasedMac:  id-PasswordBasedMac, see Section 6.1.1 (with id-
       sha256 as the owf parameter, see Section 2.1 and id-hmacWithSHA256
       as the mac parameter, see Section 6.2.1)
 
@@ -1313,15 +1328,20 @@ Table of Contents
               <https://doi.org/10.6028/nist.sp.800-57pt1r5>.  NIST
               Special Publications (General) 800-57pt1r5
 
+Appendix A.  History of Changes
+
+   [RFC Editor: Please remove this appendix in the release version of
+   the document.]
+
+   draft-brockhaus-lamps-rfc9481bis version 00:
+
+   *  Initial version of the document including some minor fixes
+
 Acknowledgements
 
-   Thanks to Russ Housley for his work on [RFC9044] and [RFC9045] upon
-   which this RFC relies heavily.
-
-   May thanks also to all reviewers like Serge Mister, Mark Ferreira,
-   Yuefei Lu, Tomas Gustavsson, Lijun Liao, David von Oheimb, and
-   Steffen Fries for their input and feedback to this document.
-   Apologies to all not mentioned reviewers and supporters.
+   May thanks also to all reviewers like ... for their input and
+   feedback to this document.  Apologies to all not mentioned reviewers
+   and supporters.
 
 Authors' Addresses
 
