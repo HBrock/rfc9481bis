@@ -128,6 +128,7 @@ normative:
   RFC9045:
   RFC9480:
   RFC9483:
+  RFC9688:
 
 --- abstract
 
@@ -248,8 +249,27 @@ Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}
 
 ## SHA3 {#SHA3}
 
-...
+The SHA3 algorithm family is defined in [FIPS Pub 202](#NIST.FIPS.202).
 
+The message digest algorithms SHA3-224, SHA3-256, SHA3-384, and SHA3-512 are
+identified by the following OIDs:
+
+~~~~ asn.1
+   id-sha3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 7 }
+   id-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 8 }
+   id-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 9 }
+   id-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
+      hashalgs(2) 10 }
+~~~~
+
+Specific conventions to be considered are specified in {{Section 2 of RFC9688}}.
 
 # Signature Algorithms {#Sig}
 
