@@ -14,7 +14,7 @@ pi:
   sortrefs: 'true'
 title: Certificate Management Protocol (CMP) Algorithms
 abbrev: CMP Algorithms
-area: sec
+area: ""
 wg: lamps
 kw: CMP
 date: 2024-07
