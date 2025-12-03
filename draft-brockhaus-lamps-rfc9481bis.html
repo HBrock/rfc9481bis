@@ -1532,7 +1532,7 @@ following OIDs:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-signature-algorithms" class="section-name selfRef">Signature Algorithms</a>
       </h2>
 <p id="section-3-1">This section provides references to object identifiers and conventions for signature algorithms to be employed by CMP implementations.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The signature algorithm is referred to as in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Signature algorithm identifiers are located in the:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-4.1">
@@ -1731,7 +1731,7 @@ confirmed has been signed using Ed448.<a href="#section-3.3-8" class="pilcrow">�
         </h3>
 <p id="section-3.4-1">The ML-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.204" class="internal xref">FIPS 204</a> [<a href="#NIST.FIPS.204" class="cite xref">NIST.FIPS.204</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External µ mode of ML-DSA can be used, see <span><a href="https://rfc-editor.org/rfc/rfc9881#appendix-D" class="relref">Appendix D</a> of [<a href="#RFC9881" class="cite xref">RFC9881</a>]</span>.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">The signatures  ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by the following OIDs:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">The signature algorithm ML-DSA is identified by the following OIDs:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.4-4">
 <pre>
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
@@ -1756,7 +1756,85 @@ confirmed has been signed using Ed448.<a href="#section-3.3-8" class="pilcrow">�
         <h3 id="name-composite-ml-dsa">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-composite-ml-dsa" class="section-name selfRef">Composite ML-DSA</a>
         </h3>
-<p id="section-3.5-1">ToDo Composite ML-DSA<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-1">The Composite ML-DSA signature algorithm is defined in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">The Copmosite ML-DSA signature algorithm combines of ML-DSA <a href="#ML-DSA" class="auto internal xref">Section 3.4</a> with traditional algorithms RSASSA-PKCS1-v1.5 <a href="#RSASig" class="auto internal xref">Section 3.1</a>, RSASSA-PSS <a href="#RSASig" class="auto internal xref">Section 3.1</a>, ECDSA <a href="#ECDSA" class="auto internal xref">Section 3.2</a>, Ed25519 <a href="#EdDSA" class="auto internal xref">Section 3.3</a>, and Ed448 <a href="#EdDSA" class="auto internal xref">Section 3.3</a> to new hybrid signature algorithms.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-3">The Composite ML-DSA signature algorithm is identified by the following OIDs:<a href="#section-3.5-3" class="pilcrow">¶</a></p>
+<div class="breakable lang-asn.1 sourcecode" id="section-3.5-4">
+<pre>
+id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 37 }
+
+id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 38 }
+
+id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 39 }
+
+id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 40 }
+
+id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 41 }
+
+id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 42 }
+
+id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 43 }
+
+id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 44 }
+
+id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 45 }
+
+id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 46 }
+
+id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 47 }
+
+id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 48 }
+
+id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 49 }
+
+id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 50 }
+
+id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 51 }
+
+id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 52 }
+
+id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 53 }
+
+id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 54 }
+</pre><a href="#section-3.5-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.5-5">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages <span class="bcp14">MUST</span> be the respective Pre-Hash function as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-13#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="SLH-DSA">
@@ -2863,6 +2941,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-lamps-pq-composite-sigs">[I-D.ietf-lamps-pq-composite-sigs]</dt>
+        <dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-13</span>, <time datetime="2025-10-31" class="refDate">31 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-13</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST.FIPS.180-4">[NIST.FIPS.180-4]</dt>
         <dd>
 <span class="refTitle">"Secure hash standard"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.180-4</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.180-4">https://doi.org/10.6028/nist.fips.180-4</a>&gt;</span>. <span class="annotation">NIST Federal Information Processing Standards Publications 180-4</span>
