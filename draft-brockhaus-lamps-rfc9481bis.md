@@ -3,7 +3,7 @@ v: 3
 docname: draft-brockhaus-lamps-rfc9481bis-latest
 cat: std
 obsoletes: '9481'
-updates: '4210'
+updates: '9810'
 consensus: 'true'
 submissiontype: IETF
 lang: en
@@ -21,7 +21,6 @@ kw:
 - certificate management
 - PKI
 date: 2025
-
 author:
 - name: Hendrik Brockhaus
   org: Siemens AG
@@ -73,6 +72,9 @@ informative:
     =: DOI.10.6028/NIST.SP.800-57pt1r5
     ann: >
       NIST Special Publications (General) 800-57pt1r5
+  RFC4210:
+  RFC9481:
+  I-D.ietf-pquip-pqc-engineers:
 normative:
   NIST.FIPS.180-4:
     =: DOI.10.6028/NIST.FIPS.180-4
@@ -94,6 +96,14 @@ normative:
     =: DOI.10.6028/NIST.FIPS.202
     ann: >
       NIST Federal Information Processing Standards Publications 202
+  NIST.FIPS.204:
+    target: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf
+    title: Module-Lattice-Based Digital Signature Standard
+    author:
+    - org: NIST
+    date: 2024-08
+    seriesinfo:
+      NIST: DOI 10.6028/nist.fips.204
   NIST.SP.800-185:
     =: DOI.10.6028/NIST.SP.800-185
     ann: >
@@ -109,7 +119,6 @@ normative:
   RFC3560:
   RFC3565:
   RFC4056:
-  RFC4210:
   RFC4211:
   RFC4231:
   RFC5480:
@@ -119,6 +128,7 @@ normative:
   RFC8017:
   RFC8018:
   RFC8032:
+  RFC8410:
   RFC8418:
   RFC8419:
   RFC8551:
@@ -126,37 +136,52 @@ normative:
   RFC8702:
   RFC9044:
   RFC9045:
-  RFC9480:
   RFC9483:
   RFC9688:
+  RFC9810:
+  RFC9881:
+  RFC9882:
 
 --- abstract
 
 
 This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document adds conventions
-for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 9481.
+further manage the lifecycle of X.509 certificates.  This document provides algorithm
+use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481.
 
 --- middle
 
 # Introduction {#Introduction}
 
-[ToDo: To be updated]
-
-{{Section D.2 of RFC4210}} contains a set of algorithms that is
-mandatory to be supported by implementations conforming to {{RFC4210}}.
-These algorithms were appropriate at the time CMP was released, but as
-cryptographic algorithms weaken over time, some of them should no
-longer be used.
-In general, new attacks are emerging due to research in cryptanalysis
-or an increase in computing power.
-New algorithms were introduced that are more resistant to today's
-attacks.
+{{Appendix C.2 of RFC9810}} refers to {{Section 7.1 of RFC9481}} for a set of algorithms that is
+mandatory to be supported by implementations conforming to {{Appendices C and D of RFC9810}}.
+{{Section 7.2 of RFC9481}} contains a set of algorithms for usage with {{RFC9483}}.
+This document updates both algorithm use profiles by adding new algorithm to also support PQC migration.
 
 This document lists current cryptographic algorithms that can be used
-with CMP to offer an easier way to maintain the list of suitable
-algorithms over time.
+with [CMP](#RFC9810) to offer an easier way to maintain the list of suitable
+algorithms over time. The use of [CMP](#RFC9810) is not limited to the algorithms listed in this document.
+
+Cryptographic algorithms generally become weaker over time. One of the reasons for this is that computer systems become more powerful or new attacks against the underlying mathmatical problems or special implementations are found. The ability to replace weakened algorithms with stronger alternatives is called crypto-agility. CMP is a crypto-agile protocol that allows cryptographic algorithms to be identified and replaced by object identifiers (OIDs).  This document lists the OIDs of a number of cryptographic algorithms that can be used with CMP.
+
+Quantum computers are becoming increasingly powerful as research and development continues. Aymmetric cryptographic algorithms based on the difficulty of integer factorization problem, the discrete-logarithm problem, or the elliptic-curve discrete-logarithm problem can be easily broken by sufficiently strong quantum computers, e.g., using the Shor's algorithm. The strength of symmetric cryptographic algorithms and hash functions is reduced by using the Grover's algorithm. However, the affected algorithms do not have to be completely replaced, the weakening can be addressed by doubling the key length used. For more information, please see [Post-Quantum Cryptography for Engineers](#I-D.ietf-pquip-pqc-engineers).
+
+## Changes Made by This Document
+
+This document obsoletes [RFC9481].
+
+Many new cryptographic algorithms have been specified in recent years. In particular, aymmetric algorithms for digital signatures and key management that are secure against attacks by cryptographically relevant quantum computer were added by this update.
+
+The updates made in this document include the following changes:
+
+* Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.1.2
+
+* Added ML-DSA as Section 3.4
+
+* Added SHA3-based HMAC as section 6.2.4
+
+* ...
 
 ## Terminology {#Terminology}
 
@@ -164,17 +189,14 @@ algorithms over time.
 
 In the following sections, ASN.1 values and types are used to indicate where
 algorithm identifier and output values are provided. These ASN.1 values and
-types are defined in [CMP](#RFC4210), [Certificate Request Message
-Format (CRMF)](#RFC4211), [CMP Updates](#RFC9480), and [Cryptographic
-Message Syntax (CMS)](#RFC5652).
+types are defined in [CMP](#RFC9810), [Certificate Request Message
+Format (CRMF)](#RFC4211), and [Cryptographic Message Syntax (CMS)](#RFC5652).
 
 
 
 # Message Digest Algorithms {#Hash}
 
-This section provides references to object identifiers and conventions to
-be employed by CMP implementations that support SHA2 or SHAKE message digest
-algorithms.
+This section provides references to object identifiers and conventions for message digest algorithms to be employed by CMP implementations.
 
 Digest algorithm identifiers are located in the:
 
@@ -221,37 +243,12 @@ identified by the following OIDs:
 Specific conventions to be considered are specified in {{Section 2 of RFC5754}}.
 
 
-## SHAKE {#SHAKE}
+## SHA3 and SHAKE {#SHA3-SHAKE}
 
-The SHA-3 family of hash functions is defined in [FIPS Pub 202](#NIST.FIPS.202)
+The SHA-3 family of hash functions is defined in [FIPS Pub 202](#NIST.FIPS.202)
 and consists of the fixed output length variants SHA3-224, SHA3-256, SHA3-384,
 and SHA3-512, as well as the extendable-output functions (XOFs) SHAKE128
-and SHAKE256. Currently, SHAKE128 and SHAKE256 are the only members of the
-SHA3-family that are specified for use in X.509 certificates {{RFC8692}} and CMS
-{{RFC8702}} as one-way hash functions for use with RSASSA-PSS and ECDSA.
-
-SHAKE is an extendable-output function, and [FIPS Pub 202](#NIST.FIPS.202)
-prohibits using SHAKE as a general-purpose hash function.  When SHAKE is
-used in CMP as a message digest algorithm, the output length MUST
-be 256 bits for SHAKE128 and 512 bits for SHAKE256.
-
-The message digest algorithms SHAKE128 and SHAKE256 are identified by the
-following OIDs:
-
-~~~~ asn.1
-   id-shake128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
-      hashalgs(2) 11 }
-   id-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
-      hashalgs(2) 12 }
-~~~~
-
-Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}}.
-
-## SHA3 {#SHA3}
-
-The SHA3 algorithm family is defined in [FIPS Pub 202](#NIST.FIPS.202).
+and SHAKE256.
 
 The message digest algorithms SHA3-224, SHA3-256, SHA3-384, and SHA3-512 are
 identified by the following OIDs:
@@ -273,15 +270,31 @@ identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{Section 2 of RFC9688}}.
 
+SHAKE is an extendable-output function, and [FIPS Pub 202](#NIST.FIPS.202)
+prohibits using SHAKE as a general-purpose hash function.  When SHAKE is
+used in CMP as a message digest algorithm, the output length MUST
+be 256 bits for SHAKE128 and 512 bits for SHAKE256.
+
+The message digest algorithms SHAKE128 and SHAKE256 are identified by the
+following OIDs:
+
+~~~~ asn.1
+   id-shake128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
+      hashalgs(2) 11 }
+   id-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
+      hashalgs(2) 12 }
+~~~~
+
+Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}}.
+
+
 # Signature Algorithms {#Sig}
 
-This section provides references to object identifiers and conventions to
-be employed by CMP implementations that support signature algorithms like
-RSA, ECDSA, or EdDSA.
+This section provides references to object identifiers and conventions for signature algorithms to be employed by CMP implementations.
 
-The signature algorithm is referred to as MSG_SIG_ALG in {{Appendices D
-and E of RFC4210}}, in the [Lightweight CMP Profile](#RFC9483), and in
-{{AlgProfLWP}}.
+The signature algorithm is referred to as in the [Lightweight CMP Profile](#RFC9483) and in {{AlgProfLWP}}.
 
 Signature algorithm identifiers are located in the:
 
@@ -304,10 +317,10 @@ Signature values are located in the:
 
 ## RSA {#RSASig}
 
-The RSA (RSASSA-PSS and PKCS #1 version 1.5) signature algorithm is defined
+The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is defined
 in {{RFC8017}}.
 
-The algorithm identifier for RSASAA-PSS signatures used with SHA2 message
+The algorithm identifier for RSASAA-PSS signatures used with SHA2 or SHA3 message
 digest algorithms is identified by the following OID:
 
 ~~~~ asn.1
@@ -331,7 +344,7 @@ is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{Section 3.2.1 of RFC8702}}.
 
-The signature algorithm PKCS #1 version 1.5 used with SHA2 message digest
+The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
 algorithms is identified by the following OIDs:
 
 ~~~~ asn.1
@@ -347,10 +360,30 @@ algorithms is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{Section 3.2 of RFC5754}}.
 
+The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
+algorithms is identified by the following OIDs:
+
+~~~~ asn.1
+   id-rsassa-pkcs1-v1-5-with-sha3-224 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 13 }
+   id-rsassa-pkcs1-v1-5-with-sha3-256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 14 }
+   id-rsassa-pkcs1-v1-5-with-sha3-384 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 15 }
+   id-rsassa-pkcs1-v1-5-with-sha3-512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 16 }
+~~~~
+
+Specific conventions to be considered are specified in {{Section 3.1 of RFC9688}}.
+
 
 ## ECDSA {#ECDSA}
 
-The ECDSA signature algorithm is defined in [FIPS Pub 186-5](#NIST.FIPS.186-5).
+The ECDSA signature algorithm is defined in [FIPS Pub 186-5](#NIST.FIPS.186-5).
 
 The signature algorithm ECDSA used with SHA2 message digest algorithms is
 identified by the following OIDs:
@@ -365,6 +398,28 @@ identified by the following OIDs:
    ecdsa-with-SHA512 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
       us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 4 }
 ~~~~
+
+Specific conventions to be considered are specified in {{Section 3.2.2 of RFC8702}}.
+
+The signature algorithm ECDSA used with SHA3 message digest algorithms is
+identified by the following OIDs:
+
+~~~~ asn.1
+   id-ecdsa-with-sha3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 9 }
+   id-ecdsa-with-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 10 }
+   id-ecdsa-with-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 11 }
+   id-ecdsa-with-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 12 }
+~~~~
+
+Specific conventions to be considered are specified in {{Section 3.1 of RFC9688}}.
 
 As specified in {{RFC5480}}, the NIST-recommended curves are identified by the following OIDs:
 
@@ -400,8 +455,9 @@ Specific conventions to be considered are specified in {{Section 3.2.2 of RFC870
 
 ## EdDSA {#EdDSA}
 
-The EdDSA signature algorithm is defined in {{Section 3.3 of RFC8032}} and
-[FIPS Pub 186-5](#NIST.FIPS.186-5).
+The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in {{RFC8032}} and [FIPS Pub 186-5](#NIST.FIPS.186-5).
+
+The EdDSA is described along with a recommendation for the use of the curve25519 and curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not specified in this document.  Ed25519 is intended to operate at around the 128-bit security level and Ed448 at around the 224-bit security level.  A sufficiently large quantum computer would be able to break both.
 
 The signature algorithm Ed25519 that MUST be used with SHA-512 message
 digest algorithms is identified by the following OIDs:
@@ -419,45 +475,72 @@ digest algorithms is identified by the following OIDs:
       identified-organization(3) thawte(101) 113 }
 ~~~~
 
-Specific conventions to be considered are specified in {{RFC8419}}.
+Specific conventions to be considered are specified in {{RFC8410}} and {{RFC8419}}.
 
 Note: The hash algorithm used to calculate the certHash in certConf
-messages MUST be SHA512 if the certificate to be confirmed has been
-signed using Ed25519 or SHAKE256 with d=512 if the certificate to be
+messages MUST be SHA-512 if the certificate to be confirmed has been
+signed using Ed25519 or SHAKE256 if the certificate to be
 confirmed has been signed using Ed448.
+
 
 ## ML-DSA {#ML-DSA}
 
-...
+The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
+
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used.
+
+The signatures  ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by the following OIDs:
+
+~~~~ asn.1
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
+
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
+
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
+~~~~
+
+Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882}}.
+
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be SHA-512.
 
 ## Composite ML-DSA {#C-ML-DSA}
 
-...
+ToDo Composite ML-DSA
 
 ## SLH-DSA {#SLH-DSA}
 
-...
+ToDo SLH-DSA
+
+## FN-DSA {#FN-DSA}
+
+ToDo FN-DSA
 
 ## LMS/HSS {#LMS}
 
-...
+ToDo LMS/HSS
 
 ## XMSS/XMSSMT {#XMSS}
 
-...
+ToDo XMSS/XMSSMT
 
 # Key Management Algorithms {#KeyMan}
 
 CMP utilizes the following general key management techniques: key agreement,
 key transport, and passwords.
 
-[CRMF](#RFC4211) and [CMP Updates](#RFC9480) promote the use of
+[CRMF](#RFC4211) and [CMP](#RFC9810) promote the use of
 [CMS EnvelopedData](#RFC5652) by deprecating the use of EncryptedValue.
 
 ## Key Agreement Algorithms {#KeyAgree}
 
-The key agreement algorithm is referred to as PROT_ENC_ALG in
-{{Appendices D and E of RFC4210}} and as KM_KA_ALG in the [Lightweight
+The key agreement algorithm is referred to as PROT_ENC_ALG in [CMP]
+{{Appendices C and D of RFC9810}} and as KM_KA_ALG in the [Lightweight
 CMP Profile](#RFC9483) and {{AlgProf}}.
 
 Key agreement algorithms are only used in CMP when using [CMS
@@ -575,7 +658,7 @@ Specific conventions to be considered are specified in {{RFC8418}}.
 ## Key Transport Algorithms {#KeyTrans}
 
 The key transport algorithm is also referred to as PROT_ENC_ALG in
-{{Appendices D and E of RFC4210}} and as KM_KT_ALG in the [Lightweight
+[CMP]{{Appendices C and D of RFC9810}} and as KM_KT_ALG in the [Lightweight
 CMP Profile](#RFC9483) and {{AlgProf}}.
 
 Key transport algorithms are only used in CMP when using
@@ -614,19 +697,20 @@ Further conventions to be considered for PKCS #1 v1.5 are specified in
 
 ## Key Encapsulation Mechanism {#KEM}
 
-...
+ToDo KEM
 
 ### RSA-KEM {#RSA-KEM}
 
-...
+ToDo RSA-KEM
 
 ### ML-KEM {#ML-KEM}
 
-...
+ToDo ML-KEM
 
 ### Composite ML-KEM {#C-ML-KEM}
 
-...
+ToDo Composite KEM
+
 
 ## Symmetric Key-Encryption Algorithms {#SymKeyEnc}
 
@@ -681,21 +765,23 @@ Further conventions to be considered for AES key wrap are specified in
 The key derivation algorithm is also referred to as KM_KD_ALG in
 {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
 
-Key derivation algorithms are only used in CMP when using [CMS
-EnvelopedData](#RFC5652) together with the password-based key
-management technique.
+Key derivation algorithms are only used in [CMP](#RFC9810) when using CMS
+EnvelopedData together with the password-based key management technique
+[CMS Password Recipient Info](#RFC5652) or together with [CMS KEM Recipient Info] (#RFC9629).
+
+### Key Derivation with PasswordRecipientInfo
 
 Key derivation algorithm identifiers are located in the:
 
 * keyDerivationAlgorithm field of PasswordRecipientInfo.
 
-When using the password-based key management technique with
-EnvelopedData as specified in [CMP Updates](#RFC9480) together with
+When using the KEM-based key management technique with
+EnvelopedData together with
 PKIProtection based on the message authentication code (MAC), the salt
 for the password-based MAC and key derivation function (KDF) must be
 chosen independently to ensure usage of independent symmetric keys.
 
-### PBKDF2 {#PBKDF2}
+#### PBKDF2 {#PBKDF2}
 
 Password-based key derivation function 2 (PBKDF2) is defined in {{RFC8018}}.
 
@@ -709,14 +795,29 @@ PBKDF2 has the algorithm identifier:
 Further conventions to be considered for PBKDF2 are specified in
 {{Section 4.4.1 of RFC3370}} and {{Section 5.2 of RFC8018}}.
 
-### HKDF {#HKDF}
+### Key Derivation with KEMRecipientInfo
 
-...
+Key derivation algorithm identifiers are located in the:
+
+* keyDerivationAlgorithm field of KEMRecipientInfo.
+
+#### HKDF with SHA2 and SHA3 {#HKDF}
+
+see RFC 8619 , RFC 9709 , and RFC 9688
+
+#### KMAC128 and KMAC256 with KDF {#KMAC-KDF}
+
+see RFC 9688
+
+#### KDF2 and KDF3 with SHA3 {#KDF-SHA3}
+
+see RFC 9688
+
 
 # Content-Encryption Algorithms {#Enc}
 
 The content-encryption algorithm is also referred to as PROT_SYM_ALG
-in {{Appendices D and E of RFC4210}}, in the [Lightweight CMP Profile](#RFC9483),
+in [CMP]{{Appendices C and D of RFC9810}}, in the [Lightweight CMP Profile](#RFC9483),
 and in {{AlgProf}}.
 
 Content-encryption algorithms are used in CMP when using [CMS
@@ -758,15 +859,14 @@ Specific conventions to be considered for AES-CBC content encryption are
 specified in {{RFC3565}}.
 
 
-
 # Message Authentication Code Algorithms {#MAC}
 
 The message authentication code (MAC) is either used for shared secret-based
 CMP message protection or together with the password-based key derivation
 function (PBKDF2).
 
-The MAC algorithm is also referred to as MSG_MAC_ALG in {{AlgProf}},
-{{Appendices D and E of RFC4210}}, and the [Lightweight CMP Profile](#RFC9483).
+The MAC algorithm is also referred to as MSG_MAC_ALG in {{AlgProf}}, [CMP]
+{{Appendices C and D of RFC9810}}, and the [Lightweight CMP Profile](#RFC9483).
 
 ## Password-Based MAC {#PBMac}
 
@@ -786,7 +886,7 @@ Message authentication code values are located in the:
 ### PasswordBasedMac {#P-BMac}
 
 The PasswordBasedMac algorithm is defined in {{Section 5.1.3.1 of
-RFC4210}}, {{Section 4.4 of RFC4211}}, and ["Algorithm Requirements
+RFC9810}}, {{Section 4.4 of RFC4211}}, and ["Algorithm Requirements
 Update to the Internet X.509 Public Key Infrastructure Certificate
 Request Message Format (CRMF)"](#RFC9045).
 
@@ -798,7 +898,7 @@ The PasswordBasedMac algorithm is identified by the following OID:
 ~~~~
 
 Further conventions to be considered for PasswordBasedMac are
-specified in {{Section 5.1.3.1 of RFC4210}}, {{Section 4.4 of RFC4211}},
+specified in {{Section 5.1.3.1 of RFC9810}}, {{Section 4.4 of RFC4211}},
 and ["Algorithm Requirements Update to the Internet X.509 Public Key
 Infrastructure Certificate Request Message Format (CRMF)"](#RFC9045).
 
@@ -840,6 +940,9 @@ MAC algorithm identifiers are located in the:
 MAC values are located in the:
 
 * PKIProtection field of PKIMessage.
+
+
+< Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. >
 
 ### SHA2-Based HMAC {#HMAC-SHA2}
 
@@ -894,7 +997,7 @@ Specific conventions to be considered for the AES-GMAC are specified in {{RFC904
 ### SHAKE-Based KMAC {#SHAKE-KMAC}
 
 The KMAC algorithm is defined in {{RFC8702}} and
-[NIST SP 800-185](#NIST.SP.800-185).
+[FIPS SP 800-185](#NIST.SP.800-185).
 
 The SHAKE-based KMAC algorithm is identified by the following OIDs:
 
@@ -909,6 +1012,32 @@ The SHAKE-based KMAC algorithm is identified by the following OIDs:
 
 Specific conventions to be considered for KMAC with SHAKE are
 specified in {{Section 3.4 of RFC8702}}.
+
+### SHA3-Based HMAC {#HMAC-SHA3}
+
+The HMAC algorithm is defined in {{RFC2104}} and
+[FIPS Pub 198-1](#NIST.FIPS.198-1).
+
+The HMAC algorithm used with SHA3 message digest algorithms is identified
+by the following OIDs:
+
+~~~~ asn.1
+   id-hmacWithSHA3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 13 }
+   id-hmacWithSHA3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 14 }
+   id-hmacWithSHA3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 15 }
+   id-hmacWithSHA3-512   OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 16 }
+~~~~
+
+Specific conventions to be considered for SHA3-based HMAC are
+specified in {{Section 4 of RFC9688}}.
 
 
 # Algorithm Use Profiles {#AlgProf}
@@ -945,10 +1074,10 @@ on several factors, including:
     (MSG_SIG_ALG).
 
   * protection of centrally generated keys: The strength of the
-    algorithms used for the key management technique ({{AlgProf4210}}:
+    algorithms used for the key management technique ({{AlgProf9810}}:
     PROT_ENC_ALG or {{AlgProfLWP}}: KM_KA_ALG, KM_KT_ALG, KM_KD_ALG) and
     the encryption of the content-encryption key and private key
-    ({{AlgProf4210}}: SYM_PENC_ALG, PROT_SYM_ALG or {{AlgProfLWP}}:
+    ({{AlgProf9810}}: SYM_PENC_ALG, PROT_SYM_ALG or {{AlgProfLWP}}:
     KM_KW_ALG, PROT_SYM_ALG).
 
 The following table shows the algorithms listed in this document sorted by
@@ -960,21 +1089,21 @@ the implementer MUST choose one offering more bits of security.
 
 | Bits of Security | RSA or DH             | Elliptic Curve Cryptography                             | Hash Function or XOF with Specified Output Length (d) | Symmetric Encryption |
 |              112 | RSA2048,<br/>DH(2048) | ECDSA/ECDH (secp224r1)                                  | SHA-224                                               |                      |
-|              128 | RSA3072,<br/>DH(3072) | ECDSA/ECDH (secp256r1),<br/>Ed25519/X25519 (curve25519) | SHA-256,<br/>SHAKE128(d=256)                          | AES-128              |
+|              128 | RSA3072,<br/>DH(3072) | ECDSA/ECDH (secp256r1),<br/>Ed25519/X25519 (curve25519) | SHA-256,<br/>SHAKE128                          | AES-128              |
 |              192 |                       | ECDSA/ECDH (secp384r1)                                  | SHA-384                                               | AES-192              |
 |              224 |                       | Ed448/X448 (curve448)                                   |                                                       |                      |
-|              256 |                       | ECDSA/ECDH (secp521r1)                                  | SHA-512,<br/>SHAKE256(d=512)                          | AES-256              |
+|              256 |                       | ECDSA/ECDH (secp521r1)                                  | SHA-512,<br/>SHAKE256                          | AES-256              |
 {: #BalacedAlgSets title='Cryptographic Algorithms Sorted by Their Bits of Security' align='left'}
 
 The following table shows the cryptographic algorithms sorted by their usage
 in CMP and with more details.
 
 | Bits of Security | Key Types to Be Certified              | CMP Protection<br/>MSG_SIG_ALG, MSG_MAC_ALG                                                                                                                                             | Key Management Technique<br/>PROT_ENC_ALG or KM_KA_ALG, KM_KT_ALG, KM_KD_ALG                                                                       | Key-Wrap and Symmetric Encryption<br/>PROT_SYM_ALG,<br/>SYM_PENC_ALG<br/>or<br/>KM_KW_ALG |
-|              112 | RSA2048,<br/>secp224r1                 | RSASSA-PSS (2048, SHA-224 or SHAKE128 (d=256)),<br/>RSAEncryption (2048, SHA-224),<br/>ECDSA (secp224r1, SHA-224 or SHAKE128 (d=256)),<br/>PBMAC1 (HMAC-SHA-224)                        | DH(2048),<br/>RSAES-OAEP (2048, SHA-224),<br/>RSAEncryption (2048, SHA-224),<br/>ECDH (secp224r1, SHA-224),<br/>PBKDF2 (HMAC-SHA-224)              |                                                                                           |
-|              128 | RSA3072,<br/>secp256r1,<br/>curve25519 | RSASSA-PSS (3072, SHA-256 or SHAKE128 (d=256)),<br/>RSAEncryption (3072, SHA-256),<br/>ECDSA (secp256r1, SHA-256 or SHAKE128 (d=256)),<br/>Ed25519 (SHA-512),<br/>PBMAC1 (HMAC-SHA-256) | DH(3072),<br/>RSAES-OAEP (3072, SHA-256),<br/> RSAEncryption (3072, SHA-256),<br/>ECDH (secp256r1, SHA-256),<br/>X25519,<br/>PBKDF2 (HMAC-SHA-256) | AES-128                                                                                   |
+|              112 | RSA2048,<br/>secp224r1                 | RSASSA-PSS (2048, SHA-224 or SHAKE128),<br/>RSAEncryption (2048, SHA-224),<br/>ECDSA (secp224r1, SHA-224 or SHAKE128),<br/>PBMAC1 (HMAC-SHA-224)                        | DH(2048),<br/>RSAES-OAEP (2048, SHA-224),<br/>RSAEncryption (2048, SHA-224),<br/>ECDH (secp224r1, SHA-224),<br/>PBKDF2 (HMAC-SHA-224)              |                                                                                           |
+|              128 | RSA3072,<br/>secp256r1,<br/>curve25519 | RSASSA-PSS (3072, SHA-256 or SHAKE128),<br/>RSAEncryption (3072, SHA-256),<br/>ECDSA (secp256r1, SHA-256 or SHAKE128),<br/>Ed25519 (SHA-512),<br/>PBMAC1 (HMAC-SHA-256) | DH(3072),<br/>RSAES-OAEP (3072, SHA-256),<br/> RSAEncryption (3072, SHA-256),<br/>ECDH (secp256r1, SHA-256),<br/>X25519,<br/>PBKDF2 (HMAC-SHA-256) | AES-128                                                                                   |
 |              192 | secp384r1                              | ECDSA (secp384r1, SHA-384),<br/>PBMAC1 (HMAC-SHA-384)                                                                                                                                   | ECDH (secp384r1, SHA-384),<br/>PBKDF2 (HMAC-SHA-384)                                                                                               | AES-192                                                                                   |
 |              224 | curve448                               | Ed448 (SHAKE256)                                                                                                                                                                        | X448                                                                                                                                               |                                                                                           |
-|              256 | secp521r1                              | ECDSA (secp521r1, SHA-512 or SHAKE256 (d=512)),<br/>PBMAC1 (HMAC-SHA-512)                                                                                                               | ECDH (secp521r1, SHA-512),<br/>PBKDF2 (HMAC-SHA-512)                                                                                               | AES-256                                                                                   |
+|              256 | secp521r1                              | ECDSA (secp521r1, SHA-512 or SHAKE256),<br/>PBMAC1 (HMAC-SHA-512)                                                                                                               | ECDH (secp521r1, SHA-512),<br/>PBKDF2 (HMAC-SHA-512)                                                                                               | AES-256                                                                                   |
 {: #BalacedAlgSetsCMP title='Cryptographic Algorithms Sorted by Their Bits of Security and Usage by CMP' align='left'}
 
 To avoid consuming too many computational resources, choosing a set of algorithms
@@ -982,10 +1111,10 @@ offering roughly the same level of security is recommended. Below are several
 algorithm profiles that are balanced, assuming the implementer chooses MAC
 secrets and/or certificate profiles of at least equivalent strength.
 
-## Algorithm Profile for PKI Management Message Profiles in RFC 4210 {#AlgProf4210}
+## Algorithm Profile for PKI Management Message Profiles in RFC 9810 {#AlgProf9810}
 
 The following table updates the definitions of algorithms used within PKI
-Management Message Profiles, as defined in {{Section D.2 of RFC4210}}.
+Management Message Profiles, as defined in {{Section C.2 of RFC9810}}.
 
 The columns in the table are:
 
@@ -1010,7 +1139,7 @@ Deprecated:
 | SYM_PENC_ALG | symmetric encryption of an end entity's private key where the symmetric key is distributed out of band                      | AES-wrap  |                              | 3-DES(3-key-EDE, CBC Mode), RC5, CAST-128 |
 | PROT_ENC_ALG | asymmetric algorithm used for encryption of (symmetric keys for encryption of) private keys transported in PKIMessages      | DH        | ECDH, RSA                    |                                           |
 | PROT_SYM_ALG | symmetric encryption algorithm used for encryption of private key bits (a key of this type is encrypted using PROT_ENC_ALG) | AES-CBC   |                              | 3-DES(3-key-EDE, CBC Mode), RC5, CAST-128 |
-{: #AlgProd4210T title='Algorithms Used within Appendix D.2 of RFC 4210' align='center'}
+{: #AlgProd9810T title='Algorithms Used within Appendix C.2 of RFC 9810' align='center'}
 
 The following are the mandatory algorithm identifiers and specifications:
 
@@ -1137,13 +1266,14 @@ Changes from 00 -> 01:
 
 * Added SHA3 to Section 2
 
-* Added ML-DSA, Composite ML-DSA, SLH-DSA, LMS/HSS, XMSS/XMSSMT to Section 3
+* Added ML-DSA, Composite ML-DSA, SLH-DSA, FN-DSA, LMS/HSS, XMSS/XMSSMT to Section 3
 
 * Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM
 
 * Added HKDF to Section 4.5
 
 * Fixed erratum 7800
+
 
 draft-brockhaus-lamps-rfc9481bis version 00:
 
