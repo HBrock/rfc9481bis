@@ -488,7 +488,7 @@ Table of Contents
    security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash
    varient of ML-DSA, called HashML-DSA, is not specified in this
    document.  If pre-hasing is required, the External µ mode of ML-DSA
-   can be used.
+   can be used, see Appendix D of [RFC9881].
 
    The signatures ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by
    the following OIDs:
