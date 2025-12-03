@@ -141,6 +141,7 @@ normative:
   RFC9810:
   RFC9881:
   RFC9882:
+  I-D.ietf-lamps-pq-composite-sigs:
 
 --- abstract
 
@@ -294,7 +295,7 @@ Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}
 
 This section provides references to object identifiers and conventions for signature algorithms to be employed by CMP implementations.
 
-The signature algorithm is referred to as in the [Lightweight CMP Profile](#RFC9483) and in {{AlgProfLWP}}.
+The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]{{Appendices C and D of RFC9810}}, [Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
 
 Signature algorithm identifiers are located in the:
 
@@ -489,7 +490,7 @@ The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
 
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
 
-The signatures  ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by the following OIDs:
+The signature algorithm ML-DSA is identified by the following OIDs:
 
 ~~~~ asn.1
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
@@ -509,9 +510,90 @@ Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be SHA-512.
 
+
 ## Composite ML-DSA {#C-ML-DSA}
 
-ToDo Composite ML-DSA
+The Composite ML-DSA signature algorithm is defined in {{I-D.ietf-lamps-pq-composite-sigs}}.
+
+The Copmosite ML-DSA signature algorithm combines of ML-DSA ({{ML-DSA}}) with traditional algorithms RSASSA-PKCS1-v1.5 ({{RSASig}}), RSASSA-PSS ({{RSASig}}), ECDSA ({{ECDSA}}), Ed25519 ({{EdDSA}}), and Ed448 ({{EdDSA}}) to new PQ/T Hybrid signature algorithms following the "Composite Design Philosophy" described in {{Section 2.2 of I-D.ietf-lamps-pq-composite-sigs}}.
+
+The Composite ML-DSA signature algorithm is identified by the following OIDs:
+
+~~~~ asn.1
+id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 37 }
+
+id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 38 }
+
+id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 39 }
+
+id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 40 }
+
+id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 41 }
+
+id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 42 }
+
+id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 43 }
+
+id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 44 }
+
+id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 45 }
+
+id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 46 }
+
+id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 47 }
+
+id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 48 }
+
+id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 49 }
+
+id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 50 }
+
+id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 51 }
+
+id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 52 }
+
+id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 53 }
+
+id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
+   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+   pkix(7) alg(6) 54 }
+~~~~
+
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be the respective Pre-Hash function as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
 
 ## SLH-DSA {#SLH-DSA}
 
