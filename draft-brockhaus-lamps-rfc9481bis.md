@@ -487,7 +487,7 @@ confirmed has been signed using Ed448.
 
 The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used.
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
 
 The signatures  ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by the following OIDs:
 
