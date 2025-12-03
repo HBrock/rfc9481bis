@@ -12,28 +12,27 @@
 <meta content="
        This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document adds conventions
-for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 9481. 
+further manage the lifecycle of X.509 certificates.  This document provides algorithm
+use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="CMP" name="keyword">
 <meta content="certificate management" name="keyword">
 <meta content="PKI" name="keyword">
 <meta content="draft-brockhaus-lamps-rfc9481bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
-    platformdirs 4.3.6
+    lxml 5.3.1
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
-    wcwidth 0.2.13
+    requests 2.32.5
+    wcwidth 0.2.14
 -->
 <link href="draft-brockhaus-lamps-rfc9481bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1052,11 +1051,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CMP Algorithms</td>
-<td class="right">April 2025</td>
+<td class="right">December 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Brockhaus, et al.</td>
-<td class="center">Expires 4 October 2025</td>
+<td class="center">Expires 6 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,15 +1071,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9481" class="eref">9481</a> (if approved)</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc4210" class="eref">4210</a> (if approved)</dd>
+<a href="https://www.rfc-editor.org/rfc/rfc9810" class="eref">9810</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-02" class="published">2 April 2025</time>
+<time datetime="2025-12-03" class="published">3 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
+<dd class="expires"><time datetime="2026-06-06">6 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,8 +1106,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document adds conventions
-for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 9481.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+further manage the lifecycle of X.509 certificates.  This document provides algorithm
+use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1140,7 +1139,7 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1173,7 +1172,10 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-changes-made-by-this-docume" class="internal xref">Changes Made by This Document</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
             </ul>
 </li>
@@ -1181,13 +1183,10 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-message-digest-algorithms" class="internal xref">Message Digest Algorithms</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-sha2" class="internal xref">SHA2</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-sha2" class="internal xref">SHA2</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-shake" class="internal xref">SHAKE</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-sha3" class="internal xref">SHA3</a></p>
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-sha3-and-shake" class="internal xref">SHA3 and SHAKE</a></p>
 </li>
             </ul>
 </li>
@@ -1213,10 +1212,13 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
                 <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-slh-dsa" class="internal xref">SLH-DSA</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
-                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.  <a href="#name-lms-hss" class="internal xref">LMS/HSS</a></p>
+                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.  <a href="#name-fn-dsa" class="internal xref">FN-DSA</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.8">
-                <p id="section-toc.1-1.3.2.8.1"><a href="#section-3.8" class="auto internal xref">3.8</a>.  <a href="#name-xmss-xmssmt" class="internal xref">XMSS/XMSSMT</a></p>
+                <p id="section-toc.1-1.3.2.8.1"><a href="#section-3.8" class="auto internal xref">3.8</a>.  <a href="#name-lms-hss" class="internal xref">LMS/HSS</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.9">
+                <p id="section-toc.1-1.3.2.9.1"><a href="#section-3.9" class="auto internal xref">3.9</a>.  <a href="#name-xmss-xmssmt" class="internal xref">XMSS/XMSSMT</a></p>
 </li>
             </ul>
 </li>
@@ -1268,10 +1270,10 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
                 <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-key-derivation-algorithms" class="internal xref">Key Derivation Algorithms</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5.2.1">
-                    <p id="section-toc.1-1.4.2.5.2.1.1"><a href="#section-4.5.1" class="auto internal xref">4.5.1</a>.  <a href="#name-pbkdf2" class="internal xref">PBKDF2</a></p>
+                    <p id="section-toc.1-1.4.2.5.2.1.1"><a href="#section-4.5.1" class="auto internal xref">4.5.1</a>.  <a href="#name-key-derivation-with-passwor" class="internal xref">Key Derivation with PasswordRecipientInfo</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5.2.2">
-                    <p id="section-toc.1-1.4.2.5.2.2.1"><a href="#section-4.5.2" class="auto internal xref">4.5.2</a>.  <a href="#name-hkdf" class="internal xref">HKDF</a></p>
+                    <p id="section-toc.1-1.4.2.5.2.2.1"><a href="#section-4.5.2" class="auto internal xref">4.5.2</a>.  <a href="#name-key-derivation-with-kemreci" class="internal xref">Key Derivation with KEMRecipientInfo</a></p>
 </li>
                 </ul>
 </li>
@@ -1311,6 +1313,9 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
                     <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="auto internal xref">6.2.3</a>.  <a href="#name-shake-based-kmac" class="internal xref">SHAKE-Based KMAC</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.4">
+                    <p id="section-toc.1-1.6.2.2.2.4.1"><a href="#section-6.2.4" class="auto internal xref">6.2.4</a>.  <a href="#name-sha3-based-hmac" class="internal xref">SHA3-Based HMAC</a></p>
+</li>
                 </ul>
 </li>
             </ul>
@@ -1319,7 +1324,7 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-algorithm-use-profiles" class="internal xref">Algorithm Use Profiles</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-algorithm-profile-for-pki-m" class="internal xref">Algorithm Profile for PKI Management Message Profiles in RFC 4210</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-algorithm-profile-for-pki-m" class="internal xref">Algorithm Profile for PKI Management Message Profiles in RFC 9810</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-algorithm-profile-for-light" class="internal xref">Algorithm Profile for Lightweight CMP Profile</a></p>
@@ -1361,33 +1366,52 @@ for several post-quantum algorithms. It updates rfc4210bis and obsoleted RFC 948
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">[ToDo: To be updated]<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2"><span><a href="https://rfc-editor.org/rfc/rfc4210#appendix-D.2" class="relref">Appendix D.2</a> of [<a href="#RFC4210" class="cite xref">RFC4210</a>]</span> contains a set of algorithms that is
-mandatory to be supported by implementations conforming to <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>.
-These algorithms were appropriate at the time CMP was released, but as
-cryptographic algorithms weaken over time, some of them should no
-longer be used.
-In general, new attacks are emerging due to research in cryptanalysis
-or an increase in computing power.
-New algorithms were introduced that are more resistant to today's
-attacks.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document lists current cryptographic algorithms that can be used
-with CMP to offer an easier way to maintain the list of suitable
-algorithms over time.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<div id="Terminology">
+<p id="section-1-1"><span><a href="https://rfc-editor.org/rfc/rfc9810#appendix-C.2" class="relref">Appendix C.2</a> of [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> refers to <span><a href="https://rfc-editor.org/rfc/rfc9481#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC9481" class="cite xref">RFC9481</a>]</span> for a set of algorithms that is
+mandatory to be supported by implementations conforming to Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>.
+<span><a href="https://rfc-editor.org/rfc/rfc9481#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC9481" class="cite xref">RFC9481</a>]</span> contains a set of algorithms for usage with <span>[<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.
+This document updates both algorithm use profiles by adding new algorithm to also support PQC migration.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document lists current cryptographic algorithms that can be used
+with <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> to offer an easier way to maintain the list of suitable
+algorithms over time. The use of <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> is not limited to the algorithms listed in this document.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Cryptographic algorithms generally become weaker over time. One of the reasons for this is that computer systems become more powerful or new attacks against the underlying mathmatical problems or special implementations are found. The ability to replace weakened algorithms with stronger alternatives is called crypto-agility. CMP is a crypto-agile protocol that allows cryptographic algorithms to be identified and replaced by object identifiers (OIDs).  This document lists the OIDs of a number of cryptographic algorithms that can be used with CMP.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">Quantum computers are becoming increasingly powerful as research and development continues. Aymmetric cryptographic algorithms based on the difficulty of integer factorization problem, the discrete-logarithm problem, or the elliptic-curve discrete-logarithm problem can be easily broken by sufficiently strong quantum computers, e.g., using the Shor's algorithm. The strength of symmetric cryptographic algorithms and hash functions is reduced by using the Grover's algorithm. However, the affected algorithms do not have to be completely replaced, the weakening can be addressed by doubling the key length used. For more information, please see <span><a href="#I-D.ietf-pquip-pqc-engineers" class="internal xref">Post-Quantum Cryptography for Engineers</a> [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<div id="changes-made-by-this-document">
 <section id="section-1.1">
-        <h3 id="name-terminology">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        <h3 id="name-changes-made-by-this-docume">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-changes-made-by-this-docume" class="section-name selfRef">Changes Made by This Document</a>
         </h3>
-<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.1-1">This document obsoletes <span>[<a href="#RFC9481" class="cite xref">RFC9481</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Many new cryptographic algorithms have been specified in recent years. In particular, aymmetric algorithms for digital signatures and key management that are secure against attacks by cryptographically relevant quantum computer were added by this update.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">The updates made in this document include the following changes:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-4.1">
+            <p id="section-1.1-4.1.1">Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.1.2<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.2">
+            <p id="section-1.1-4.2.1">Added ML-DSA as Section 3.4<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.3">
+            <p id="section-1.1-4.3.1">Added SHA3-based HMAC as section 6.2.4<a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.4">
+            <p id="section-1.1-4.4.1">...<a href="#section-1.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="Terminology">
+<section id="section-1.2">
+        <h3 id="name-terminology">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-1.2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">In the following sections, ASN.1 values and types are used to indicate where
+appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">In the following sections, ASN.1 values and types are used to indicate where
 algorithm identifier and output values are provided. These ASN.1 values and
-types are defined in <span><a href="#RFC4210" class="internal xref">CMP</a> [<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, <span><a href="#RFC4211" class="internal xref">Certificate Request Message
-Format (CRMF)</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, <span><a href="#RFC9480" class="internal xref">CMP Updates</a> [<a href="#RFC9480" class="cite xref">RFC9480</a>]</span>, and <span><a href="#RFC5652" class="internal xref">Cryptographic
-Message Syntax (CMS)</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+types are defined in <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, <span><a href="#RFC4211" class="internal xref">Certificate Request Message
+Format (CRMF)</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, and <span><a href="#RFC5652" class="internal xref">Cryptographic Message Syntax (CMS)</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1397,9 +1421,7 @@ Message Syntax (CMS)</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</spa
       <h2 id="name-message-digest-algorithms">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-message-digest-algorithms" class="section-name selfRef">Message Digest Algorithms</a>
       </h2>
-<p id="section-2-1">This section provides references to object identifiers and conventions to
-be employed by CMP implementations that support SHA2 or SHAKE message digest
-algorithms.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">This section provides references to object identifiers and conventions for message digest algorithms to be employed by CMP implementations.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Digest algorithm identifiers are located in the:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-3.1">
@@ -1455,45 +1477,18 @@ identified by the following OIDs:<a href="#section-2.1-2" class="pilcrow">¶</a>
 <p id="section-2.1-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc5754#section-2" class="relref">Section 2</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="SHAKE">
+<div id="SHA3-SHAKE">
 <section id="section-2.2">
-        <h3 id="name-shake">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-shake" class="section-name selfRef">SHAKE</a>
+        <h3 id="name-sha3-and-shake">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-sha3-and-shake" class="section-name selfRef">SHA3 and SHAKE</a>
         </h3>
-<p id="section-2.2-1">The SHA-3 family of hash functions is defined in <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>
+<p id="section-2.2-1">The SHA-3 family of hash functions is defined in <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>
 and consists of the fixed output length variants SHA3-224, SHA3-256, SHA3-384,
 and SHA3-512, as well as the extendable-output functions (XOFs) SHAKE128
-and SHAKE256. Currently, SHAKE128 and SHAKE256 are the only members of the
-SHA3-family that are specified for use in X.509 certificates <span>[<a href="#RFC8692" class="cite xref">RFC8692</a>]</span> and CMS
-<span>[<a href="#RFC8702" class="cite xref">RFC8702</a>]</span> as one-way hash functions for use with RSASSA-PSS and ECDSA.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">SHAKE is an extendable-output function, and <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>
-prohibits using SHAKE as a general-purpose hash function.  When SHAKE is
-used in CMP as a message digest algorithm, the output length <span class="bcp14">MUST</span>
-be 256 bits for SHAKE128 and 512 bits for SHAKE256.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2-3">The message digest algorithms SHAKE128 and SHAKE256 are identified by the
-following OIDs:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-2.2-4">
-<pre>
-   id-shake128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
-      hashalgs(2) 11 }
-   id-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
-      hashalgs(2) 12 }
-</pre><a href="#section-2.2-4" class="pilcrow">¶</a>
-</div>
-<p id="section-2.2-5">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="SHA3">
-<section id="section-2.3">
-        <h3 id="name-sha3">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-sha3" class="section-name selfRef">SHA3</a>
-        </h3>
-<p id="section-2.3-1">The SHA3 algorithm family is defined in <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">The message digest algorithms SHA3-224, SHA3-256, SHA3-384, and SHA3-512 are
-identified by the following OIDs:<a href="#section-2.3-2" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-2.3-3">
+and SHAKE256.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">The message digest algorithms SHA3-224, SHA3-256, SHA3-384, and SHA3-512 are
+identified by the following OIDs:<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-2.2-3">
 <pre>
    id-sha3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
       us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
@@ -1507,9 +1502,26 @@ identified by the following OIDs:<a href="#section-2.3-2" class="pilcrow">¶</a>
    id-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
       us(840) organization(1) gov(101) csor(3) nistalgorithm(4)
       hashalgs(2) 10 }
-</pre><a href="#section-2.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-2.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-2.3-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-2" class="relref">Section 2</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-2.3-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-2" class="relref">Section 2</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">SHAKE is an extendable-output function, and <span><a href="#NIST.FIPS.202" class="internal xref">FIPS Pub 202</a> [<a href="#NIST.FIPS.202" class="cite xref">NIST.FIPS.202</a>]</span>
+prohibits using SHAKE as a general-purpose hash function.  When SHAKE is
+used in CMP as a message digest algorithm, the output length <span class="bcp14">MUST</span>
+be 256 bits for SHAKE128 and 512 bits for SHAKE256.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2-6">The message digest algorithms SHAKE128 and SHAKE256 are identified by the
+following OIDs:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-2.2-7">
+<pre>
+   id-shake128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
+      hashalgs(2) 11 }
+   id-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+      us(840) organization(1) gov(101) csor(3) nistAlgorithm(4)
+      hashalgs(2) 12 }
+</pre><a href="#section-2.2-7" class="pilcrow">¶</a>
+</div>
+<p id="section-2.2-8">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-2.2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1519,11 +1531,8 @@ identified by the following OIDs:<a href="#section-2.3-2" class="pilcrow">¶</a>
       <h2 id="name-signature-algorithms">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-signature-algorithms" class="section-name selfRef">Signature Algorithms</a>
       </h2>
-<p id="section-3-1">This section provides references to object identifiers and conventions to
-be employed by CMP implementations that support signature algorithms like
-RSA, ECDSA, or EdDSA.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The signature algorithm is referred to as MSG_SIG_ALG in Appendices <a href="https://rfc-editor.org/rfc/rfc4210#appendix-D" class="relref">D</a> and <a href="https://rfc-editor.org/rfc/rfc4210#appendix-E" class="relref">E</a> of <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in
-<a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">This section provides references to object identifiers and conventions for signature algorithms to be employed by CMP implementations.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The signature algorithm is referred to as in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Signature algorithm identifiers are located in the:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-4.1">
@@ -1554,9 +1563,9 @@ SignerInfo<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
         <h3 id="name-rsa">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-rsa" class="section-name selfRef">RSA</a>
         </h3>
-<p id="section-3.1-1">The RSA (RSASSA-PSS and PKCS #1 version 1.5) signature algorithm is defined
+<p id="section-3.1-1">The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is defined
 in <span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The algorithm identifier for RSASAA-PSS signatures used with SHA2 message
+<p id="section-3.1-2">The algorithm identifier for RSASAA-PSS signatures used with SHA2 or SHA3 message
 digest algorithms is identified by the following OID:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-3">
 <pre>
@@ -1578,7 +1587,7 @@ is identified by the following OIDs:<a href="#section-3.1-5" class="pilcrow">¶<
 </pre><a href="#section-3.1-6" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-7">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.1" class="relref">Section 3.2.1</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
-<p id="section-3.1-8">The signature algorithm PKCS #1 version 1.5 used with SHA2 message digest
+<p id="section-3.1-8">The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
 algorithms is identified by the following OIDs:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-9">
 <pre>
@@ -1593,6 +1602,25 @@ algorithms is identified by the following OIDs:<a href="#section-3.1-8" class="p
 </pre><a href="#section-3.1-9" class="pilcrow">¶</a>
 </div>
 <p id="section-3.1-10">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc5754#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1-11">The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
+algorithms is identified by the following OIDs:<a href="#section-3.1-11" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.1-12">
+<pre>
+   id-rsassa-pkcs1-v1-5-with-sha3-224 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 13 }
+   id-rsassa-pkcs1-v1-5-with-sha3-256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 14 }
+   id-rsassa-pkcs1-v1-5-with-sha3-384 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 15 }
+   id-rsassa-pkcs1-v1-5-with-sha3-512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 16 }
+</pre><a href="#section-3.1-12" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-13">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-3.1-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ECDSA">
@@ -1600,7 +1628,7 @@ algorithms is identified by the following OIDs:<a href="#section-3.1-8" class="p
         <h3 id="name-ecdsa">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-ecdsa" class="section-name selfRef">ECDSA</a>
         </h3>
-<p id="section-3.2-1">The ECDSA signature algorithm is defined in <span><a href="#NIST.FIPS.186-5" class="internal xref">FIPS Pub 186-5</a> [<a href="#NIST.FIPS.186-5" class="cite xref">NIST.FIPS.186-5</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">The ECDSA signature algorithm is defined in <span><a href="#NIST.FIPS.186-5" class="internal xref">FIPS Pub 186-5</a> [<a href="#NIST.FIPS.186-5" class="cite xref">NIST.FIPS.186-5</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The signature algorithm ECDSA used with SHA2 message digest algorithms is
 identified by the following OIDs:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.2-3">
@@ -1615,8 +1643,28 @@ identified by the following OIDs:<a href="#section-3.2-2" class="pilcrow">¶</a>
       us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 4 }
 </pre><a href="#section-3.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-4">As specified in <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span>, the NIST-recommended curves are identified by the following OIDs:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-3.2-5">
+<p id="section-3.2-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">The signature algorithm ECDSA used with SHA3 message digest algorithms is
+identified by the following OIDs:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.2-6">
+<pre>
+   id-ecdsa-with-sha3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 9 }
+   id-ecdsa-with-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 10 }
+   id-ecdsa-with-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 11 }
+   id-ecdsa-with-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlg(3) 12 }
+</pre><a href="#section-3.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2-7">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.2-8">As specified in <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span>, the NIST-recommended curves are identified by the following OIDs:<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.2-9">
 <pre>
    secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
       us(840) ansi-X9-62(10045) curves(3) prime(1) 1 }
@@ -1628,12 +1676,12 @@ identified by the following OIDs:<a href="#section-3.2-2" class="pilcrow">¶</a>
       identified-organization(3) certicom(132) curve(0) 34 }
    secp521r1 OBJECT IDENTIFIER ::= { iso(1)
       identified-organization(3) certicom(132) curve(0) 35 }
-</pre><a href="#section-3.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-6">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc5754#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.2-7">The signature algorithm ECDSA used with SHAKE message digest algorithms is
-identified by the following OIDs:<a href="#section-3.2-7" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-3.2-8">
+<p id="section-3.2-10">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc5754#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-3.2-10" class="pilcrow">¶</a></p>
+<p id="section-3.2-11">The signature algorithm ECDSA used with SHAKE message digest algorithms is
+identified by the following OIDs:<a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.2-12">
 <pre>
    id-ecdsa-with-shake128 OBJECT IDENTIFIER  ::=  { iso(1)
       identified-organization(3) dod(6) internet(1) security(5)
@@ -1641,9 +1689,9 @@ identified by the following OIDs:<a href="#section-3.2-7" class="pilcrow">¶</a>
    id-ecdsa-with-shake256 OBJECT IDENTIFIER  ::=  { iso(1)
       identified-organization(3) dod(6) internet(1) security(5)
       mechanisms(5) pkix(7) algorithms(6) 33 }
-</pre><a href="#section-3.2-8" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-12" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-9">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.2-13">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.2-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="EdDSA">
@@ -1651,29 +1699,29 @@ identified by the following OIDs:<a href="#section-3.2-7" class="pilcrow">¶</a>
         <h3 id="name-eddsa">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-eddsa" class="section-name selfRef">EdDSA</a>
         </h3>
-<p id="section-3.3-1">The EdDSA signature algorithm is defined in <span><a href="https://rfc-editor.org/rfc/rfc8032#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC8032" class="cite xref">RFC8032</a>]</span> and
-<span><a href="#NIST.FIPS.186-5" class="internal xref">FIPS Pub 186-5</a> [<a href="#NIST.FIPS.186-5" class="cite xref">NIST.FIPS.186-5</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">The signature algorithm Ed25519 that <span class="bcp14">MUST</span> be used with SHA-512 message
-digest algorithms is identified by the following OIDs:<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-3.3-3">
+<p id="section-3.3-1">The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span> and <span><a href="#NIST.FIPS.186-5" class="internal xref">FIPS Pub 186-5</a> [<a href="#NIST.FIPS.186-5" class="cite xref">NIST.FIPS.186-5</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">The EdDSA is described along with a recommendation for the use of the curve25519 and curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not specified in this document.  Ed25519 is intended to operate at around the 128-bit security level and Ed448 at around the 224-bit security level.  A sufficiently large quantum computer would be able to break both.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">The signature algorithm Ed25519 that <span class="bcp14">MUST</span> be used with SHA-512 message
+digest algorithms is identified by the following OIDs:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.3-4">
 <pre>
    id-Ed25519 OBJECT IDENTIFIER  ::=  { iso(1)
       identified-organization(3) thawte(101) 112 }
-</pre><a href="#section-3.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-3.3-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.3-4">The signature algorithm Ed448 that <span class="bcp14">MUST</span> be used with SHAKE256 message
-digest algorithms is identified by the following OIDs:<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-3.3-5">
+<p id="section-3.3-5">The signature algorithm Ed448 that <span class="bcp14">MUST</span> be used with SHAKE256 message
+digest algorithms is identified by the following OIDs:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.3-6">
 <pre>
    id-Ed448 OBJECT IDENTIFIER  ::=  { iso(1)
       identified-organization(3) thawte(101) 113 }
-</pre><a href="#section-3.3-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.3-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.3-6">Specific conventions to be considered are specified in <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.3-7">Note: The hash algorithm used to calculate the certHash in certConf
-messages <span class="bcp14">MUST</span> be SHA512 if the certificate to be confirmed has been
-signed using Ed25519 or SHAKE256 with d=512 if the certificate to be
-confirmed has been signed using Ed448.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Specific conventions to be considered are specified in <span>[<a href="#RFC8410" class="cite xref">RFC8410</a>]</span> and <span>[<a href="#RFC8419" class="cite xref">RFC8419</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">Note: The hash algorithm used to calculate the certHash in certConf
+messages <span class="bcp14">MUST</span> be SHA-512 if the certificate to be confirmed has been
+signed using Ed25519 or SHAKE256 if the certificate to be
+confirmed has been signed using Ed448.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ML-DSA">
@@ -1681,7 +1729,26 @@ confirmed has been signed using Ed448.<a href="#section-3.3-7" class="pilcrow">�
         <h3 id="name-ml-dsa">
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-ml-dsa" class="section-name selfRef">ML-DSA</a>
         </h3>
-<p id="section-3.4-1">...<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">The ML-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.204" class="internal xref">FIPS 204</a> [<a href="#NIST.FIPS.204" class="cite xref">NIST.FIPS.204</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External µ mode of ML-DSA can be used.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">The signatures  ML-DSA-44, ML-DSA-65, and ML-DSA-87 are identified by the following OIDs:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.4-4">
+<pre>
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
+
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
+
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
+</pre><a href="#section-3.4-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-5">Specific conventions to be considered are specified in <span>[<a href="#RFC9881" class="cite xref">RFC9881</a>]</span> and <span>[<a href="#RFC9882" class="cite xref">RFC9882</a>]</span>.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-6">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages <span class="bcp14">MUST</span> be SHA-512.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="C-ML-DSA">
@@ -1689,7 +1756,7 @@ confirmed has been signed using Ed448.<a href="#section-3.3-7" class="pilcrow">�
         <h3 id="name-composite-ml-dsa">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-composite-ml-dsa" class="section-name selfRef">Composite ML-DSA</a>
         </h3>
-<p id="section-3.5-1">...<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-1">ToDo Composite ML-DSA<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="SLH-DSA">
@@ -1697,23 +1764,31 @@ confirmed has been signed using Ed448.<a href="#section-3.3-7" class="pilcrow">�
         <h3 id="name-slh-dsa">
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-slh-dsa" class="section-name selfRef">SLH-DSA</a>
         </h3>
-<p id="section-3.6-1">...<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-1">ToDo SLH-DSA<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="FN-DSA">
+<section id="section-3.7">
+        <h3 id="name-fn-dsa">
+<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-fn-dsa" class="section-name selfRef">FN-DSA</a>
+        </h3>
+<p id="section-3.7-1">ToDo FN-DSA<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="LMS">
-<section id="section-3.7">
+<section id="section-3.8">
         <h3 id="name-lms-hss">
-<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-lms-hss" class="section-name selfRef">LMS/HSS</a>
+<a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-lms-hss" class="section-name selfRef">LMS/HSS</a>
         </h3>
-<p id="section-3.7-1">...<a href="#section-3.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.8-1">ToDo LMS/HSS<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="XMSS">
-<section id="section-3.8">
+<section id="section-3.9">
         <h3 id="name-xmss-xmssmt">
-<a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-xmss-xmssmt" class="section-name selfRef">XMSS/XMSSMT</a>
+<a href="#section-3.9" class="section-number selfRef">3.9. </a><a href="#name-xmss-xmssmt" class="section-name selfRef">XMSS/XMSSMT</a>
         </h3>
-<p id="section-3.8-1">...<a href="#section-3.8-1" class="pilcrow">¶</a></p>
+<p id="section-3.9-1">ToDo XMSS/XMSSMT<a href="#section-3.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1725,15 +1800,15 @@ confirmed has been signed using Ed448.<a href="#section-3.3-7" class="pilcrow">�
       </h2>
 <p id="section-4-1">CMP utilizes the following general key management techniques: key agreement,
 key transport, and passwords.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2"><span><a href="#RFC4211" class="internal xref">CRMF</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span> and <span><a href="#RFC9480" class="internal xref">CMP Updates</a> [<a href="#RFC9480" class="cite xref">RFC9480</a>]</span> promote the use of
+<p id="section-4-2"><span><a href="#RFC4211" class="internal xref">CRMF</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span> and <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> promote the use of
 <span><a href="#RFC5652" class="internal xref">CMS EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> by deprecating the use of EncryptedValue.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <div id="KeyAgree">
 <section id="section-4.1">
         <h3 id="name-key-agreement-algorithms">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-key-agreement-algorithms" class="section-name selfRef">Key Agreement Algorithms</a>
         </h3>
-<p id="section-4.1-1">The key agreement algorithm is referred to as PROT_ENC_ALG in
-Appendices <a href="https://rfc-editor.org/rfc/rfc4210#appendix-D" class="relref">D</a> and <a href="https://rfc-editor.org/rfc/rfc4210#appendix-E" class="relref">E</a> of <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span> and as KM_KA_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
+<p id="section-4.1-1">The key agreement algorithm is referred to as PROT_ENC_ALG in [CMP]
+Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> and as KM_KA_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
 CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> and <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">Key agreement algorithms are only used in CMP when using <span><a href="#RFC5652" class="internal xref">CMS
 EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> together with the key agreement key management
@@ -1859,7 +1934,7 @@ is identified by the following OIDs:<a href="#section-4.1.2-7" class="pilcrow">�
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-key-transport-algorithms" class="section-name selfRef">Key Transport Algorithms</a>
         </h3>
 <p id="section-4.2-1">The key transport algorithm is also referred to as PROT_ENC_ALG in
-Appendices <a href="https://rfc-editor.org/rfc/rfc4210#appendix-D" class="relref">D</a> and <a href="https://rfc-editor.org/rfc/rfc4210#appendix-E" class="relref">E</a> of <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span> and as KM_KT_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
+[CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> and as KM_KT_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
 CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> and <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Key transport algorithms are only used in CMP when using
 <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> EnvelopedData together with the key transport key
@@ -1907,13 +1982,13 @@ management technique.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
         <h3 id="name-key-encapsulation-mechanism">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-key-encapsulation-mechanism" class="section-name selfRef">Key Encapsulation Mechanism</a>
         </h3>
-<p id="section-4.3-1">...<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">ToDo KEM<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <div id="RSA-KEM">
 <section id="section-4.3.1">
           <h4 id="name-rsa-kem">
 <a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-rsa-kem" class="section-name selfRef">RSA-KEM</a>
           </h4>
-<p id="section-4.3.1-1">...<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-1">ToDo RSA-KEM<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ML-KEM">
@@ -1921,7 +1996,7 @@ management technique.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
           <h4 id="name-ml-kem">
 <a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-ml-kem" class="section-name selfRef">ML-KEM</a>
           </h4>
-<p id="section-4.3.2-1">...<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-1">ToDo ML-KEM<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="C-ML-KEM">
@@ -1929,7 +2004,7 @@ management technique.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
           <h4 id="name-composite-ml-kem">
 <a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-composite-ml-kem" class="section-name selfRef">Composite ML-KEM</a>
           </h4>
-<p id="section-4.3.3-1">...<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.3-1">ToDo Composite KEM<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1998,43 +2073,79 @@ algorithm with AES-128 content-encryption algorithm); see <span>[<a href="#RFC85
         </h3>
 <p id="section-4.5-1">The key derivation algorithm is also referred to as KM_KD_ALG in
 <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">Key derivation algorithms are only used in CMP when using <span><a href="#RFC5652" class="internal xref">CMS
-EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> together with the password-based key
-management technique.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
-<p id="section-4.5-3">Key derivation algorithm identifiers are located in the:<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">Key derivation algorithms are only used in <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> when using CMS
+EnvelopedData together with the password-based key management technique
+<span><a href="#RFC5652" class="internal xref">CMS Password Recipient Info</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> or together with [CMS KEM Recipient Info] (#RFC9629).<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<div id="key-derivation-with-passwordrecipientinfo">
+<section id="section-4.5.1">
+          <h4 id="name-key-derivation-with-passwor">
+<a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-key-derivation-with-passwor" class="section-name selfRef">Key Derivation with PasswordRecipientInfo</a>
+          </h4>
+<p id="section-4.5.1-1">Key derivation algorithm identifiers are located in the:<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.5-4.1">
-            <p id="section-4.5-4.1.1">keyDerivationAlgorithm field of PasswordRecipientInfo.<a href="#section-4.5-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4.5.1-2.1">
+              <p id="section-4.5.1-2.1.1">keyDerivationAlgorithm field of PasswordRecipientInfo.<a href="#section-4.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-        </ul>
-<p id="section-4.5-5">When using the password-based key management technique with
-EnvelopedData as specified in <span><a href="#RFC9480" class="internal xref">CMP Updates</a> [<a href="#RFC9480" class="cite xref">RFC9480</a>]</span> together with
+          </ul>
+<p id="section-4.5.1-3">When using the KEM-based key management technique with
+EnvelopedData together with
 PKIProtection based on the message authentication code (MAC), the salt
 for the password-based MAC and key derivation function (KDF) must be
-chosen independently to ensure usage of independent symmetric keys.<a href="#section-4.5-5" class="pilcrow">¶</a></p>
+chosen independently to ensure usage of independent symmetric keys.<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
 <div id="PBKDF2">
-<section id="section-4.5.1">
-          <h4 id="name-pbkdf2">
-<a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-pbkdf2" class="section-name selfRef">PBKDF2</a>
-          </h4>
-<p id="section-4.5.1-1">Password-based key derivation function 2 (PBKDF2) is defined in <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.5.1-2">PBKDF2 has the algorithm identifier:<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-4.5.1-3">
+<section id="section-4.5.1.1">
+            <h5 id="name-pbkdf2">
+<a href="#section-4.5.1.1" class="section-number selfRef">4.5.1.1. </a><a href="#name-pbkdf2" class="section-name selfRef">PBKDF2</a>
+            </h5>
+<p id="section-4.5.1.1-1">Password-based key derivation function 2 (PBKDF2) is defined in <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.1.1-2">PBKDF2 has the algorithm identifier:<a href="#section-4.5.1.1-2" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-4.5.1.1-3">
 <pre>
    id-PBKDF2 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
       rsadsi(113549) pkcs(1) pkcs-5(5) 12 }
-</pre><a href="#section-4.5.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-4.5.1.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-4.5.1-4">Further conventions to be considered for PBKDF2 are specified in
-<span><a href="https://rfc-editor.org/rfc/rfc3370#section-4.4.1" class="relref">Section 4.4.1</a> of [<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8018#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.5.1.1-4">Further conventions to be considered for PBKDF2 are specified in
+<span><a href="https://rfc-editor.org/rfc/rfc3370#section-4.4.1" class="relref">Section 4.4.1</a> of [<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8018#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="HKDF">
+</section>
+</div>
+<div id="key-derivation-with-kemrecipientinfo">
 <section id="section-4.5.2">
-          <h4 id="name-hkdf">
-<a href="#section-4.5.2" class="section-number selfRef">4.5.2. </a><a href="#name-hkdf" class="section-name selfRef">HKDF</a>
+          <h4 id="name-key-derivation-with-kemreci">
+<a href="#section-4.5.2" class="section-number selfRef">4.5.2. </a><a href="#name-key-derivation-with-kemreci" class="section-name selfRef">Key Derivation with KEMRecipientInfo</a>
           </h4>
-<p id="section-4.5.2-1">...<a href="#section-4.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.5.2-1">Key derivation algorithm identifiers are located in the:<a href="#section-4.5.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.5.2-2.1">
+              <p id="section-4.5.2-2.1.1">keyDerivationAlgorithm field of KEMRecipientInfo.<a href="#section-4.5.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<div id="HKDF">
+<section id="section-4.5.2.1">
+            <h5 id="name-hkdf-with-sha2-and-sha3">
+<a href="#section-4.5.2.1" class="section-number selfRef">4.5.2.1. </a><a href="#name-hkdf-with-sha2-and-sha3" class="section-name selfRef">HKDF with SHA2 and SHA3</a>
+            </h5>
+<p id="section-4.5.2.1-1">see RFC 8619 , RFC 9709 , and RFC 9688<a href="#section-4.5.2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="KMAC-KDF">
+<section id="section-4.5.2.2">
+            <h5 id="name-kmac128-and-kmac256-with-kd">
+<a href="#section-4.5.2.2" class="section-number selfRef">4.5.2.2. </a><a href="#name-kmac128-and-kmac256-with-kd" class="section-name selfRef">KMAC128 and KMAC256 with KDF</a>
+            </h5>
+<p id="section-4.5.2.2-1">see RFC 9688<a href="#section-4.5.2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="KDF-SHA3">
+<section id="section-4.5.2.3">
+            <h5 id="name-kdf2-and-kdf3-with-sha3">
+<a href="#section-4.5.2.3" class="section-number selfRef">4.5.2.3. </a><a href="#name-kdf2-and-kdf3-with-sha3" class="section-name selfRef">KDF2 and KDF3 with SHA3</a>
+            </h5>
+<p id="section-4.5.2.3-1">see RFC 9688<a href="#section-4.5.2.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -2047,7 +2158,7 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-content-encryption-algorith" class="section-name selfRef">Content-Encryption Algorithms</a>
       </h2>
 <p id="section-5-1">The content-encryption algorithm is also referred to as PROT_SYM_ALG
-in Appendices <a href="https://rfc-editor.org/rfc/rfc4210#appendix-D" class="relref">D</a> and <a href="https://rfc-editor.org/rfc/rfc4210#appendix-E" class="relref">E</a> of <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>,
+in [CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>,
 and in <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Content-encryption algorithms are used in CMP when using <span><a href="#RFC5652" class="internal xref">CMS
 EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> to transport a signed private key package in
@@ -2101,8 +2212,8 @@ specified in <span>[<a href="#RFC3565" class="cite xref">RFC3565</a>]</span>.<a 
 <p id="section-6-1">The message authentication code (MAC) is either used for shared secret-based
 CMP message protection or together with the password-based key derivation
 function (PBKDF2).<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">The MAC algorithm is also referred to as MSG_MAC_ALG in <a href="#AlgProf" class="auto internal xref">Section 7</a>,
-Appendices <a href="https://rfc-editor.org/rfc/rfc4210#appendix-D" class="relref">D</a> and <a href="https://rfc-editor.org/rfc/rfc4210#appendix-E" class="relref">E</a> of <span>[<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-2">The MAC algorithm is also referred to as MSG_MAC_ALG in <a href="#AlgProf" class="auto internal xref">Section 7</a>, [CMP]
+Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="PBMac">
 <section id="section-6.1">
         <h3 id="name-password-based-mac">
@@ -2129,7 +2240,7 @@ specified in <a href="#SKMac" class="auto internal xref">Section 6.2</a>, using 
           <h4 id="name-passwordbasedmac">
 <a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-passwordbasedmac" class="section-name selfRef">PasswordBasedMac</a>
           </h4>
-<p id="section-6.1.1-1">The PasswordBasedMac algorithm is defined in <span><a href="https://rfc-editor.org/rfc/rfc4210#section-5.1.3.1" class="relref">Section 5.1.3.1</a> of [<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, <span><a href="https://rfc-editor.org/rfc/rfc4211#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, and <span><a href="#RFC9045" class="internal xref">"Algorithm Requirements
+<p id="section-6.1.1-1">The PasswordBasedMac algorithm is defined in <span><a href="https://rfc-editor.org/rfc/rfc9810#section-5.1.3.1" class="relref">Section 5.1.3.1</a> of [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, <span><a href="https://rfc-editor.org/rfc/rfc4211#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, and <span><a href="#RFC9045" class="internal xref">"Algorithm Requirements
 Update to the Internet X.509 Public Key Infrastructure Certificate
 Request Message Format (CRMF)"</a> [<a href="#RFC9045" class="cite xref">RFC9045</a>]</span>.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1.1-2">The PasswordBasedMac algorithm is identified by the following OID:<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
@@ -2140,7 +2251,7 @@ Request Message Format (CRMF)"</a> [<a href="#RFC9045" class="cite xref">RFC9045
 </pre><a href="#section-6.1.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-6.1.1-4">Further conventions to be considered for PasswordBasedMac are
-specified in <span><a href="https://rfc-editor.org/rfc/rfc4210#section-5.1.3.1" class="relref">Section 5.1.3.1</a> of [<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>, <span><a href="https://rfc-editor.org/rfc/rfc4211#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>,
+specified in <span><a href="https://rfc-editor.org/rfc/rfc9810#section-5.1.3.1" class="relref">Section 5.1.3.1</a> of [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, <span><a href="https://rfc-editor.org/rfc/rfc4211#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>,
 and <span><a href="#RFC9045" class="internal xref">"Algorithm Requirements Update to the Internet X.509 Public Key
 Infrastructure Certificate Request Message Format (CRMF)"</a> [<a href="#RFC9045" class="cite xref">RFC9045</a>]</span>.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -2152,7 +2263,7 @@ Infrastructure Certificate Request Message Format (CRMF)"</a> [<a href="#RFC9045
           </h4>
 <p id="section-6.1.2-1">Password-Based Message Authentication Code 1 (PBMAC1) is defined in
 <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>. PBMAC1 combines a password-based key derivation function,
-like PBKDF2 (<a href="#PBKDF2" class="auto internal xref">Section 4.5.1</a>), with an underlying symmetric key-based message
+like PBKDF2 (<a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>), with an underlying symmetric key-based message
 authentication scheme.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.1.2-2">PBMAC1 has the following OID:<a href="#section-6.1.2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-6.1.2-3">
@@ -2173,7 +2284,7 @@ authentication scheme.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-6.2-1">Symmetric key-based message authentication code (MAC) algorithms are used
 for deriving the symmetric encryption key when using PBKDF2, as described
-in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1</a>, as well as with password-based MAC, as described in <a href="#PBMac" class="auto internal xref">Section 6.1</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, as well as with password-based MAC, as described in <a href="#PBMac" class="auto internal xref">Section 6.1</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">MAC algorithm identifiers are located in the:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.1">
@@ -2195,6 +2306,7 @@ in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1</a>, as well as wi
             <p id="section-6.2-5.1.1">PKIProtection field of PKIMessage.<a href="#section-6.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-6.2-6">&lt; Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. &gt;<a href="#section-6.2-6" class="pilcrow">¶</a></p>
 <div id="HMAC-SHA2">
 <section id="section-6.2.1">
           <h4 id="name-sha2-based-hmac">
@@ -2255,7 +2367,7 @@ the key derivation function PBKDF2.<a href="#section-6.2.2-2" class="pilcrow">¶
 <a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-shake-based-kmac" class="section-name selfRef">SHAKE-Based KMAC</a>
           </h4>
 <p id="section-6.2.3-1">The KMAC algorithm is defined in <span>[<a href="#RFC8702" class="cite xref">RFC8702</a>]</span> and
-<span><a href="#NIST.SP.800-185" class="internal xref">NIST SP 800-185</a> [<a href="#NIST.SP.800-185" class="cite xref">NIST.SP.800-185</a>]</span>.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<span><a href="#NIST.SP.800-185" class="internal xref">FIPS SP 800-185</a> [<a href="#NIST.SP.800-185" class="cite xref">NIST.SP.800-185</a>]</span>.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-2">The SHAKE-based KMAC algorithm is identified by the following OIDs:<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-6.2.3-3">
 <pre>
@@ -2269,6 +2381,35 @@ the key derivation function PBKDF2.<a href="#section-6.2.2-2" class="pilcrow">¶
 </div>
 <p id="section-6.2.3-4">Specific conventions to be considered for KMAC with SHAKE are
 specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.4" class="relref">Section 3.4</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-6.2.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="HMAC-SHA3">
+<section id="section-6.2.4">
+          <h4 id="name-sha3-based-hmac">
+<a href="#section-6.2.4" class="section-number selfRef">6.2.4. </a><a href="#name-sha3-based-hmac" class="section-name selfRef">SHA3-Based HMAC</a>
+          </h4>
+<p id="section-6.2.4-1">The HMAC algorithm is defined in <span>[<a href="#RFC2104" class="cite xref">RFC2104</a>]</span> and
+<span><a href="#NIST.FIPS.198-1" class="internal xref">FIPS Pub 198-1</a> [<a href="#NIST.FIPS.198-1" class="cite xref">NIST.FIPS.198-1</a>]</span>.<a href="#section-6.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.4-2">The HMAC algorithm used with SHA3 message digest algorithms is identified
+by the following OIDs:<a href="#section-6.2.4-2" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-6.2.4-3">
+<pre>
+   id-hmacWithSHA3-224 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 13 }
+   id-hmacWithSHA3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 14 }
+   id-hmacWithSHA3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 15 }
+   id-hmacWithSHA3-512   OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) hashAlgs(2) 16 }
+</pre><a href="#section-6.2.4-3" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2.4-4">Specific conventions to be considered for SHA3-based HMAC are
+specified in <span><a href="https://rfc-editor.org/rfc/rfc9688#section-4" class="relref">Section 4</a> of [<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-6.2.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2316,10 +2457,10 @@ signature algorithm when signature-based protection is used
 </li>
             <li class="normal" id="section-7-4.3.2.3">
               <p id="section-7-4.3.2.3.1">protection of centrally generated keys: The strength of the
-algorithms used for the key management technique (<a href="#AlgProf4210" class="auto internal xref">Section 7.1</a>:
+algorithms used for the key management technique (<a href="#AlgProf9810" class="auto internal xref">Section 7.1</a>:
 PROT_ENC_ALG or <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>: KM_KA_ALG, KM_KT_ALG, KM_KD_ALG) and
 the encryption of the content-encryption key and private key
-(<a href="#AlgProf4210" class="auto internal xref">Section 7.1</a>: SYM_PENC_ALG, PROT_SYM_ALG or <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>:
+(<a href="#AlgProf9810" class="auto internal xref">Section 7.1</a>: SYM_PENC_ALG, PROT_SYM_ALG or <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>:
 KM_KW_ALG, PROT_SYM_ALG).<a href="#section-7-4.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
@@ -2358,7 +2499,7 @@ the implementer <span class="bcp14">MUST</span> choose one offering more bits of
             <td class="text-left" rowspan="1" colspan="1">128</td>
             <td class="text-left" rowspan="1" colspan="1">RSA3072,<br>DH(3072)</td>
             <td class="text-left" rowspan="1" colspan="1">ECDSA/ECDH (secp256r1),<br>Ed25519/X25519 (curve25519)</td>
-            <td class="text-left" rowspan="1" colspan="1">SHA-256,<br>SHAKE128(d=256)</td>
+            <td class="text-left" rowspan="1" colspan="1">SHA-256,<br>SHAKE128</td>
             <td class="text-left" rowspan="1" colspan="1">AES-128</td>
           </tr>
           <tr>
@@ -2379,7 +2520,7 @@ the implementer <span class="bcp14">MUST</span> choose one offering more bits of
             <td class="text-left" rowspan="1" colspan="1">256</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1">ECDSA/ECDH (secp521r1)</td>
-            <td class="text-left" rowspan="1" colspan="1">SHA-512,<br>SHAKE256(d=512)</td>
+            <td class="text-left" rowspan="1" colspan="1">SHA-512,<br>SHAKE256</td>
             <td class="text-left" rowspan="1" colspan="1">AES-256</td>
           </tr>
         </tbody>
@@ -2406,14 +2547,14 @@ in CMP and with more details.<a href="#section-7-7" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">112</td>
             <td class="text-left" rowspan="1" colspan="1">RSA2048,<br>secp224r1</td>
-            <td class="text-left" rowspan="1" colspan="1">RSASSA-PSS (2048, SHA-224 or SHAKE128 (d=256)),<br>RSAEncryption (2048, SHA-224),<br>ECDSA (secp224r1, SHA-224 or SHAKE128 (d=256)),<br>PBMAC1 (HMAC-SHA-224)</td>
+            <td class="text-left" rowspan="1" colspan="1">RSASSA-PSS (2048, SHA-224 or SHAKE128),<br>RSAEncryption (2048, SHA-224),<br>ECDSA (secp224r1, SHA-224 or SHAKE128),<br>PBMAC1 (HMAC-SHA-224)</td>
             <td class="text-left" rowspan="1" colspan="1">DH(2048),<br>RSAES-OAEP (2048, SHA-224),<br>RSAEncryption (2048, SHA-224),<br>ECDH (secp224r1, SHA-224),<br>PBKDF2 (HMAC-SHA-224)</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">128</td>
             <td class="text-left" rowspan="1" colspan="1">RSA3072,<br>secp256r1,<br>curve25519</td>
-            <td class="text-left" rowspan="1" colspan="1">RSASSA-PSS (3072, SHA-256 or SHAKE128 (d=256)),<br>RSAEncryption (3072, SHA-256),<br>ECDSA (secp256r1, SHA-256 or SHAKE128 (d=256)),<br>Ed25519 (SHA-512),<br>PBMAC1 (HMAC-SHA-256)</td>
+            <td class="text-left" rowspan="1" colspan="1">RSASSA-PSS (3072, SHA-256 or SHAKE128),<br>RSAEncryption (3072, SHA-256),<br>ECDSA (secp256r1, SHA-256 or SHAKE128),<br>Ed25519 (SHA-512),<br>PBMAC1 (HMAC-SHA-256)</td>
             <td class="text-left" rowspan="1" colspan="1">DH(3072),<br>RSAES-OAEP (3072, SHA-256),<br> RSAEncryption (3072, SHA-256),<br>ECDH (secp256r1, SHA-256),<br>X25519,<br>PBKDF2 (HMAC-SHA-256)</td>
             <td class="text-left" rowspan="1" colspan="1">AES-128</td>
           </tr>
@@ -2434,7 +2575,7 @@ in CMP and with more details.<a href="#section-7-7" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">256</td>
             <td class="text-left" rowspan="1" colspan="1">secp521r1</td>
-            <td class="text-left" rowspan="1" colspan="1">ECDSA (secp521r1, SHA-512 or SHAKE256 (d=512)),<br>PBMAC1 (HMAC-SHA-512)</td>
+            <td class="text-left" rowspan="1" colspan="1">ECDSA (secp521r1, SHA-512 or SHAKE256),<br>PBMAC1 (HMAC-SHA-512)</td>
             <td class="text-left" rowspan="1" colspan="1">ECDH (secp521r1, SHA-512),<br>PBKDF2 (HMAC-SHA-512)</td>
             <td class="text-left" rowspan="1" colspan="1">AES-256</td>
           </tr>
@@ -2445,13 +2586,13 @@ in CMP and with more details.<a href="#section-7-7" class="pilcrow">¶</a></p>
 offering roughly the same level of security is recommended. Below are several
 algorithm profiles that are balanced, assuming the implementer chooses MAC
 secrets and/or certificate profiles of at least equivalent strength.<a href="#section-7-9" class="pilcrow">¶</a></p>
-<div id="AlgProf4210">
+<div id="AlgProf9810">
 <section id="section-7.1">
         <h3 id="name-algorithm-profile-for-pki-m">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-algorithm-profile-for-pki-m" class="section-name selfRef">Algorithm Profile for PKI Management Message Profiles in RFC 4210</a>
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-algorithm-profile-for-pki-m" class="section-name selfRef">Algorithm Profile for PKI Management Message Profiles in RFC 9810</a>
         </h3>
 <p id="section-7.1-1">The following table updates the definitions of algorithms used within PKI
-Management Message Profiles, as defined in <span><a href="https://rfc-editor.org/rfc/rfc4210#appendix-D.2" class="relref">Appendix D.2</a> of [<a href="#RFC4210" class="cite xref">RFC4210</a>]</span>.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+Management Message Profiles, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9810#appendix-C.2" class="relref">Appendix C.2</a> of [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">The columns in the table are:<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-7.1-3">
           <dt id="section-7.1-3.1">Name:</dt>
@@ -2480,11 +2621,11 @@ Management Message Profiles, as defined in <span><a href="https://rfc-editor.org
 </dd>
         <dd class="break"></dd>
 </dl>
-<span id="name-algorithms-used-within-appe"></span><div id="AlgProd4210T">
+<span id="name-algorithms-used-within-appe"></span><div id="AlgProd9810T">
 <table class="center" id="table-3">
           <caption>
 <a href="#table-3" class="selfRef">Table 3</a>:
-<a href="#name-algorithms-used-within-appe" class="selfRef">Algorithms Used within Appendix D.2 of RFC 4210</a>
+<a href="#name-algorithms-used-within-appe" class="selfRef">Algorithms Used within Appendix C.2 of RFC 9810</a>
           </caption>
 <thead>
             <tr>
@@ -2548,7 +2689,7 @@ Management Message Profiles, as defined in <span><a href="https://rfc-editor.org
           <dd class="break"></dd>
 <dt id="section-7.1-6.5">PBMAC1:</dt>
           <dd style="margin-left: 1.5em" id="section-7.1-6.6">
-            <p id="section-7.1-6.6.1">id-PBMAC1, see <a href="#PBMAC1" class="auto internal xref">Section 6.1.2</a> (with id-PBKDF2 as the key derivation function, see <a href="#PBKDF2" class="auto internal xref">Section 4.5.1</a> and id-hmacWithSHA256 as the message authentication scheme, see <a href="#HMAC-SHA2" class="auto internal xref">Section 6.2.1</a>). It is <span class="bcp14">RECOMMENDED</span> to prefer the usage of PBMAC1 instead of PasswordBasedMac.<a href="#section-7.1-6.6.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-6.6.1">id-PBMAC1, see <a href="#PBMAC1" class="auto internal xref">Section 6.1.2</a> (with id-PBKDF2 as the key derivation function, see <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a> and id-hmacWithSHA256 as the message authentication scheme, see <a href="#HMAC-SHA2" class="auto internal xref">Section 6.2.1</a>). It is <span class="bcp14">RECOMMENDED</span> to prefer the usage of PBMAC1 instead of PasswordBasedMac.<a href="#section-7.1-6.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-7.1-6.7">DH:</dt>
@@ -2747,6 +2888,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <span class="refTitle">"SHA-3 standard :: permutation-based hash and extendable-output functions"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.202</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.202">https://doi.org/10.6028/nist.fips.202</a>&gt;</span>. <span class="annotation">NIST Federal Information Processing Standards Publications 202</span>
         </dd>
 <dd class="break"></dd>
+<dt id="NIST.FIPS.204">[NIST.FIPS.204]</dt>
+        <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Module-Lattice-Based Digital Signature Standard"</span>, <span class="seriesInfo">NIST DOI 10.6028/nist.fips.204</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST.SP.800-185">[NIST.SP.800-185]</dt>
         <dd>
 <span class="refAuthor">Kelsey, J.</span>, <span class="refAuthor">Change, S.</span>, and <span class="refAuthor">R. Perlner</span>, <span class="refTitle">"SHA-3 derived functions: cSHAKE, KMAC, TupleHash and ParallelHash"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-185</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-185">https://doi.org/10.6028/nist.sp.800-185</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-185</span>
@@ -2789,10 +2934,6 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 4056</span>, <span class="seriesInfo">DOI 10.17487/RFC4056</span>, <time datetime="2005-06" class="refDate">June 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4056">https://www.rfc-editor.org/rfc/rfc4056</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC4210">[RFC4210]</dt>
-        <dd>
-<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Kause, T.</span>, and <span class="refAuthor">T. Mononen</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 4210</span>, <span class="seriesInfo">DOI 10.17487/RFC4210</span>, <time datetime="2005-09" class="refDate">September 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4210">https://www.rfc-editor.org/rfc/rfc4210</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC4211">[RFC4211]</dt>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Request Message Format (CRMF)"</span>, <span class="seriesInfo">RFC 4211</span>, <span class="seriesInfo">DOI 10.17487/RFC4211</span>, <time datetime="2005-09" class="refDate">September 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4211">https://www.rfc-editor.org/rfc/rfc4211</a>&gt;</span>. </dd>
@@ -2833,6 +2974,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8410">[RFC8410]</dt>
+        <dd>
+<span class="refAuthor">Josefsson, S.</span> and <span class="refAuthor">J. Schaad</span>, <span class="refTitle">"Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure"</span>, <span class="seriesInfo">RFC 8410</span>, <span class="seriesInfo">DOI 10.17487/RFC8410</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8410">https://www.rfc-editor.org/rfc/rfc8410</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8418">[RFC8418]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of the Elliptic Curve Diffie-Hellman Key Agreement Algorithm with X25519 and X448 in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 8418</span>, <span class="seriesInfo">DOI 10.17487/RFC8418</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8418">https://www.rfc-editor.org/rfc/rfc8418</a>&gt;</span>. </dd>
@@ -2861,17 +3006,25 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Algorithm Requirements Update to the Internet X.509 Public Key Infrastructure Certificate Request Message Format (CRMF)"</span>, <span class="seriesInfo">RFC 9045</span>, <span class="seriesInfo">DOI 10.17487/RFC9045</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9045">https://www.rfc-editor.org/rfc/rfc9045</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC9480">[RFC9480]</dt>
-        <dd>
-<span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Certificate Management Protocol (CMP) Updates"</span>, <span class="seriesInfo">RFC 9480</span>, <span class="seriesInfo">DOI 10.17487/RFC9480</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9480">https://www.rfc-editor.org/rfc/rfc9480</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC9483">[RFC9483]</dt>
         <dd>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, and <span class="refAuthor">S. Fries</span>, <span class="refTitle">"Lightweight Certificate Management Protocol (CMP) Profile"</span>, <span class="seriesInfo">RFC 9483</span>, <span class="seriesInfo">DOI 10.17487/RFC9483</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9483">https://www.rfc-editor.org/rfc/rfc9483</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9688">[RFC9688]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of the SHA3 One-Way Hash Functions in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9688</span>, <span class="seriesInfo">DOI 10.17487/RFC9688</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9688">https://www.rfc-editor.org/rfc/rfc9688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9810">[RFC9810]</dt>
+        <dd>
+<span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, <span class="refAuthor">Ounsworth, M.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 9810</span>, <span class="seriesInfo">DOI 10.17487/RFC9810</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9810">https://www.rfc-editor.org/rfc/rfc9810</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9881">[RFC9881]</dt>
+        <dd>
+<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. E. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="seriesInfo">RFC 9881</span>, <span class="seriesInfo">DOI 10.17487/RFC9881</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9881">https://www.rfc-editor.org/rfc/rfc9881</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9882">[RFC9882]</dt>
+      <dd>
+<span class="refAuthor">Salter, B.</span>, <span class="refAuthor">Raine, A.</span>, and <span class="refAuthor">D. Van Geest</span>, <span class="refTitle">"Use of the ML-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9882</span>, <span class="seriesInfo">DOI 10.17487/RFC9882</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9882">https://www.rfc-editor.org/rfc/rfc9882</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2886,10 +3039,22 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">University of Bristol</span>, <span class="refTitle">"Algorithms, Key Size and Protocols Report (2018)"</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.ecrypt.eu.org/csa/documents/D5.4-FinalAlgKeySizeProt.pdf">https://www.ecrypt.eu.org/csa/documents/D5.4-FinalAlgKeySizeProt.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-pquip-pqc-engineers">[I-D.ietf-pquip-pqc-engineers]</dt>
+        <dd>
+<span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-engineers-14</span>, <time datetime="2025-08-25" class="refDate">25 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST.SP.800-57pt1r5">[NIST.SP.800-57pt1r5]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Barker, E.</span>, <span class="refTitle">"Recommendation for key management:: part 1 - general"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-57pt1r5</span>, <time datetime="2020-05" class="refDate">May 2020</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-57pt1r5">https://doi.org/10.6028/nist.sp.800-57pt1r5</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-57pt1r5</span>
         </dd>
+<dd class="break"></dd>
+<dt id="RFC4210">[RFC4210]</dt>
+        <dd>
+<span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Kause, T.</span>, and <span class="refAuthor">T. Mononen</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 4210</span>, <span class="seriesInfo">DOI 10.17487/RFC4210</span>, <time datetime="2005-09" class="refDate">September 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4210">https://www.rfc-editor.org/rfc/rfc4210</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9481">[RFC9481]</dt>
+      <dd>
+<span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">Aschauer, H.</span>, <span class="refAuthor">Ounsworth, M.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Certificate Management Protocol (CMP) Algorithms"</span>, <span class="seriesInfo">RFC 9481</span>, <span class="seriesInfo">DOI 10.17487/RFC9481</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9481">https://www.rfc-editor.org/rfc/rfc9481</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2908,7 +3073,7 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
           <p id="appendix-A-3.1.1">Added SHA3 to Section 2<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.2">
-          <p id="appendix-A-3.2.1">Added ML-DSA, Composite ML-DSA, SLH-DSA, LMS/HSS, XMSS/XMSSMT to Section 3<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.2.1">Added ML-DSA, Composite ML-DSA, SLH-DSA, FN-DSA, LMS/HSS, XMSS/XMSSMT to Section 3<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.3">
           <p id="appendix-A-3.3.1">Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
