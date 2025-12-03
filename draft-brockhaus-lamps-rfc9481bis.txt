@@ -518,9 +518,9 @@ Table of Contents
    [I-D.ietf-lamps-pq-composite-sigs].
 
    The Copmosite ML-DSA signature algorithm combines of ML-DSA
-   Section 3.4 with traditional algorithms RSASSA-PKCS1-v1.5
-   Section 3.1, RSASSA-PSS Section 3.1, ECDSA Section 3.2, Ed25519
-   Section 3.3, and Ed448 Section 3.3 to new hybrid signature
+   (Section 3.4) with traditional algorithms RSASSA-PKCS1-v1.5
+   (Section 3.1), RSASSA-PSS (Section 3.1), ECDSA (Section 3.2), Ed25519
+   (Section 3.3), and Ed448 (Section 3.3) to new hybrid signature
    algorithms.
 
    The Composite ML-DSA signature algorithm is identified by the
