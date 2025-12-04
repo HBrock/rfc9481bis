@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 6 June 2026                                             Entrust
-                                                         3 December 2025
+Expires: 7 June 2026                                             Entrust
+                                                         4 December 2025
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2026.
+   This Internet-Draft will expire on 7 June 2026.
 
 Copyright Notice
 
@@ -81,8 +81,6 @@ Table of Contents
      3.5.  Composite ML-DSA
      3.6.  SLH-DSA
      3.7.  FN-DSA
-     3.8.  LMS/HSS
-     3.9.  XMSS/XMSSMT
    4.  Key Management Algorithms
      4.1.  Key Agreement Algorithms
        4.1.1.  Diffie-Hellman
@@ -611,14 +609,6 @@ Table of Contents
 3.7.  FN-DSA
 
    ToDo FN-DSA
-
-3.8.  LMS/HSS
-
-   ToDo LMS/HSS
-
-3.9.  XMSS/XMSSMT
-
-   ToDo XMSS/XMSSMT
 
 4.  Key Management Algorithms
 
@@ -1712,8 +1702,7 @@ Appendix A.  History of Changes
 
    *  Added SHA3 to Section 2
 
-   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, FN-DSA, LMS/HSS, XMSS/
-      XMSSMT to Section 3
+   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
 
    *  Added new Section 4.3 for Key Encapsulation Mechanisms containing
       RSA-KEM, ML-KEM, Composite ML-KEM
