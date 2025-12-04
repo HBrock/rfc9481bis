@@ -510,7 +510,6 @@ Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be SHA-512.
 
-
 ## Composite ML-DSA {#C-ML-DSA}
 
 The Composite ML-DSA signature algorithm is defined in {{I-D.ietf-lamps-pq-composite-sigs}}.
@@ -602,14 +601,6 @@ ToDo SLH-DSA
 ## FN-DSA {#FN-DSA}
 
 ToDo FN-DSA
-
-## LMS/HSS {#LMS}
-
-ToDo LMS/HSS
-
-## XMSS/XMSSMT {#XMSS}
-
-ToDo XMSS/XMSSMT
 
 # Key Management Algorithms {#KeyMan}
 
@@ -1348,7 +1339,7 @@ Changes from 00 -> 01:
 
 * Added SHA3 to Section 2
 
-* Added ML-DSA, Composite ML-DSA, SLH-DSA, FN-DSA, LMS/HSS, XMSS/XMSSMT to Section 3
+* Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
 
 * Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM
 
