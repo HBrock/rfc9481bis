@@ -1836,7 +1836,103 @@ id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
         <h3 id="name-slh-dsa">
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-slh-dsa" class="section-name selfRef">SLH-DSA</a>
         </h3>
-<p id="section-3.6-1">ToDo SLH-DSA<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-1">The SLH-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.205" class="internal xref">FIPS 205</a> [<a href="#NIST.FIPS.205" class="cite xref">NIST.FIPS.205</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-2">The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in a pure mode and a pre-hash mode using either SHA2 or SHAKE.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-3">The Pure SLH-DSA signature algorithm using SHA2 is identified by the following OIDs:<a href="#section-3.6-3" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.6-4">
+<pre>
+   id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 20 }
+   id-slh-dsa-sha2-128f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 21 }
+   id-slh-dsa-sha2-192s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 22 }
+   id-slh-dsa-sha2-192f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 23 }
+   id-slh-dsa-sha2-256s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 24 }
+   id-slh-dsa-sha2-256f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 25 }
+</pre><a href="#section-3.6-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.6-5">The Pure SLH-DSA signature algorithm using SHAKE is identified by the following OIDs:<a href="#section-3.6-5" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.6-6">
+<pre>
+   id-slh-dsa-shake-128s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 26 }
+   id-slh-dsa-shake-128f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 27 }
+   id-slh-dsa-shake-192s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 28 }
+   id-slh-dsa-shake-192f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 29 }
+   id-slh-dsa-shake-256s OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 30 }
+   id-slh-dsa-shake-256f OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 31 }
+</pre><a href="#section-3.6-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.6-7">The HashSLH-DSA signature algorithm using SHA2 is identified by the following OIDs:<a href="#section-3.6-7" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.6-8">
+<pre>
+   id-hash-slh-dsa-sha2-128s-with-sha256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 35 }
+   id-hash-slh-dsa-sha2-128f-with-sha256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 36 }
+   id-hash-slh-dsa-sha2-192s-with-sha512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 37 }
+   id-hash-slh-dsa-sha2-192f-with-sha512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 38 }
+   id-hash-slh-dsa-sha2-256s-with-sha512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 39 }
+   id-hash-slh-dsa-sha2-256f-with-sha512 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 40 }
+</pre><a href="#section-3.6-8" class="pilcrow">¶</a>
+</div>
+<p id="section-3.6-9">The HashSLH-DSA signature algorithm using SHAKE is identified by the following OIDs:<a href="#section-3.6-9" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.6-10">
+<pre>
+   id-hash-slh-dsa-shake-128s-with-shake128 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 41 }
+   id-hash-slh-dsa-shake-128f-with-shake128 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 42 }
+   id-hash-slh-dsa-shake-192s-with-shake256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 43 }
+   id-hash-slh-dsa-shake-192f-with-shake256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 44 }
+   id-hash-slh-dsa-shake-256s-with-shake256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 45 }
+   id-hash-slh-dsa-shake-256f-with-shake256 OBJECT IDENTIFIER ::= {
+      joint-iso-itu-t(2) country(16) us(840) organization(1)
+      gov(101) csor(3) sigAlg(4) 46 }
+</pre><a href="#section-3.6-10" class="pilcrow">¶</a>
+</div>
+<p id="section-3.6-11">Note: Since the same OID is used for the sigantur algorithm and the type of public key, a key pair can be used for either Pure SLH-DSA or HashSLH-DSA.  For use with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>, only the use of Pure SLH-DSA keys is specified in <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-11" class="pilcrow">¶</a></p>
+<p id="section-3.6-12">Specific conventions to be considered are specified in <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> and <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-12" class="pilcrow">¶</a></p>
+<p id="section-3.6-13">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the hash function used in the SLH-DSA tree as identified by the OID used for the signature algorithm of the certificate signature, see <span><a href="https://rfc-editor.org/rfc/rfc9814#section-4" class="relref">Section 4</a> of [<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="FN-DSA">
@@ -2923,6 +3019,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-13</span>, <time datetime="2025-10-31" class="refDate">31 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-13</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-lamps-x509-slhdsa">[I-D.ietf-lamps-x509-slhdsa]</dt>
+        <dd>
+<span class="refAuthor">Bashiri, K.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Gazdag, S.</span>, <span class="refAuthor">Van Geest, D.</span>, and <span class="refAuthor">S. Kousidis</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure: Algorithm Identifiers for SLH-DSA"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-x509-slhdsa-09</span>, <time datetime="2025-06-30" class="refDate">30 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST.FIPS.180-4">[NIST.FIPS.180-4]</dt>
         <dd>
 <span class="refTitle">"Secure hash standard"</span>, <span class="refContent">National Institute of Standards and Technology (U.S.)</span>, <span class="seriesInfo">DOI 10.6028/nist.fips.180-4</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.fips.180-4">https://doi.org/10.6028/nist.fips.180-4</a>&gt;</span>. <span class="annotation">NIST Federal Information Processing Standards Publications 180-4</span>
@@ -2951,6 +3051,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="NIST.FIPS.204">[NIST.FIPS.204]</dt>
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"Module-Lattice-Based Digital Signature Standard"</span>, <span class="seriesInfo">NIST DOI 10.6028/nist.fips.204</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST.FIPS.205">[NIST.FIPS.205]</dt>
+        <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Stateless Hash-Based Digital Signature Standard"</span>, <span class="seriesInfo">NIST DOI 10.6028/nist.fips.205</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NIST.SP.800-185">[NIST.SP.800-185]</dt>
         <dd>
@@ -3077,6 +3181,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="RFC9810">[RFC9810]</dt>
         <dd>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, <span class="refAuthor">Ounsworth, M.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 9810</span>, <span class="seriesInfo">DOI 10.17487/RFC9810</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9810">https://www.rfc-editor.org/rfc/rfc9810</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9814">[RFC9814]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Kampanakis, P.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Use of the SLH-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9814</span>, <span class="seriesInfo">DOI 10.17487/RFC9814</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9814">https://www.rfc-editor.org/rfc/rfc9814</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9881">[RFC9881]</dt>
         <dd>
