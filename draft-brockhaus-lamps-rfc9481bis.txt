@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 7 June 2026                                             Entrust
-                                                         4 December 2025
+Expires: 11 June 2026                                            Entrust
+                                                         8 December 2025
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 June 2026.
+   This Internet-Draft will expire on 11 June 2026.
 
 Copyright Notice
 
@@ -471,10 +471,10 @@ Table of Contents
    Specific conventions to be considered are specified in [RFC8410] and
    [RFC8419].
 
-   Note: The hash algorithm used to calculate the certHash in certConf
-   messages MUST be SHA-512 if the certificate to be confirmed has been
-   signed using Ed25519 or SHAKE256 if the certificate to be confirmed
-   has been signed using Ed448.
+   Note: The hash algorithm used to calculate the certHash in the
+   certConf messages MUST be SHA-512 if the certificate to be confirmed
+   has been signed using Ed25519 or SHAKE256 if the certificate to be
+   confirmed has been signed using Ed448.
 
 3.4.  ML-DSA
 
@@ -483,8 +483,7 @@ Table of Contents
 
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
    quantum-resistant digital signature scheme standardized by the NIST.
-   This document specifies the use of the ML-DSA in CMP at three
-   security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash
+   This document specifies the use of the ML-DSA in CMP.  The pre-hash
    varient of ML-DSA, called HashML-DSA, is not specified in this
    document.  If pre-hasing is required, the External µ mode of ML-DSA
    can be used, see Appendix D of [RFC9881].
@@ -507,8 +506,8 @@ Table of Contents
    [RFC9882].
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash messages MUST be SHA-
-   512.
+   hash algorithm used to calculate the certHash in the certConf
+   messages MUST be SHA-512.
 
 3.5.  Composite ML-DSA
 
@@ -598,9 +597,9 @@ Table of Contents
       pkix(7) alg(6) 54 }
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash messages MUST be the
-   respective Pre-Hash function as specified in Section 7 of
-   [I-D.ietf-lamps-pq-composite-sigs].
+   hash algorithm used to calculate the certHash in the certConf
+   messages MUST be the respective Pre-Hash function as specified in
+   Section 7 of [I-D.ietf-lamps-pq-composite-sigs].
 
 3.6.  SLH-DSA
 
