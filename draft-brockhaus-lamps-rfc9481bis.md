@@ -478,7 +478,7 @@ digest algorithms is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC8410}} and {{RFC8419}}.
 
-Note: The hash algorithm used to calculate the certHash in certConf
+Note: The hash algorithm used to calculate the certHash in the certConf
 messages MUST be SHA-512 if the certificate to be confirmed has been
 signed using Ed25519 or SHAKE256 if the certificate to be
 confirmed has been signed using Ed448.
@@ -488,7 +488,7 @@ confirmed has been signed using Ed448.
 
 The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
 
 The signature algorithm ML-DSA is identified by the following OIDs:
 
@@ -508,7 +508,7 @@ The signature algorithm ML-DSA is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882}}.
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be SHA-512.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be SHA-512.
 
 ## Composite ML-DSA {#C-ML-DSA}
 
@@ -592,7 +592,7 @@ id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
    pkix(7) alg(6) 54 }
 ~~~~
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash messages MUST be the respective Pre-Hash function as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the respective Pre-Hash function as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
 
 ## SLH-DSA {#SLH-DSA}
 
