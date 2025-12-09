@@ -608,9 +608,9 @@ Note: If the hashAlg field in a certConf message is not present the hash algorit
 
 The SLH-DSA signature algorithm is defined in [FIPS 205](#NIST.FIPS.205).
 
-The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in a pure mode and a pre-hash mode using either SHA2 or SHAKE.
+The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for using HashSLH-DSA are specified in {{I-D.ietf-lamps-x509-slhdsa}}, {{RFC9814}} only specifies the Pure SLH-DSA for usage with [CMS](#RFC5652). Therefore, only Pure SLH-DSA signature algorithm OIDs are listed below.
 
-The Pure SLH-DSA signature algorithm using SHA2 is identified by the following OIDs:
+The Pure SLH-DSA signature algorithm using SHA2 ({{SHA2}}) is identified by the following OIDs:
 
 ~~~~ asn.1
    id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
@@ -633,7 +633,7 @@ The Pure SLH-DSA signature algorithm using SHA2 is identified by the following O
       gov(101) csor(3) sigAlg(4) 25 }
 ~~~~
 
-The Pure SLH-DSA signature algorithm using SHAKE is identified by the following OIDs:
+The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified by the following OIDs:
 
 ~~~~ asn.1
    id-slh-dsa-shake-128s OBJECT IDENTIFIER ::= {
@@ -656,57 +656,9 @@ The Pure SLH-DSA signature algorithm using SHAKE is identified by the following 
       gov(101) csor(3) sigAlg(4) 31 }
 ~~~~
 
-The HashSLH-DSA signature algorithm using SHA2 is identified by the following OIDs:
-
-~~~~ asn.1
-   id-hash-slh-dsa-sha2-128s-with-sha256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 35 }
-   id-hash-slh-dsa-sha2-128f-with-sha256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 36 }
-   id-hash-slh-dsa-sha2-192s-with-sha512 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 37 }
-   id-hash-slh-dsa-sha2-192f-with-sha512 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 38 }
-   id-hash-slh-dsa-sha2-256s-with-sha512 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 39 }
-   id-hash-slh-dsa-sha2-256f-with-sha512 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 40 }
-~~~~
-
-The HashSLH-DSA signature algorithm using SHAKE is identified by the following OIDs:
-
-~~~~ asn.1
-   id-hash-slh-dsa-shake-128s-with-shake128 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 41 }
-   id-hash-slh-dsa-shake-128f-with-shake128 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 42 }
-   id-hash-slh-dsa-shake-192s-with-shake256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 43 }
-   id-hash-slh-dsa-shake-192f-with-shake256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 44 }
-   id-hash-slh-dsa-shake-256s-with-shake256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 45 }
-   id-hash-slh-dsa-shake-256f-with-shake256 OBJECT IDENTIFIER ::= {
-      joint-iso-itu-t(2) country(16) us(840) organization(1)
-      gov(101) csor(3) sigAlg(4) 46 }
-~~~~
-
-Note: Since the same OID is used for the sigantur algorithm and the type of public key, a key pair can be used for either Pure SLH-DSA or HashSLH-DSA.  For use with [CMS](#RFC5652), only the use of Pure SLH-DSA keys is specified in {{RFC9814}}.
-
 Specific conventions to be considered are specified in {{I-D.ietf-lamps-x509-slhdsa}} and {{RFC9814}}.
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the hash function used in the SLH-DSA tree as identified by the OID used for the signature algorithm of the certificate signature, see {{Section 4 of RFC9814}}.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the hash function used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
 
 ## FN-DSA {#FN-DSA}
 
