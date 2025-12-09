@@ -608,14 +608,14 @@ Table of Contents
 
    The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a
    quantum-resistant digital signature scheme standardized by the NIST.
-   This document specifies the use of the SLH-DSA in CMP in a pure mode
-   (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for using
-   HashSLH-DSA are specified in [I-D.ietf-lamps-x509-slhdsa], [RFC9814]
-   only specifies OIDs for using the Pure SLH-DSA with CMS [RFC5652].
-   Therefore, only Pure SLH-DSA signature algorithm OIDs are listed
-   below.
+   This document specifies the use of the SLH-DSA in CMP in the pure
+   mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for
+   using HashSLH-DSA are specified in [I-D.ietf-lamps-x509-slhdsa],
+   [RFC9814] only specifies the Pure SLH-DSA for usage with CMS
+   [RFC5652].  Therefore, only Pure SLH-DSA signature algorithm OIDs are
+   listed below.
 
-   The Pure SLH-DSA signature algorithm using SHA2Section 2.1 is
+   The Pure SLH-DSA signature algorithm using SHA2 (Section 2.1) is
    identified by the following OIDs:
 
       id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
@@ -637,7 +637,7 @@ Table of Contents
          joint-iso-itu-t(2) country(16) us(840) organization(1)
          gov(101) csor(3) sigAlg(4) 25 }
 
-   The Pure SLH-DSA signature algorithm using SHAKESection 2.2 is
+   The Pure SLH-DSA signature algorithm using SHAKE (Section 2.2) is
    identified by the following OIDs:
 
       id-slh-dsa-shake-128s OBJECT IDENTIFIER ::= {

@@ -1837,8 +1837,8 @@ id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-slh-dsa" class="section-name selfRef">SLH-DSA</a>
         </h3>
 <p id="section-3.6-1">The SLH-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.205" class="internal xref">FIPS 205</a> [<a href="#NIST.FIPS.205" class="cite xref">NIST.FIPS.205</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.6-2">The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in a pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for using HashSLH-DSA are specified in <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span>, <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span> only specifies OIDs for using the Pure SLH-DSA with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>. Therefore, only Pure SLH-DSA signature algorithm OIDs are listed below.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
-<p id="section-3.6-3">The Pure SLH-DSA signature algorithm using SHA2<a href="#SHA2" class="auto internal xref">Section 2.1</a> is identified by the following OIDs:<a href="#section-3.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.6-2">The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for using HashSLH-DSA are specified in <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span>, <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span> only specifies the Pure SLH-DSA for usage with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>. Therefore, only Pure SLH-DSA signature algorithm OIDs are listed below.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-3">The Pure SLH-DSA signature algorithm using SHA2 (<a href="#SHA2" class="auto internal xref">Section 2.1</a>) is identified by the following OIDs:<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.6-4">
 <pre>
    id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
@@ -1861,7 +1861,7 @@ id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
       gov(101) csor(3) sigAlg(4) 25 }
 </pre><a href="#section-3.6-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.6-5">The Pure SLH-DSA signature algorithm using SHAKE<a href="#SHA3-SHAKE" class="auto internal xref">Section 2.2</a> is identified by the following OIDs:<a href="#section-3.6-5" class="pilcrow">¶</a></p>
+<p id="section-3.6-5">The Pure SLH-DSA signature algorithm using SHAKE (<a href="#SHA3-SHAKE" class="auto internal xref">Section 2.2</a>) is identified by the following OIDs:<a href="#section-3.6-5" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.6-6">
 <pre>
    id-slh-dsa-shake-128s OBJECT IDENTIFIER ::= {
