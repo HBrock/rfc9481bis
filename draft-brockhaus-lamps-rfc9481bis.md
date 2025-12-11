@@ -186,11 +186,11 @@ Many new cryptographic algorithms have been specified in recent years. In partic
 
 The updates made in this document include the following changes:
 
-* Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.1.2
+* Added SHA3 to Sections {{SHA3-SHAKE}}, {{RSASig}}, {{ECDSA}}, and {{RSAEnc}}
 
-* Added ML-DSA as Section 3.4
+* Added ML-DSA, Composite ML-DSA, and SLH-DSA to {{Sig}}
 
-* Added SHA3-based HMAC as section 6.2.4
+* Added SHA3-based HMAC as {{HMAC-SHA3}}
 
 * ...
 
@@ -659,10 +659,6 @@ The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified 
 Specific conventions to be considered are specified in {{I-D.ietf-lamps-x509-slhdsa}} and {{RFC9814}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the hash function used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
-
-## FN-DSA {#FN-DSA}
-
-ToDo FN-DSA
 
 # Key Management Algorithms {#KeyMan}
 
@@ -1399,13 +1395,15 @@ scope of the profile.
 
 Changes from 00 -> 01:
 
-* Added SHA3 to Section 2
+* Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.2.1
 
-* Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
+* Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
 
-* Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM
+* Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, and Composite ML-KEM
 
 * Added HKDF to Section 4.5
+
+*Added SHA3-based HAMAC to Section 6.2
 
 * Fixed erratum 7800
 
