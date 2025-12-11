@@ -145,6 +145,7 @@ normative:
   RFC9044:
   RFC9045:
   RFC9483:
+  RFC9629:
   RFC9688:
   RFC9810:
   RFC9814:
@@ -186,9 +187,13 @@ Many new cryptographic algorithms have been specified in recent years. In partic
 
 The updates made in this document include the following changes:
 
-* Added SHA3 to Sections {{SHA3-SHAKE}}, {{RSASig}}, {{ECDSA}}, and {{RSAEnc}}
+* Added SHA3 to {{SHA3-SHAKE}}, {{RSASig}}, {{ECDSA}}, and {{RSAEnc}}
 
 * Added ML-DSA, Composite ML-DSA, and SLH-DSA to {{Sig}}
+
+* Added RSA-KEM, ML-KEM, and Composite ML-KEM to the new {{KEM}}
+
+* Updated {{KDF}} and added Key Derivation with KEMRecipientInfo containing HKDF with SHA2 and SHA3, KMAC as KDF, and KDF2 and KDF3
 
 * Added SHA3-based HMAC as {{HMAC-SHA3}}
 
@@ -201,7 +206,7 @@ The updates made in this document include the following changes:
 In the following sections, ASN.1 values and types are used to indicate where
 algorithm identifier and output values are provided. These ASN.1 values and
 types are defined in [CMP](#RFC9810), [Certificate Request Message
-Format (CRMF)](#RFC4211), and [Cryptographic Message Syntax (CMS)](#RFC5652).
+Format (CRMF)](#RFC4211), and [Cryptographic Message Syntax (CMS)](#RFC5652){{RFC9629}}.
 
 
 
@@ -660,6 +665,7 @@ Specific conventions to be considered are specified in {{I-D.ietf-lamps-x509-slh
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the hash function used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
 
+
 # Key Management Algorithms {#KeyMan}
 
 CMP utilizes the following general key management techniques: key agreement,
@@ -828,7 +834,17 @@ Further conventions to be considered for PKCS #1 v1.5 are specified in
 
 ## Key Encapsulation Mechanism {#KEM}
 
-ToDo KEM
+The key encapsulation mechanism algorithm identifiers are located in the:
+
+* kem field of KemCiphertextInfo and KEMRecipientInfo
+
+Key encapsulation ciphertext is located in the:
+
+* ct field of KemCiphertextInfo
+
+* kemct field of KEMRecipientInfo
+
+< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 ### RSA-KEM {#RSA-KEM}
 
@@ -850,18 +866,19 @@ KM_KW_ALG in {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
 
 As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
-using the key agreement or password-based key management technique
-with [CMS](#RFC5652) EnvelopedData.
+using the key agreement, password, or KEM-based key management technique with [CMS](#RFC5652) (#RFC9629) EnvelopedData.
 
 Key wrap algorithm identifiers are located in the:
 
 * parameters field of the KeyEncryptionAlgorithmIdentifier of
-  KeyAgreeRecipientInfo and PasswordRecipientInfo.
+  KeyAgreeRecipientInfo, PasswordRecipientInfo, and KEMRecipientInfo.
 
 Wrapped content-encryption keys are located in the:
 
-* encryptedKey field of RecipientEncryptedKeys (for key agreement) and
-  PasswordRecipientInfo (for password-based key management).
+* encryptedKey field of RecipientEncryptedKeys (for key agreement), PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo (for KEM).
+
+< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
+
 
 ### AES Key Wrap {#AESWrap}
 
@@ -891,7 +908,7 @@ algorithm with AES-128 content-encryption algorithm); see {{RFC8551}}.
 Further conventions to be considered for AES key wrap are specified in
 {{Section 2.2 of RFC3394}} and {{Section 2.3.2 of RFC3565}}.
 
-## Key Derivation Algorithms {#KeyDeriv}
+## Key Derivation Algorithms {#KDF}
 
 The key derivation algorithm is also referred to as KM_KD_ALG in
 {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
@@ -930,13 +947,15 @@ Further conventions to be considered for PBKDF2 are specified in
 
 Key derivation algorithm identifiers are located in the:
 
-* keyDerivationAlgorithm field of KEMRecipientInfo.
+* kdf field of KemBMParameter and KEMRecipientInfo.
+
+< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 #### HKDF with SHA2 and SHA3 {#HKDF}
 
 see RFC 8619 , RFC 9709 , and RFC 9688
 
-#### KMAC128 and KMAC256 with KDF {#KMAC-KDF}
+#### KMAC128 and KMAC256 as KDF {#KMAC-KDF}
 
 see RFC 9688
 
@@ -1064,7 +1083,7 @@ MAC algorithm identifiers are located in the:
 
 * messageAuthScheme field of PBMAC1,
 
-* mac field of PBMParameter, and
+* mac field of KemBMParameter and PBMParameter, and
 
 * prf field of PBKDF2-params.
 
@@ -1073,7 +1092,7 @@ MAC values are located in the:
 * PKIProtection field of PKIMessage.
 
 
-< Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. >
+< Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 ### SHA2-Based HMAC {#HMAC-SHA2}
 
@@ -1401,7 +1420,7 @@ Changes from 00 -> 01:
 
 * Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, and Composite ML-KEM
 
-* Added HKDF to Section 4.5
+* Updated Section 4.5 and added Section 4.5.1 on Key Derivation with KEMRecipientInfo containing HKDF, KMAC128 and KDF256 as KDF, and KDF2 and KDF3
 
 *Added SHA3-based HAMAC to Section 6.2
 
