@@ -1055,7 +1055,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Brockhaus, et al.</td>
-<td class="center">Expires 12 June 2026</td>
+<td class="center">Expires 14 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9810" class="eref">9810</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-09" class="published">9 December 2025</time>
+<time datetime="2025-12-11" class="published">11 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-12">12 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-14">14 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1139,7 +1139,7 @@ use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsol
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1210,9 +1210,6 @@ use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsol
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
                 <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.  <a href="#name-slh-dsa" class="internal xref">SLH-DSA</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
-                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.  <a href="#name-fn-dsa" class="internal xref">FN-DSA</a></p>
 </li>
             </ul>
 </li>
@@ -1379,13 +1376,13 @@ algorithms over time. The use of <span><a href="#RFC9810" class="internal xref">
 <p id="section-1.1-3">The updates made in this document include the following changes:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.1-4.1">
-            <p id="section-1.1-4.1.1">Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.1.2<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.1.1">Added SHA3 to Sections <a href="#SHA3-SHAKE" class="auto internal xref">Section 2.2</a>, <a href="#RSASig" class="auto internal xref">Section 3.1</a>, <a href="#ECDSA" class="auto internal xref">Section 3.2</a>, and <a href="#RSAEnc" class="auto internal xref">Section 4.2.1</a><a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.2">
-            <p id="section-1.1-4.2.1">Added ML-DSA as Section 3.4<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.2.1">Added ML-DSA, Composite ML-DSA, and SLH-DSA to <a href="#Sig" class="auto internal xref">Section 3</a><a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.3">
-            <p id="section-1.1-4.3.1">Added SHA3-based HMAC as section 6.2.4<a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.3.1">Added SHA3-based HMAC as <a href="#HMAC-SHA3" class="auto internal xref">Section 6.2.4</a><a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.4">
             <p id="section-1.1-4.4.1">...<a href="#section-1.1-4.4.1" class="pilcrow">¶</a></p>
@@ -1886,14 +1883,6 @@ id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
 </div>
 <p id="section-3.6-7">Specific conventions to be considered are specified in <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> and <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-7" class="pilcrow">¶</a></p>
 <p id="section-3.6-8">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the hash function used in the SLH-DSA tree, see <span><a href="https://rfc-editor.org/rfc/rfc9814#section-4" class="relref">Section 4</a> of [<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-8" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="FN-DSA">
-<section id="section-3.7">
-        <h3 id="name-fn-dsa">
-<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-fn-dsa" class="section-name selfRef">FN-DSA</a>
-        </h3>
-<p id="section-3.7-1">ToDo FN-DSA<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3191,25 +3180,28 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">Changes from 00 -&gt; 01:<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-3.1">
-          <p id="appendix-A-3.1.1">Added SHA3 to Section 2<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.1.1">Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.2.1<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.2">
-          <p id="appendix-A-3.2.1">Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.2.1">Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.3">
-          <p id="appendix-A-3.3.1">Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, Composite ML-KEM<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.3.1">Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, and Composite ML-KEM<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.4">
           <p id="appendix-A-3.4.1">Added HKDF to Section 4.5<a href="#appendix-A-3.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-A-3.5">
-          <p id="appendix-A-3.5.1">Fixed erratum 7800<a href="#appendix-A-3.5.1" class="pilcrow">¶</a></p>
-</li>
       </ul>
-<p id="appendix-A-4">draft-brockhaus-lamps-rfc9481bis version 00:<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-4">*Added SHA3-based HAMAC to Section 6.2<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-5.1">
-          <p id="appendix-A-5.1.1">Initial version of the document including some minor fixes<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-5.1.1">Fixed erratum 7800<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-A-6">draft-brockhaus-lamps-rfc9481bis version 00:<a href="#appendix-A-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-7.1">
+          <p id="appendix-A-7.1.1">Initial version of the document including some minor fixes<a href="#appendix-A-7.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>

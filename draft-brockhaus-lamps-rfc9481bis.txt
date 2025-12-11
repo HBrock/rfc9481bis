@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 12 June 2026                                            Entrust
-                                                         9 December 2025
+Expires: 14 June 2026                                            Entrust
+                                                        11 December 2025
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 June 2026.
+   This Internet-Draft will expire on 14 June 2026.
 
 Copyright Notice
 
@@ -80,7 +80,6 @@ Table of Contents
      3.4.  ML-DSA
      3.5.  Composite ML-DSA
      3.6.  SLH-DSA
-     3.7.  FN-DSA
    4.  Key Management Algorithms
      4.1.  Key Agreement Algorithms
        4.1.1.  Diffie-Hellman
@@ -168,11 +167,12 @@ Table of Contents
 
    The updates made in this document include the following changes:
 
-   *  Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.1.2
+   *  Added SHA3 to Sections Section 2.2, Section 3.1, Section 3.2, and
+      Section 4.2.1
 
-   *  Added ML-DSA as Section 3.4
+   *  Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
 
-   *  Added SHA3-based HMAC as section 6.2.4
+   *  Added SHA3-based HMAC as Section 6.2.4
 
    *  ...
 
@@ -666,10 +666,6 @@ Table of Contents
    hash algorithm used to calculate the certHash in the certConf
    messages MUST be the hash function used in the SLH-DSA tree, see
    Section 4 of [RFC9814].
-
-3.7.  FN-DSA
-
-   ToDo FN-DSA
 
 4.  Key Management Algorithms
 
@@ -1781,14 +1777,16 @@ Appendix A.  History of Changes
 
    Changes from 00 -> 01:
 
-   *  Added SHA3 to Section 2
+   *  Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.2.1
 
-   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
+   *  Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
 
    *  Added new Section 4.3 for Key Encapsulation Mechanisms containing
-      RSA-KEM, ML-KEM, Composite ML-KEM
+      RSA-KEM, ML-KEM, and Composite ML-KEM
 
    *  Added HKDF to Section 4.5
+
+   *Added SHA3-based HAMAC to Section 6.2
 
    *  Fixed erratum 7800
 
