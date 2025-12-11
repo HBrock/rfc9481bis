@@ -1382,10 +1382,16 @@ algorithms over time. The use of <span><a href="#RFC9810" class="internal xref">
             <p id="section-1.1-4.2.1">Added ML-DSA, Composite ML-DSA, and SLH-DSA to <a href="#Sig" class="auto internal xref">Section 3</a><a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.3">
-            <p id="section-1.1-4.3.1">Added SHA3-based HMAC as <a href="#HMAC-SHA3" class="auto internal xref">Section 6.2.4</a><a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.3.1">Added RSA-KEM, ML-KEM, and Composite ML-KEM to the new <a href="#KEM" class="auto internal xref">Section 4.3</a><a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.4">
-            <p id="section-1.1-4.4.1">...<a href="#section-1.1-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.4.1">Updated <a href="#KDF" class="auto internal xref">Section 4.5</a> and added Key Derivation with KEMRecipientInfo containing HKDF with SHA2 and SHA3, KMAC as KDF, and KDF2 and KDF3<a href="#section-1.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.5">
+            <p id="section-1.1-4.5.1">Added SHA3-based HMAC as <a href="#HMAC-SHA3" class="auto internal xref">Section 6.2.4</a><a href="#section-1.1-4.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.6">
+            <p id="section-1.1-4.6.1">...<a href="#section-1.1-4.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2076,7 +2082,22 @@ management technique.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
         <h3 id="name-key-encapsulation-mechanism">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-key-encapsulation-mechanism" class="section-name selfRef">Key Encapsulation Mechanism</a>
         </h3>
-<p id="section-4.3-1">ToDo KEM<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">The key encapsulation mechanism algorithm identifiers are located in the:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-2.1">
+            <p id="section-4.3-2.1.1">kem field of KemCiphertextInfo and KEMRecipientInfo<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-3">Key encapsulation ciphertext is located in the:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-4.1">
+            <p id="section-4.3-4.1.1">ct field of KemCiphertextInfo<a href="#section-4.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-4.2">
+            <p id="section-4.3-4.2.1">kemct field of KEMRecipientInfo<a href="#section-4.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-5">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.3-5" class="pilcrow">¶</a></p>
 <div id="RSA-KEM">
 <section id="section-4.3.1">
           <h4 id="name-rsa-kem">
@@ -2112,22 +2133,21 @@ management technique.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 KM_KW_ALG in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
-using the key agreement or password-based key management technique
-with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> EnvelopedData.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+using the key agreement, password, or KEM-based key management technique with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> (#RFC9629) EnvelopedData.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4-3">Key wrap algorithm identifiers are located in the:<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4-4.1">
             <p id="section-4.4-4.1.1">parameters field of the KeyEncryptionAlgorithmIdentifier of
-KeyAgreeRecipientInfo and PasswordRecipientInfo.<a href="#section-4.4-4.1.1" class="pilcrow">¶</a></p>
+KeyAgreeRecipientInfo, PasswordRecipientInfo, and KEMRecipientInfo.<a href="#section-4.4-4.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-4.4-5">Wrapped content-encryption keys are located in the:<a href="#section-4.4-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4-6.1">
-            <p id="section-4.4-6.1.1">encryptedKey field of RecipientEncryptedKeys (for key agreement) and
-PasswordRecipientInfo (for password-based key management).<a href="#section-4.4-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.4-6.1.1">encryptedKey field of RecipientEncryptedKeys (for key agreement), PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo (for KEM).<a href="#section-4.4-6.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-4.4-7">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.4-7" class="pilcrow">¶</a></p>
 <div id="AESWrap">
 <section id="section-4.4.1">
           <h4 id="name-aes-key-wrap">
@@ -2160,7 +2180,7 @@ algorithm with AES-128 content-encryption algorithm); see <span>[<a href="#RFC85
 </div>
 </section>
 </div>
-<div id="KeyDeriv">
+<div id="KDF">
 <section id="section-4.5">
         <h3 id="name-key-derivation-algorithms">
 <a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-key-derivation-algorithms" class="section-name selfRef">Key Derivation Algorithms</a>
@@ -2213,9 +2233,10 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
 <p id="section-4.5.2-1">Key derivation algorithm identifiers are located in the:<a href="#section-4.5.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.5.2-2.1">
-              <p id="section-4.5.2-2.1.1">keyDerivationAlgorithm field of KEMRecipientInfo.<a href="#section-4.5.2-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.5.2-2.1.1">kdf field of KemBMParameter and KEMRecipientInfo.<a href="#section-4.5.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
+<p id="section-4.5.2-3">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.5.2-3" class="pilcrow">¶</a></p>
 <div id="HKDF">
 <section id="section-4.5.2.1">
             <h5 id="name-hkdf-with-sha2-and-sha3">
@@ -2226,8 +2247,8 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
 </div>
 <div id="KMAC-KDF">
 <section id="section-4.5.2.2">
-            <h5 id="name-kmac128-and-kmac256-with-kd">
-<a href="#section-4.5.2.2" class="section-number selfRef">4.5.2.2. </a><a href="#name-kmac128-and-kmac256-with-kd" class="section-name selfRef">KMAC128 and KMAC256 with KDF</a>
+            <h5 id="name-kmac128-and-kmac256-as-kdf">
+<a href="#section-4.5.2.2" class="section-number selfRef">4.5.2.2. </a><a href="#name-kmac128-and-kmac256-as-kdf" class="section-name selfRef">KMAC128 and KMAC256 as KDF</a>
             </h5>
 <p id="section-4.5.2.2-1">see RFC 9688<a href="#section-4.5.2.2-1" class="pilcrow">¶</a></p>
 </section>
@@ -2388,7 +2409,7 @@ in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, as well as 
             <p id="section-6.2-3.2.1">messageAuthScheme field of PBMAC1,<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-3.3">
-            <p id="section-6.2-3.3.1">mac field of PBMParameter, and<a href="#section-6.2-3.3.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-3.3.1">mac field of KemBMParameter and PBMParameter, and<a href="#section-6.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-3.4">
             <p id="section-6.2-3.4.1">prf field of PBKDF2-params.<a href="#section-6.2-3.4.1" class="pilcrow">¶</a></p>
@@ -2400,7 +2421,7 @@ in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, as well as 
             <p id="section-6.2-5.1.1">PKIProtection field of PKIMessage.<a href="#section-6.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.2-6">&lt; Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. &gt;<a href="#section-6.2-6" class="pilcrow">¶</a></p>
+<p id="section-6.2-6">&lt; Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-6.2-6" class="pilcrow">¶</a></p>
 <div id="HMAC-SHA2">
 <section id="section-6.2.1">
           <h4 id="name-sha2-based-hmac">
@@ -3116,6 +3137,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, and <span class="refAuthor">S. Fries</span>, <span class="refTitle">"Lightweight Certificate Management Protocol (CMP) Profile"</span>, <span class="seriesInfo">RFC 9483</span>, <span class="seriesInfo">DOI 10.17487/RFC9483</span>, <time datetime="2023-11" class="refDate">November 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9483">https://www.rfc-editor.org/rfc/rfc9483</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9629">[RFC9629]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Gray, J.</span>, and <span class="refAuthor">T. Okubo</span>, <span class="refTitle">"Using Key Encapsulation Mechanism (KEM) Algorithms in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9629</span>, <span class="seriesInfo">DOI 10.17487/RFC9629</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9629">https://www.rfc-editor.org/rfc/rfc9629</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9688">[RFC9688]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Use of the SHA3 One-Way Hash Functions in the Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 9688</span>, <span class="seriesInfo">DOI 10.17487/RFC9688</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9688">https://www.rfc-editor.org/rfc/rfc9688</a>&gt;</span>. </dd>
@@ -3189,7 +3214,7 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
           <p id="appendix-A-3.3.1">Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, and Composite ML-KEM<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.4">
-          <p id="appendix-A-3.4.1">Added HKDF to Section 4.5<a href="#appendix-A-3.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.4.1">Updated Section 4.5 and added Section 4.5.1 on Key Derivation with KEMRecipientInfo containing HKDF, KMAC128 and KDF256 as KDF, and KDF2 and KDF3<a href="#appendix-A-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-4">*Added SHA3-based HAMAC to Section 6.2<a href="#appendix-A-4" class="pilcrow">¶</a></p>
