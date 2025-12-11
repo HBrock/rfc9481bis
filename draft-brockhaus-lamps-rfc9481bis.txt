@@ -193,7 +193,7 @@ Table of Contents
    indicate where algorithm identifier and output values are provided.
    These ASN.1 values and types are defined in CMP [RFC9810],
    Certificate Request Message Format (CRMF) [RFC4211], and
-   Cryptographic Message Syntax (CMS) [RFC5652](#RFC9629).
+   Cryptographic Message Syntax (CMS) [RFC5652][RFC9629].
 
 2.  Message Digest Algorithms
 
