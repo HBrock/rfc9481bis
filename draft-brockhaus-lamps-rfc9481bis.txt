@@ -167,7 +167,7 @@ Table of Contents
 
    The updates made in this document include the following changes:
 
-   *  Added SHA3 to Sections Section 2.2, Section 3.1, Section 3.2, and
+   *  Added SHA3 to Section 2.2, Section 3.1, Section 3.2, and
       Section 4.2.1
 
    *  Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
