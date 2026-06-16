@@ -20,7 +20,7 @@ kw:
 - CMP
 - certificate management
 - PKI
-date: 2025
+date: 2026
 author:
 - name: Hendrik Brockhaus
   org: Siemens AG
@@ -112,6 +112,10 @@ normative:
     date: 2024-08
     seriesinfo:
       NIST: DOI 10.6028/nist.fips.205
+  NIST.FIPS.206:
+    title: Fast Fourier Transform over NTRU-Lattice-Based Digital Signature Algorithm
+    author:
+    - org: NIST
   NIST.SP.800-185:
     =: DOI.10.6028/NIST.SP.800-185
     ann: >
@@ -147,12 +151,24 @@ normative:
   RFC9483:
   RFC9629:
   RFC9688:
+  RFC9690:
   RFC9810:
   RFC9814:
   RFC9881:
   RFC9882:
+  RFC9909:
+  RFC9935:
+  RFC9936:
+  RFC9986:
   I-D.ietf-lamps-pq-composite-sigs:
-  I-D.ietf-lamps-x509-slhdsa:
+  I-D.ietf-lamps-cms-composite-sigs:
+  I-D.ietf-lamps-pq-composite-kem:
+  I-D.ietf-lamps-cms-composite-kem:
+  I-D.ietf-lamps-fn-dsa-certificates:
+  I-D.ietf-lamps-cms-fn-dsa:
+  I-D.longa-cfrg-frodokem:
+  I-D.smyslov-lamps-frodokem-certificates:
+  I-D.chen-lamps-cms-frodokem:
 
 --- abstract
 
@@ -166,34 +182,48 @@ use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsol
 
 # Introduction {#Introduction}
 
+This document lists current cryptographic algorithms that can be used
+with [CMP](#RFC9810) to offer an easier way to maintain the list of suitable
+algorithms over time. The use of [CMP](#RFC9810) is not limited to the algorithms listed in this document.
+
+Cryptographic algorithms generally become weaker over time. One of the reasons for this is that
+computer systems become more powerful or new attacks against the underlying mathmatical problems or
+special implementations are found. The ability to replace weakened algorithms with stronger alternatives
+is called crypto-agility. CMP is a crypto-agile protocol that allows cryptographic algorithms to be
+identified and replaced by object identifiers (OIDs).  This document lists the OIDs of a number of
+cryptographic algorithms that can be used with CMP.
+
+Quantum computers are becoming increasingly powerful as research and development continues. Aymmetric
+cryptographic algorithms based on the difficulty of integer factorization problem, the discrete-logarithm
+problem, or the elliptic-curve discrete-logarithm problem can be easily broken by sufficiently strong
+quantum computers, e.g., using the Shor's algorithm. The strength of symmetric cryptographic algorithms
+and hash functions is reduced by using the Grover's algorithm. However, the affected algorithms do not
+have to be completely replaced, the weakening can be addressed by increasing the key length used. For more
+information, please see [Post-Quantum Cryptography for Engineers](#I-D.ietf-pquip-pqc-engineers).
+
 {{Appendix C.2 of RFC9810}} refers to {{Section 7.1 of RFC9481}} for a set of algorithms that is
 mandatory to be supported by implementations conforming to {{Appendices C and D of RFC9810}}.
 {{Section 7.2 of RFC9481}} contains a set of algorithms for usage with {{RFC9483}}.
 This document updates both algorithm use profiles by adding new algorithm to also support PQC migration.
 
-This document lists current cryptographic algorithms that can be used
-with [CMP](#RFC9810) to offer an easier way to maintain the list of suitable
-algorithms over time. The use of [CMP](#RFC9810) is not limited to the algorithms listed in this document.
-
-Cryptographic algorithms generally become weaker over time. One of the reasons for this is that computer systems become more powerful or new attacks against the underlying mathmatical problems or special implementations are found. The ability to replace weakened algorithms with stronger alternatives is called crypto-agility. CMP is a crypto-agile protocol that allows cryptographic algorithms to be identified and replaced by object identifiers (OIDs).  This document lists the OIDs of a number of cryptographic algorithms that can be used with CMP.
-
-Quantum computers are becoming increasingly powerful as research and development continues. Aymmetric cryptographic algorithms based on the difficulty of integer factorization problem, the discrete-logarithm problem, or the elliptic-curve discrete-logarithm problem can be easily broken by sufficiently strong quantum computers, e.g., using the Shor's algorithm. The strength of symmetric cryptographic algorithms and hash functions is reduced by using the Grover's algorithm. However, the affected algorithms do not have to be completely replaced, the weakening can be addressed by doubling the key length used. For more information, please see [Post-Quantum Cryptography for Engineers](#I-D.ietf-pquip-pqc-engineers).
-
 ## Changes Made by This Document
 
 This document obsoletes [RFC9481].
 
-Many new cryptographic algorithms have been specified in recent years. In particular, aymmetric algorithms for digital signatures and key management that are secure against attacks by cryptographically relevant quantum computer were added by this update.
+Many new cryptographic algorithms have been specified in recent years. In particular,
+aymmetric algorithms for digital signatures and key management that are secure against
+attacks by cryptographically relevant quantum computer were added by this update.
 
 The updates made in this document include the following changes:
 
 * Added SHA3 to {{SHA3-SHAKE}}, {{RSASig}}, {{ECDSA}}, and {{RSAEnc}}
 
-* Added ML-DSA, Composite ML-DSA, and SLH-DSA to {{Sig}}
+* Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to {{Sig}}
 
 * Added RSA-KEM, ML-KEM, and Composite ML-KEM to the new {{KEM}}
 
-* Updated {{KDF}} and added Key Derivation with KEMRecipientInfo containing HKDF with SHA2 and SHA3, KMAC as KDF, and KDF2 and KDF3
+* Updated {{KDF}} and added KEM-based Key Derivation containing HKDF with SHA2 and
+  SHA3, KMAC as KDF, and KDF2 and KDF3
 
 * Added SHA3-based HMAC as {{HMAC-SHA3}}
 
@@ -212,7 +242,8 @@ Format (CRMF)](#RFC4211), and [Cryptographic Message Syntax (CMS)](#RFC5652){{RF
 
 # Message Digest Algorithms {#Hash}
 
-This section provides references to object identifiers and conventions for message digest algorithms to be employed by CMP implementations.
+This section provides references to object identifiers and conventions for message
+digest algorithms to be employed by CMP implementations.
 
 Digest algorithm identifiers are located in the:
 
@@ -308,9 +339,11 @@ Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}
 
 # Signature Algorithms {#Sig}
 
-This section provides references to object identifiers and conventions for signature algorithms to be employed by CMP implementations.
+This section provides references to object identifiers and conventions for signature
+algorithms to be employed by CMP implementations.
 
-The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]{{Appendices C and D of RFC9810}}, [Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
+The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]{{Appendices C and D of RFC9810}},
+[Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
 
 Signature algorithm identifiers are located in the:
 
@@ -471,9 +504,16 @@ Specific conventions to be considered are specified in {{Section 3.2.2 of RFC870
 
 ## EdDSA {#EdDSA}
 
-The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in {{RFC8032}} and [FIPS Pub 186-5](#NIST.FIPS.186-5).
+The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in {{RFC8032}} and
+[FIPS Pub 186-5](#NIST.FIPS.186-5).
 
-The EdDSA is described along with a recommendation for the use of the curve25519 and curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not specified in this document.  Ed25519 is intended to operate at around the 128-bit security level and Ed448 at around the 224-bit security level.  A sufficiently large quantum computer would be able to break both.
+The EdDSA is described along with a recommendation for the use of the curve25519 and
+curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the
+HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve
+combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not
+specified in this document.  Ed25519 is intended to operate at around the 128-bit
+security level and Ed448 at around the 224-bit security level.  A sufficiently large
+quantum computer would be able to break both.
 
 The signature algorithm Ed25519 that MUST be used with SHA-512 message
 digest algorithms is identified by the following OIDs:
@@ -503,7 +543,11 @@ confirmed has been signed using Ed448.
 
 The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the ML-DSA in CMP.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant
+digital signature scheme standardized by the NIST.  This document specifies the use of
+the ML-DSA in CMP.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified
+in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can
+be used, see {{Appendix D of RFC9881}}.
 
 The signature algorithm ML-DSA is identified by the following OIDs:
 
@@ -511,11 +555,9 @@ The signature algorithm ML-DSA is identified by the following OIDs:
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
       country(16) us(840) organization(1) gov(101) csor(3)
       nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
-
    id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
       country(16) us(840) organization(1) gov(101) csor(3)
       nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
-
    id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
       country(16) us(840) organization(1) gov(101) csor(3)
       nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
@@ -523,13 +565,17 @@ The signature algorithm ML-DSA is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882}}.
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be SHA-512.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm
+used to calculate the certHash in the certConf messages MUST be SHA-512.
 
 ## Composite ML-DSA {#C-ML-DSA}
 
 The Composite ML-DSA signature algorithm is defined in {{I-D.ietf-lamps-pq-composite-sigs}}.
 
-The Copmosite ML-DSA signature algorithm combines of ML-DSA ({{ML-DSA}}) with traditional algorithms RSASSA-PKCS1-v1.5 ({{RSASig}}), RSASSA-PSS ({{RSASig}}), ECDSA ({{ECDSA}}), Ed25519 ({{EdDSA}}), and Ed448 ({{EdDSA}}) to new PQ/T Hybrid signature algorithms following the "Composite Design Philosophy" described in {{Section 2.2 of I-D.ietf-lamps-pq-composite-sigs}}.
+The Copmosite ML-DSA signature algorithm combines of ML-DSA ({{ML-DSA}}) with traditional
+algorithms RSASSA-PKCS1-v1.5 ({{RSASig}}), RSASSA-PSS ({{RSASig}}), ECDSA ({{ECDSA}}),
+Ed25519 ({{EdDSA}}), and Ed448 ({{EdDSA}}) to new PQ/T Hybrid signature algorithms
+following the "Composite Design Philosophy" described in {{Section 2.2 of I-D.ietf-lamps-pq-composite-sigs}}.
 
 The Composite ML-DSA signature algorithm is identified by the following OIDs:
 
@@ -537,83 +583,73 @@ The Composite ML-DSA signature algorithm is identified by the following OIDs:
 id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 37 }
-
 id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 38 }
-
 id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 39 }
-
 id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 40 }
-
 id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 41 }
-
 id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 42 }
-
 id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 43 }
-
 id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 44 }
-
 id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 45 }
-
 id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 46 }
-
 id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 47 }
-
 id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 48 }
-
 id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 49 }
-
 id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 50 }
-
 id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 51 }
-
 id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 52 }
-
 id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 53 }
-
 id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
    iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
    pkix(7) alg(6) 54 }
 ~~~~
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the respective Pre-Hash function as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm used to
+calculate the certHash in the certConf messages MUST be the respective Pre-Hash function
+as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
 
 ## SLH-DSA {#SLH-DSA}
 
 The SLH-DSA signature algorithm is defined in [FIPS 205](#NIST.FIPS.205).
 
-The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant digital signature scheme standardized by the NIST.  This document specifies the use of the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for using HashSLH-DSA are specified in {{I-D.ietf-lamps-x509-slhdsa}}, {{RFC9814}} only specifies the Pure SLH-DSA for usage with [CMS](#RFC5652). Therefore, only Pure SLH-DSA signature algorithm OIDs are listed below.
+The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant
+digital signature scheme standardized by the NIST.  This document specifies the use of
+the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although,
+OIDs for using HashSLH-DSA are specified in {{RFC9909}}, {{RFC9814}} only specifies the
+Pure SLH-DSA for usage with [CMS](#RFC5652). Therefore, only Pure SLH-DSA signature
+algorithm OIDs are listed below.
 
 The Pure SLH-DSA signature algorithm using SHA2 ({{SHA2}}) is identified by the following OIDs:
 
@@ -638,7 +674,8 @@ The Pure SLH-DSA signature algorithm using SHA2 ({{SHA2}}) is identified by the 
       gov(101) csor(3) sigAlg(4) 25 }
 ~~~~
 
-The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified by the following OIDs:
+The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified by the
+following OIDs:
 
 ~~~~ asn.1
    id-slh-dsa-shake-128s OBJECT IDENTIFIER ::= {
@@ -661,9 +698,14 @@ The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified 
       gov(101) csor(3) sigAlg(4) 31 }
 ~~~~
 
-Specific conventions to be considered are specified in {{I-D.ietf-lamps-x509-slhdsa}} and {{RFC9814}}.
+Specific conventions to be considered are specified in {{RFC9909}} and {{RFC9814}}.
 
-Note: If the hashAlg field in a certConf message is not present the hash algorithm used to calculate the certHash in the certConf messages MUST be the hash function used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm
+used to calculate the certHash in the certConf messages MUST be the hash function
+used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
+
+## FN-DSA {#FN-DSA}
+
 
 
 # Key Management Algorithms {#KeyMan}
@@ -858,6 +900,10 @@ ToDo ML-KEM
 
 ToDo Composite KEM
 
+### FrodoKEM {#FrodoKEM}
+
+ToDo FrodoKEM
+
 
 ## Symmetric Key-Encryption Algorithms {#SymKeyEnc}
 
@@ -866,7 +912,8 @@ KM_KW_ALG in {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
 
 As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
-using the key agreement, password, or KEM-based key management technique with [CMS](#RFC5652) (#RFC9629) EnvelopedData.
+using the key agreement, password, or KEM-based key management technique
+with [CMS](#RFC5652) (#RFC9629) EnvelopedData.
 
 Key wrap algorithm identifiers are located in the:
 
@@ -875,7 +922,9 @@ Key wrap algorithm identifiers are located in the:
 
 Wrapped content-encryption keys are located in the:
 
-* encryptedKey field of RecipientEncryptedKeys (for key agreement), PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo (for KEM).
+* encryptedKey field of RecipientEncryptedKeys (for key agreement),
+PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo
+(for KEM).
 
 < Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
@@ -1066,8 +1115,8 @@ PBMAC1 has the following OID:
       rsadsi(113549) pkcs(1) pkcs-5(5) 14 }
 ~~~~
 
-Specific conventions to be considered for PBMAC1 are specified in {{Section
-7.1 and Appendix A.5 of RFC8018}}.
+Specific conventions to be considered for PBMAC1 are specified in
+{{Section 7.1 and Appendix A.5 of RFC8018}}.
 
 
 
@@ -1092,7 +1141,8 @@ MAC values are located in the:
 * PKIProtection field of PKIMessage.
 
 
-< Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind. Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
+< Pruefen, ob mit KEM und bei POP noch neue Nutzungen rein gekommen sind.
+Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 ### SHA2-Based HMAC {#HMAC-SHA2}
 
@@ -1315,7 +1365,8 @@ AES-CBC:
 
 ## Algorithm Profile for Lightweight CMP Profile {#AlgProfLWP}
 
-The following table contains definitions of algorithms that MAY be supported by implementations of the [Lightweight CMP Profile](#RFC9483).
+The following table contains definitions of algorithms that MAY be supported by
+implementations of the [Lightweight CMP Profile](#RFC9483).
 
 As the set of algorithms to be used for implementations of the Lightweight
 CMP Profile heavily depends on the PKI management operations implemented,
@@ -1418,11 +1469,13 @@ Changes from 00 -> 01:
 
 * Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
 
-* Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM, and Composite ML-KEM
+* Added new Section 4.3 for Key Encapsulation Mechanisms containing RSA-KEM, ML-KEM,
+  and Composite ML-KEM
 
-* Updated Section 4.5 and added Section 4.5.1 on Key Derivation with KEMRecipientInfo containing HKDF, KMAC128 and KDF256 as KDF, and KDF2 and KDF3
+* Updated Section 4.5 and added Section 4.5.1 on Key Derivation with KEMRecipientInfo
+  containing HKDF, KMAC128 and KDF256 as KDF, and KDF2 and KDF3
 
-*Added SHA3-based HAMAC to Section 6.2
+* Added SHA3-based HAMAC to Section 6.2
 
 * Fixed erratum 7800
 
