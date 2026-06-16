@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 14 June 2026                                            Entrust
-                                                        11 December 2025
+Expires: 18 December 2026                                        Entrust
+                                                            16 June 2026
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 June 2026.
+   This Internet-Draft will expire on 18 December 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -80,6 +80,7 @@ Table of Contents
      3.4.  ML-DSA
      3.5.  Composite ML-DSA
      3.6.  SLH-DSA
+     3.7.  FN-DSA
    4.  Key Management Algorithms
      4.1.  Key Agreement Algorithms
        4.1.1.  Diffie-Hellman
@@ -90,6 +91,7 @@ Table of Contents
        4.3.1.  RSA-KEM
        4.3.2.  ML-KEM
        4.3.3.  Composite ML-KEM
+       4.3.4.  FrodoKEM
      4.4.  Symmetric Key-Encryption Algorithms
        4.4.1.  AES Key Wrap
      4.5.  Key Derivation Algorithms
@@ -121,13 +123,6 @@ Table of Contents
 
 1.  Introduction
 
-   Appendix C.2 of [RFC9810] refers to Section 7.1 of [RFC9481] for a
-   set of algorithms that is mandatory to be supported by
-   implementations conforming to Appendices C and D of [RFC9810].
-   Section 7.2 of [RFC9481] contains a set of algorithms for usage with
-   [RFC9483].  This document updates both algorithm use profiles by
-   adding new algorithm to also support PQC migration.
-
    This document lists current cryptographic algorithms that can be used
    with CMP [RFC9810] to offer an easier way to maintain the list of
    suitable algorithms over time.  The use of CMP [RFC9810] is not
@@ -151,9 +146,16 @@ Table of Contents
    using the Shor's algorithm.  The strength of symmetric cryptographic
    algorithms and hash functions is reduced by using the Grover's
    algorithm.  However, the affected algorithms do not have to be
-   completely replaced, the weakening can be addressed by doubling the
+   completely replaced, the weakening can be addressed by increasing the
    key length used.  For more information, please see Post-Quantum
    Cryptography for Engineers [I-D.ietf-pquip-pqc-engineers].
+
+   Appendix C.2 of [RFC9810] refers to Section 7.1 of [RFC9481] for a
+   set of algorithms that is mandatory to be supported by
+   implementations conforming to Appendices C and D of [RFC9810].
+   Section 7.2 of [RFC9481] contains a set of algorithms for usage with
+   [RFC9483].  This document updates both algorithm use profiles by
+   adding new algorithm to also support PQC migration.
 
 1.1.  Changes Made by This Document
 
@@ -170,12 +172,12 @@ Table of Contents
    *  Added SHA3 to Section 2.2, Section 3.1, Section 3.2, and
       Section 4.2.1
 
-   *  Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
+   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
 
    *  Added RSA-KEM, ML-KEM, and Composite ML-KEM to the new Section 4.3
 
-   *  Updated Section 4.5 and added Key Derivation with KEMRecipientInfo
-      containing HKDF with SHA2 and SHA3, KMAC as KDF, and KDF2 and KDF3
+   *  Updated Section 4.5 and added KEM-based Key Derivation containing
+      HKDF with SHA2 and SHA3, KMAC as KDF, and KDF2 and KDF3
 
    *  Added SHA3-based HMAC as Section 6.2.4
 
@@ -498,11 +500,9 @@ Table of Contents
       id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
          country(16) us(840) organization(1) gov(101) csor(3)
          nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
-
       id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
          country(16) us(840) organization(1) gov(101) csor(3)
          nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
-
       id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
          country(16) us(840) organization(1) gov(101) csor(3)
          nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
@@ -532,71 +532,54 @@ Table of Contents
    id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 37 }
-
    id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 38 }
-
    id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 39 }
-
    id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 40 }
-
    id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 41 }
-
    id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 42 }
-
    id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 43 }
-
    id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 44 }
-
    id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 45 }
-
    id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 46 }
-
    id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 47 }
-
    id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 48 }
-
    id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 49 }
-
    id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 50 }
-
    id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 51 }
-
    id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 52 }
-
    id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 53 }
-
    id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
       iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
       pkix(7) alg(6) 54 }
@@ -615,10 +598,9 @@ Table of Contents
    quantum-resistant digital signature scheme standardized by the NIST.
    This document specifies the use of the SLH-DSA in CMP in the pure
    mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although, OIDs for
-   using HashSLH-DSA are specified in [I-D.ietf-lamps-x509-slhdsa],
-   [RFC9814] only specifies the Pure SLH-DSA for usage with CMS
-   [RFC5652].  Therefore, only Pure SLH-DSA signature algorithm OIDs are
-   listed below.
+   using HashSLH-DSA are specified in [RFC9909], [RFC9814] only
+   specifies the Pure SLH-DSA for usage with CMS [RFC5652].  Therefore,
+   only Pure SLH-DSA signature algorithm OIDs are listed below.
 
    The Pure SLH-DSA signature algorithm using SHA2 (Section 2.1) is
    identified by the following OIDs:
@@ -664,13 +646,15 @@ Table of Contents
          joint-iso-itu-t(2) country(16) us(840) organization(1)
          gov(101) csor(3) sigAlg(4) 31 }
 
-   Specific conventions to be considered are specified in
-   [I-D.ietf-lamps-x509-slhdsa] and [RFC9814].
+   Specific conventions to be considered are specified in [RFC9909] and
+   [RFC9814].
 
    Note: If the hashAlg field in a certConf message is not present the
    hash algorithm used to calculate the certHash in the certConf
    messages MUST be the hash function used in the SLH-DSA tree, see
    Section 4 of [RFC9814].
+
+3.7.  FN-DSA
 
 4.  Key Management Algorithms
 
@@ -848,6 +832,10 @@ Table of Contents
 4.3.3.  Composite ML-KEM
 
    ToDo Composite KEM
+
+4.3.4.  FrodoKEM
+
+   ToDo FrodoKEM
 
 4.4.  Symmetric Key-Encryption Algorithms
 
@@ -1526,21 +1514,79 @@ Table of Contents
 
 10.1.  Normative References
 
+   [I-D.chen-lamps-cms-frodokem]
+              Chen, M., Su, L., and G. WANG, "Use of FrodoKEM in the
+              Cryptographic Message Syntax", Work in Progress, Internet-
+              Draft, draft-chen-lamps-cms-frodokem-00, 12 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-chen-lamps-
+              cms-frodokem-00>.
+
+   [I-D.ietf-lamps-cms-composite-kem]
+              Van Geest, D., Ounsworth, M., Gray, J., and J. Klaußner,
+              "Composite ML-KEM for use in Cryptographic Message Syntax
+              (CMS)", Work in Progress, Internet-Draft, draft-ietf-
+              lamps-cms-composite-kem-01, 6 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              cms-composite-kem-01>.
+
+   [I-D.ietf-lamps-cms-composite-sigs]
+              Ounsworth, M., Gray, J., Klaußner, J., and D. Van Geest,
+              "Composite Module-Lattice-Based Digital Signature
+              Algorithm (ML-DSA) for use in Cryptographic Message Syntax
+              (CMS)", Work in Progress, Internet-Draft, draft-ietf-
+              lamps-cms-composite-sigs-05, 22 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              cms-composite-sigs-05>.
+
+   [I-D.ietf-lamps-cms-fn-dsa]
+              Van Geest, D. and S. Turner, "Use of the FN-DSA Signature
+              Algorithm in the Cryptographic Message Syntax (CMS)", Work
+              in Progress, Internet-Draft, draft-ietf-lamps-cms-fn-dsa-
+              00, 20 May 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-cms-fn-dsa-00>.
+
+   [I-D.ietf-lamps-fn-dsa-certificates]
+              Massimo, J., Kampanakis, P., Turner, S., and B.
+              Westerbaan, "Internet X.509 Public Key Infrastructure --
+              Algorithm Identifiers for the Fast-Fourier Transform over
+              NTRU-Lattice-Based Digital Signature Algorithm (FN-DSA)",
+              Work in Progress, Internet-Draft, draft-ietf-lamps-fn-dsa-
+              certificates-00, 20 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              fn-dsa-certificates-00>.
+
+   [I-D.ietf-lamps-pq-composite-kem]
+              Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
+              Fluhrer, "Composite ML-KEM for use in X.509 Public Key
+              Infrastructure", Work in Progress, Internet-Draft, draft-
+              ietf-lamps-pq-composite-kem-16, 15 June 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              pq-composite-kem-16>.
+
    [I-D.ietf-lamps-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
-              Fluhrer, "Composite ML-DSA for use in X.509 Public Key
+              Fluhrer, "Composite Module-Lattice-Based Digital Signature
+              Algorithm (ML-DSA) for use in X.509 Public Key
               Infrastructure", Work in Progress, Internet-Draft, draft-
-              ietf-lamps-pq-composite-sigs-13, 31 October 2025,
+              ietf-lamps-pq-composite-sigs-19, 21 April 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              pq-composite-sigs-13>.
+              pq-composite-sigs-19>.
 
-   [I-D.ietf-lamps-x509-slhdsa]
-              Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
-              S. Kousidis, "Internet X.509 Public Key Infrastructure:
-              Algorithm Identifiers for SLH-DSA", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-x509-slhdsa-09, 30 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-x509-slhdsa-09>.
+   [I-D.longa-cfrg-frodokem]
+              Longa, P., Bos, J. W., Ehlen, S., and D. Stebila,
+              "FrodoKEM: key encapsulation from learning with errors",
+              Work in Progress, Internet-Draft, draft-longa-cfrg-
+              frodokem-02, 18 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-longa-cfrg-
+              frodokem-02>.
+
+   [I-D.smyslov-lamps-frodokem-certificates]
+              Smyslov, V., "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for FrodoKEM", Work in Progress,
+              Internet-Draft, draft-smyslov-lamps-frodokem-certificates-
+              01, 20 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-smyslov-
+              lamps-frodokem-certificates-01>.
 
    [NIST.FIPS.180-4]
               "Secure hash standard", National Institute of Standards
@@ -1585,6 +1631,10 @@ Table of Contents
               <https://nvlpubs.nist.gov/nistpubs/FIPS/
               NIST.FIPS.205.pdf>.
 
+   [NIST.FIPS.206]
+              NIST, "Fast Fourier Transform over NTRU-Lattice-Based
+              Digital Signature Algorithm", n.d..
+
    [NIST.SP.800-185]
               Kelsey, J., Change, S., and R. Perlner, "SHA-3 derived
               functions: cSHAKE, KMAC, TupleHash and ParallelHash",
@@ -1616,12 +1666,12 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc2631>.
 
    [RFC3370]  Housley, R., "Cryptographic Message Syntax (CMS)
-              Algorithms", RFC 3370, DOI 10.17487/RFC3370, August 2002,
-              <https://www.rfc-editor.org/rfc/rfc3370>.
+              Algorithms", RFC 3370, DOI 10.17487/RFC3370, September
+              2002, <https://www.rfc-editor.org/rfc/rfc3370>.
 
    [RFC3394]  Schaad, J. and R. Housley, "Advanced Encryption Standard
               (AES) Key Wrap Algorithm", RFC 3394, DOI 10.17487/RFC3394,
-              September 2002, <https://www.rfc-editor.org/rfc/rfc3394>.
+              October 2002, <https://www.rfc-editor.org/rfc/rfc3394>.
 
    [RFC3560]  Housley, R., "Use of the RSAES-OAEP Key Transport
               Algorithm in Cryptographic Message Syntax (CMS)",
@@ -1745,6 +1795,11 @@ Table of Contents
               DOI 10.17487/RFC9688, November 2024,
               <https://www.rfc-editor.org/rfc/rfc9688>.
 
+   [RFC9690]  Housley, R. and S. Turner, "Use of the RSA-KEM Algorithm
+              in the Cryptographic Message Syntax (CMS)", RFC 9690,
+              DOI 10.17487/RFC9690, February 2025,
+              <https://www.rfc-editor.org/rfc/rfc9690>.
+
    [RFC9810]  Brockhaus, H., von Oheimb, D., Ounsworth, M., and J. Gray,
               "Internet X.509 Public Key Infrastructure -- Certificate
               Management Protocol (CMP)", RFC 9810,
@@ -1768,6 +1823,27 @@ Table of Contents
               DSA Signature Algorithm in the Cryptographic Message
               Syntax (CMS)", RFC 9882, DOI 10.17487/RFC9882, October
               2025, <https://www.rfc-editor.org/rfc/rfc9882>.
+
+   [RFC9909]  Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
+              S. Kousidis, "Internet X.509 Public Key Infrastructure --
+              Algorithm Identifiers for the Stateless Hash-Based Digital
+              Signature Algorithm (SLH-DSA)", RFC 9909,
+              DOI 10.17487/RFC9909, December 2025,
+              <https://www.rfc-editor.org/rfc/rfc9909>.
+
+   [RFC9935]  Turner, S., Kampanakis, P., Massimo, J., and B. E.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Key-
+              Encapsulation Mechanism (ML-KEM)", RFC 9935,
+              DOI 10.17487/RFC9935, March 2026,
+              <https://www.rfc-editor.org/rfc/rfc9935>.
+
+   [RFC9936]  Prat, J., Ounsworth, M., and D. Van Geest, "Use of ML-KEM
+              in the Cryptographic Message Syntax (CMS)", RFC 9936,
+              DOI 10.17487/RFC9936, March 2026,
+              <https://www.rfc-editor.org/rfc/rfc9936>.
+
+   [RFC9986]  "*** BROKEN REFERENCE ***".
 
 10.2.  Informative References
 
@@ -1821,7 +1897,7 @@ Appendix A.  History of Changes
       KEMRecipientInfo containing HKDF, KMAC128 and KDF256 as KDF, and
       KDF2 and KDF3
 
-   *Added SHA3-based HAMAC to Section 6.2
+   *  Added SHA3-based HAMAC to Section 6.2
 
    *  Fixed erratum 7800
 
