@@ -68,6 +68,12 @@ informative:
     author:
     - org: University of Bristol
     date: 2015-03
+  ETSI.TS.119312:
+    target: https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/02.01.01_60/ts_119312v020101p.pdf
+    title: Electronic Signatures and Trust Infrastructures (ESI); Cryptographic Suites V2.1.1
+    author:
+    - org: STSI
+    date: 2026-06
   NIST.SP.800-57pt1r5:
     =: DOI.10.6028/NIST.SP.800-57pt1r5
     ann: >
@@ -126,10 +132,12 @@ normative:
       NIST Special Publications (General) 800-38d
   RFC2104:
   RFC2631:
+  RFC2986:
   RFC3370:
   RFC3394:
   RFC3560:
   RFC3565:
+  RFC4055:
   RFC4056:
   RFC4211:
   RFC4231:
@@ -137,6 +145,7 @@ normative:
   RFC5652:
   RFC5753:
   RFC5754:
+  RFC5756:
   RFC8017:
   RFC8018:
   RFC8032:
@@ -175,15 +184,15 @@ normative:
 
 This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document provides algorithm
-use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481.
+further manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481
+and updates algorithm use profiles from Appendixes C and D of RFC 9810 and for RFC 9483.
 
 --- middle
 
 # Introduction {#Introduction}
 
 This document lists current cryptographic algorithms that can be used
-with [CMP](#RFC9810) to offer an easier way to maintain the list of suitable
+with [Certificate Management Protocol (CMP)](#RFC9810) to offer an easier way to maintain the list of suitable
 algorithms over time. The use of [CMP](#RFC9810) is not limited to the algorithms listed in this document.
 
 Cryptographic algorithms generally become weaker over time. One of the reasons for this is that
@@ -236,7 +245,8 @@ The updates made in this document include the following changes:
 In the following sections, ASN.1 values and types are used to indicate where
 algorithm identifier and output values are provided. These ASN.1 values and
 types are defined in [CMP](#RFC9810), [Certificate Request Message
-Format (CRMF)](#RFC4211), and [Cryptographic Message Syntax (CMS)](#RFC5652){{RFC9629}}.
+Format (CRMF)](#RFC4211), [PKCS #10: Certification Request Syntax Specification](#RFC2986),
+and [Cryptographic Message Syntax (CMS)](#RFC5652){{RFC9629}}.
 
 
 
@@ -255,15 +265,21 @@ Digest algorithm identifiers are located in the:
 
 * digestAlgorithm field of SignerInfo.
 
+Many Key Derivation functions (KDF) internally employ a one-way hash
+function. When this is the case, the hash function that is used is
+indirectly indicated by the algorithm identifier of the KDF.
+
 Digest values are located in the:
 
 * hashVal field of OOBCertHash,
 
-* certHash field of CertStatus, and
+* certHash field of CertStatus,
 
-* witness field of Challenge.
+* witness field of Challenge, and
 
-In addition, digest values are input to signature algorithms.
+* MessageDigest field of signedAttrs.
+
+In addition, digest values can be an input to signature algorithms.
 
 ## SHA2 {#SHA2}
 
@@ -342,8 +358,8 @@ Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}
 This section provides references to object identifiers and conventions for signature
 algorithms to be employed by CMP implementations.
 
-The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]{{Appendices C and D of RFC9810}},
-[Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
+The signature algorithm is referred to as MSG_SIG_ALG in {{Appendices C and D of RFC9810}},
+in the [Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
 
 Signature algorithm identifiers are located in the:
 
@@ -369,15 +385,18 @@ Signature values are located in the:
 The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is defined
 in {{RFC8017}}.
 
-The algorithm identifier for RSASAA-PSS signatures used with SHA2 or SHA3 message
-digest algorithms is identified by the following OID:
+The signature algorithm RSASAA-PSS used with SHA2 or SHA3 message digest
+algorithms is identified by the following OID:
 
 ~~~~ asn.1
    id-RSASSA-PSS OBJECT IDENTIFIER ::= { iso(1) member-body(2)
       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 10 }
 ~~~~
 
-Specific conventions to be considered are specified in {{RFC4056}}.
+Specific conventions to be considered are specified in {{Section 3 of RFC4055}}
+and {{Section 2 of RFC4056}}. The OID for the specific hash function used is
+included in the hashAlgorithm field of algorithm parameter RSASSA-PSS-params.
+So it is applicable for SHA2 and SHA3, see also [ETSI TS 119 312 V2.1.1](#ETSI.TS.119312).
 
 The signature algorithm RSASSA-PSS used with SHAKE message digest algorithms
 is identified by the following OIDs:
@@ -391,7 +410,8 @@ is identified by the following OIDs:
       mechanisms(5) pkix(7) algorithms(6) 31 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.2.1 of RFC8702}}.
+Specific conventions to be considered are specified in {{Section 4.1.1 of RFC8692}},
+{{RFC5756}}, and {{Section 3.2.1 of RFC8702}}.
 
 The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
 algorithms is identified by the following OIDs:
@@ -407,7 +427,8 @@ algorithms is identified by the following OIDs:
       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 13 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.2 of RFC5754}}.
+Specific conventions to be considered are specified in {{Section 5 of RFC4055}}
+and {{Section 3.2 of RFC5754}}.
 
 The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
 algorithms is identified by the following OIDs:
