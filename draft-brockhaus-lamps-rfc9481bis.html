@@ -12,8 +12,8 @@
 <meta content="
        This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document provides algorithm
-use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481. 
+further manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481
+and updates algorithm use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. 
     " name="description">
 <meta content="xml2rfc 3.33.0" name="generator">
 <meta content="CMP" name="keyword">
@@ -1055,7 +1055,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Brockhaus, et al.</td>
-<td class="center">Expires 18 December 2026</td>
+<td class="center">Expires 19 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc9810" class="eref">9810</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-16" class="published">16 June 2026</time>
+<time datetime="2026-06-17" class="published">17 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-18">18 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-19">19 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1106,8 +1106,8 @@ svg {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes the conventions for using several cryptographic algorithms
 with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document provides algorithm
-use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsoletes RFC 9481.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+further manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481
+and updates algorithm use profiles from Appendixes C and D of RFC 9810 and for RFC 9483.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1139,7 +1139,7 @@ use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsol
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1364,7 +1364,7 @@ use profiles from Appendixes C and D of RFC 9810 and for RFC 9483. It also obsol
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">This document lists current cryptographic algorithms that can be used
-with <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> to offer an easier way to maintain the list of suitable
+with <span><a href="#RFC9810" class="internal xref">Certificate Management Protocol (CMP)</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> to offer an easier way to maintain the list of suitable
 algorithms over time. The use of <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> is not limited to the algorithms listed in this document.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Cryptographic algorithms generally become weaker over time. One of the reasons for this is that
 computer systems become more powerful or new attacks against the underlying mathmatical problems or
@@ -1428,7 +1428,8 @@ appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">�
 <p id="section-1.2-2">In the following sections, ASN.1 values and types are used to indicate where
 algorithm identifier and output values are provided. These ASN.1 values and
 types are defined in <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, <span><a href="#RFC4211" class="internal xref">Certificate Request Message
-Format (CRMF)</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, and <span><a href="#RFC5652" class="internal xref">Cryptographic Message Syntax (CMS)</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span><span>[<a href="#RFC9629" class="cite xref">RFC9629</a>]</span>.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+Format (CRMF)</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span>, <span><a href="#RFC2986" class="internal xref">PKCS #10: Certification Request Syntax Specification</a> [<a href="#RFC2986" class="cite xref">RFC2986</a>]</span>,
+and <span><a href="#RFC5652" class="internal xref">Cryptographic Message Syntax (CMS)</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span><span>[<a href="#RFC9629" class="cite xref">RFC9629</a>]</span>.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1455,19 +1456,25 @@ digest algorithms to be employed by CMP implementations.<a href="#section-2-1" c
           <p id="section-2-3.4.1">digestAlgorithm field of SignerInfo.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-4">Digest values are located in the:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">Many Key Derivation functions (KDF) internally employ a one-way hash
+function. When this is the case, the hash function that is used is
+indirectly indicated by the algorithm identifier of the KDF.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">Digest values are located in the:<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">hashVal field of OOBCertHash,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-6.1">
+          <p id="section-2-6.1.1">hashVal field of OOBCertHash,<a href="#section-2-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">certHash field of CertStatus, and<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-6.2">
+          <p id="section-2-6.2.1">certHash field of CertStatus,<a href="#section-2-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-5.3">
-          <p id="section-2-5.3.1">witness field of Challenge.<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-6.3">
+          <p id="section-2-6.3.1">witness field of Challenge, and<a href="#section-2-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-6.4">
+          <p id="section-2-6.4.1">MessageDigest field of signedAttrs.<a href="#section-2-6.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-2-6">In addition, digest values are input to signature algorithms.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">In addition, digest values can be an input to signature algorithms.<a href="#section-2-7" class="pilcrow">¶</a></p>
 <div id="SHA2">
 <section id="section-2.1">
         <h3 id="name-sha2">
@@ -1551,8 +1558,8 @@ following OIDs:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-3-1">This section provides references to object identifiers and conventions for signature
 algorithms to be employed by CMP implementations.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The signature algorithm is referred to as MSG_SIG_ALG in the [CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>,
-<span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">The signature algorithm is referred to as MSG_SIG_ALG in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>,
+in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Signature algorithm identifiers are located in the:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-4.1">
@@ -1585,15 +1592,18 @@ SignerInfo<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-3.1-1">The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is defined
 in <span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The algorithm identifier for RSASAA-PSS signatures used with SHA2 or SHA3 message
-digest algorithms is identified by the following OID:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The signature algorithm RSASAA-PSS used with SHA2 or SHA3 message digest
+algorithms is identified by the following OID:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-3">
 <pre>
    id-RSASSA-PSS OBJECT IDENTIFIER ::= { iso(1) member-body(2)
       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 10 }
 </pre><a href="#section-3.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-4">Specific conventions to be considered are specified in <span>[<a href="#RFC4056" class="cite xref">RFC4056</a>]</span>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc4055#section-3" class="relref">Section 3</a> of [<a href="#RFC4055" class="cite xref">RFC4055</a>]</span>
+and <span><a href="https://rfc-editor.org/rfc/rfc4056#section-2" class="relref">Section 2</a> of [<a href="#RFC4056" class="cite xref">RFC4056</a>]</span>. The OID for the specific hash function used is
+included in the hashAlgorithm field of algorithm parameter RSASSA-PSS-params.
+So it is applicable for SHA2 and SHA3, see also <span><a href="#ETSI.TS.119312" class="internal xref">ETSI TS 119 312 V2.1.1</a> [<a href="#ETSI.TS.119312" class="cite xref">ETSI.TS.119312</a>]</span>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">The signature algorithm RSASSA-PSS used with SHAKE message digest algorithms
 is identified by the following OIDs:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-6">
@@ -1606,7 +1616,8 @@ is identified by the following OIDs:<a href="#section-3.1-5" class="pilcrow">¶<
       mechanisms(5) pkix(7) algorithms(6) 31 }
 </pre><a href="#section-3.1-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-7">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.1" class="relref">Section 3.2.1</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc8692#section-4.1.1" class="relref">Section 4.1.1</a> of [<a href="#RFC8692" class="cite xref">RFC8692</a>]</span>,
+<span>[<a href="#RFC5756" class="cite xref">RFC5756</a>]</span>, and <span><a href="https://rfc-editor.org/rfc/rfc8702#section-3.2.1" class="relref">Section 3.2.1</a> of [<a href="#RFC8702" class="cite xref">RFC8702</a>]</span>.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.1-8">The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
 algorithms is identified by the following OIDs:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-9">
@@ -1621,7 +1632,8 @@ algorithms is identified by the following OIDs:<a href="#section-3.1-8" class="p
       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 13 }
 </pre><a href="#section-3.1-9" class="pilcrow">¶</a>
 </div>
-<p id="section-3.1-10">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc5754#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1-10">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc4055#section-5" class="relref">Section 5</a> of [<a href="#RFC4055" class="cite xref">RFC4055</a>]</span>
+and <span><a href="https://rfc-editor.org/rfc/rfc5754#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5754" class="cite xref">RFC5754</a>]</span>.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
 <p id="section-3.1-11">The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
 algorithms is identified by the following OIDs:<a href="#section-3.1-11" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.1-12">
@@ -3123,6 +3135,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"Diffie-Hellman Key Agreement Method"</span>, <span class="seriesInfo">RFC 2631</span>, <span class="seriesInfo">DOI 10.17487/RFC2631</span>, <time datetime="1999-06" class="refDate">June 1999</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2631">https://www.rfc-editor.org/rfc/rfc2631</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC2986">[RFC2986]</dt>
+        <dd>
+<span class="refAuthor">Nystrom, M.</span> and <span class="refAuthor">B. Kaliski</span>, <span class="refTitle">"PKCS #10: Certification Request Syntax Specification Version 1.7"</span>, <span class="seriesInfo">RFC 2986</span>, <span class="seriesInfo">DOI 10.17487/RFC2986</span>, <time datetime="2000-11" class="refDate">November 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2986">https://www.rfc-editor.org/rfc/rfc2986</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC3370">[RFC3370]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Cryptographic Message Syntax (CMS) Algorithms"</span>, <span class="seriesInfo">RFC 3370</span>, <span class="seriesInfo">DOI 10.17487/RFC3370</span>, <time datetime="2002-09" class="refDate">September 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3370">https://www.rfc-editor.org/rfc/rfc3370</a>&gt;</span>. </dd>
@@ -3138,6 +3154,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="RFC3565">[RFC3565]</dt>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"Use of the Advanced Encryption Standard (AES) Encryption Algorithm in Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">RFC 3565</span>, <span class="seriesInfo">DOI 10.17487/RFC3565</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3565">https://www.rfc-editor.org/rfc/rfc3565</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4055">[RFC4055]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Kaliski, B.</span>, and <span class="refAuthor">R. Housley</span>, <span class="refTitle">"Additional Algorithms and Identifiers for RSA Cryptography for use in the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 4055</span>, <span class="seriesInfo">DOI 10.17487/RFC4055</span>, <time datetime="2005-06" class="refDate">June 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4055">https://www.rfc-editor.org/rfc/rfc4055</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4056">[RFC4056]</dt>
         <dd>
@@ -3166,6 +3186,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="RFC5754">[RFC5754]</dt>
         <dd>
 <span class="refAuthor">Turner, S.</span>, <span class="refTitle">"Using SHA2 Algorithms with Cryptographic Message Syntax"</span>, <span class="seriesInfo">RFC 5754</span>, <span class="seriesInfo">DOI 10.17487/RFC5754</span>, <time datetime="2010-01" class="refDate">January 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5754">https://www.rfc-editor.org/rfc/rfc5754</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5756">[RFC5756]</dt>
+        <dd>
+<span class="refAuthor">Turner, S.</span>, <span class="refAuthor">Brown, D.</span>, <span class="refAuthor">Yiu, K.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">T. Polk</span>, <span class="refTitle">"Updates for RSAES-OAEP and RSASSA-PSS Algorithm Parameters"</span>, <span class="seriesInfo">RFC 5756</span>, <span class="seriesInfo">DOI 10.17487/RFC5756</span>, <time datetime="2010-01" class="refDate">January 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5756">https://www.rfc-editor.org/rfc/rfc5756</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8017">[RFC8017]</dt>
         <dd>
@@ -3275,6 +3299,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="ECRYPT.CSA.D5.4">[ECRYPT.CSA.D5.4]</dt>
         <dd>
 <span class="refAuthor">University of Bristol</span>, <span class="refTitle">"Algorithms, Key Size and Protocols Report (2018)"</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.ecrypt.eu.org/csa/documents/D5.4-FinalAlgKeySizeProt.pdf">https://www.ecrypt.eu.org/csa/documents/D5.4-FinalAlgKeySizeProt.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ETSI.TS.119312">[ETSI.TS.119312]</dt>
+        <dd>
+<span class="refAuthor">STSI</span>, <span class="refTitle">"Electronic Signatures and Trust Infrastructures (ESI); Cryptographic Suites V2.1.1"</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/02.01.01_60/ts_119312v020101p.pdf">https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/02.01.01_60/ts_119312v020101p.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-pquip-pqc-engineers">[I-D.ietf-pquip-pqc-engineers]</dt>
         <dd>

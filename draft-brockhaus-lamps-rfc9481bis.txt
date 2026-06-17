@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 18 December 2026                                        Entrust
-                                                            16 June 2026
+Expires: 19 December 2026                                        Entrust
+                                                            17 June 2026
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -19,9 +19,9 @@ Abstract
    This document describes the conventions for using several
    cryptographic algorithms with the Certificate Management Protocol
    (CMP).  CMP is used to enroll and further manage the lifecycle of
-   X.509 certificates.  This document provides algorithm use profiles
-   from Appendixes C and D of RFC 9810 and for RFC 9483.  It also
-   obsoletes RFC 9481.
+   X.509 certificates.  This document obsoletes RFC 9481 and updates
+   algorithm use profiles from Appendixes C and D of RFC 9810 and for
+   RFC 9483.
 
 Discussion Venues
 
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2026.
+   This Internet-Draft will expire on 19 December 2026.
 
 Copyright Notice
 
@@ -124,9 +124,10 @@ Table of Contents
 1.  Introduction
 
    This document lists current cryptographic algorithms that can be used
-   with CMP [RFC9810] to offer an easier way to maintain the list of
-   suitable algorithms over time.  The use of CMP [RFC9810] is not
-   limited to the algorithms listed in this document.
+   with Certificate Management Protocol (CMP) [RFC9810] to offer an
+   easier way to maintain the list of suitable algorithms over time.
+   The use of CMP [RFC9810] is not limited to the algorithms listed in
+   this document.
 
    Cryptographic algorithms generally become weaker over time.  One of
    the reasons for this is that computer systems become more powerful or
@@ -194,7 +195,8 @@ Table of Contents
    In the following sections, ASN.1 values and types are used to
    indicate where algorithm identifier and output values are provided.
    These ASN.1 values and types are defined in CMP [RFC9810],
-   Certificate Request Message Format (CRMF) [RFC4211], and
+   Certificate Request Message Format (CRMF) [RFC4211], PKCS #10:
+   Certification Request Syntax Specification [RFC2986], and
    Cryptographic Message Syntax (CMS) [RFC5652][RFC9629].
 
 2.  Message Digest Algorithms
@@ -213,15 +215,21 @@ Table of Contents
 
    *  digestAlgorithm field of SignerInfo.
 
+   Many Key Derivation functions (KDF) internally employ a one-way hash
+   function.  When this is the case, the hash function that is used is
+   indirectly indicated by the algorithm identifier of the KDF.
+
    Digest values are located in the:
 
    *  hashVal field of OOBCertHash,
 
-   *  certHash field of CertStatus, and
+   *  certHash field of CertStatus,
 
-   *  witness field of Challenge.
+   *  witness field of Challenge, and
 
-   In addition, digest values are input to signature algorithms.
+   *  MessageDigest field of signedAttrs.
+
+   In addition, digest values can be an input to signature algorithms.
 
 2.1.  SHA2
 
@@ -298,9 +306,9 @@ Table of Contents
    conventions for signature algorithms to be employed by CMP
    implementations.
 
-   The signature algorithm is referred to as MSG_SIG_ALG in the
-   [CMP]Appendices C and D of [RFC9810], Lightweight CMP Profile
-   [RFC9483], and in Section 7.2.
+   The signature algorithm is referred to as MSG_SIG_ALG in Appendices C
+   and D of [RFC9810], in the Lightweight CMP Profile [RFC9483], and in
+   Section 7.2.
 
    Signature algorithm identifiers are located in the:
 
@@ -324,13 +332,17 @@ Table of Contents
    The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is
    defined in [RFC8017].
 
-   The algorithm identifier for RSASAA-PSS signatures used with SHA2 or
-   SHA3 message digest algorithms is identified by the following OID:
+   The signature algorithm RSASAA-PSS used with SHA2 or SHA3 message
+   digest algorithms is identified by the following OID:
 
       id-RSASSA-PSS OBJECT IDENTIFIER ::= { iso(1) member-body(2)
          us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 10 }
 
-   Specific conventions to be considered are specified in [RFC4056].
+   Specific conventions to be considered are specified in Section 3 of
+   [RFC4055] and Section 2 of [RFC4056].  The OID for the specific hash
+   function used is included in the hashAlgorithm field of algorithm
+   parameter RSASSA-PSS-params.  So it is applicable for SHA2 and SHA3,
+   see also ETSI TS 119 312 V2.1.1 [ETSI.TS.119312].
 
    The signature algorithm RSASSA-PSS used with SHAKE message digest
    algorithms is identified by the following OIDs:
@@ -342,8 +354,8 @@ Table of Contents
          identified-organization(3) dod(6) internet(1) security(5)
          mechanisms(5) pkix(7) algorithms(6) 31 }
 
-   Specific conventions to be considered are specified in Section 3.2.1
-   of [RFC8702].
+   Specific conventions to be considered are specified in Section 4.1.1
+   of [RFC8692], [RFC5756], and Section 3.2.1 of [RFC8702].
 
    The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message
    digest algorithms is identified by the following OIDs:
@@ -357,8 +369,8 @@ Table of Contents
       sha512WithRSAEncryption  OBJECT IDENTIFIER  ::=  { iso(1)
          member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 13 }
 
-   Specific conventions to be considered are specified in Section 3.2 of
-   [RFC5754].
+   Specific conventions to be considered are specified in Section 5 of
+   [RFC4055] and Section 3.2 of [RFC5754].
 
    The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message
    digest algorithms is identified by the following OIDs:
@@ -1665,6 +1677,11 @@ Table of Contents
               RFC 2631, DOI 10.17487/RFC2631, June 1999,
               <https://www.rfc-editor.org/rfc/rfc2631>.
 
+   [RFC2986]  Nystrom, M. and B. Kaliski, "PKCS #10: Certification
+              Request Syntax Specification Version 1.7", RFC 2986,
+              DOI 10.17487/RFC2986, November 2000,
+              <https://www.rfc-editor.org/rfc/rfc2986>.
+
    [RFC3370]  Housley, R., "Cryptographic Message Syntax (CMS)
               Algorithms", RFC 3370, DOI 10.17487/RFC3370, September
               2002, <https://www.rfc-editor.org/rfc/rfc3370>.
@@ -1682,6 +1699,13 @@ Table of Contents
               Encryption Algorithm in Cryptographic Message Syntax
               (CMS)", RFC 3565, DOI 10.17487/RFC3565, July 2003,
               <https://www.rfc-editor.org/rfc/rfc3565>.
+
+   [RFC4055]  Schaad, J., Kaliski, B., and R. Housley, "Additional
+              Algorithms and Identifiers for RSA Cryptography for use in
+              the Internet X.509 Public Key Infrastructure Certificate
+              and Certificate Revocation List (CRL) Profile", RFC 4055,
+              DOI 10.17487/RFC4055, June 2005,
+              <https://www.rfc-editor.org/rfc/rfc4055>.
 
    [RFC4056]  Schaad, J., "Use of the RSASSA-PSS Signature Algorithm in
               Cryptographic Message Syntax (CMS)", RFC 4056,
@@ -1715,6 +1739,11 @@ Table of Contents
    [RFC5754]  Turner, S., "Using SHA2 Algorithms with Cryptographic
               Message Syntax", RFC 5754, DOI 10.17487/RFC5754, January
               2010, <https://www.rfc-editor.org/rfc/rfc5754>.
+
+   [RFC5756]  Turner, S., Brown, D., Yiu, K., Housley, R., and T. Polk,
+              "Updates for RSAES-OAEP and RSASSA-PSS Algorithm
+              Parameters", RFC 5756, DOI 10.17487/RFC5756, January 2010,
+              <https://www.rfc-editor.org/rfc/rfc5756>.
 
    [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,
               "PKCS #1: RSA Cryptography Specifications Version 2.2",
@@ -1852,6 +1881,13 @@ Table of Contents
               Report (2018)", March 2015,
               <https://www.ecrypt.eu.org/csa/documents/
               D5.4-FinalAlgKeySizeProt.pdf>.
+
+   [ETSI.TS.119312]
+              STSI, "Electronic Signatures and Trust Infrastructures
+              (ESI); Cryptographic Suites V2.1.1", June 2026,
+              <https://www.etsi.org/deliver/
+              etsi_ts/119300_119399/119312/02.01.01_60/
+              ts_119312v020101p.pdf>.
 
    [I-D.ietf-pquip-pqc-engineers]
               Banerjee, A., Reddy.K, T., Schoinianakis, D., Hollebeek,
