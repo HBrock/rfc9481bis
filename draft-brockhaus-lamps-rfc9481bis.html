@@ -15,24 +15,25 @@ with the Certificate Management Protocol (CMP).  CMP is used to enroll and furth
 manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481 and
 updates the algorithm use profiles for Appendixes C and D of RFC 9810 and for RFC 9483. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="CMP" name="keyword">
 <meta content="certificate management" name="keyword">
 <meta content="PKI" name="keyword">
 <meta content="draft-brockhaus-lamps-rfc9481bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-brockhaus-lamps-rfc9481bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1732,11 +1733,10 @@ identified by the following OIDs:<a href="#section-3.2-9" class="pilcrow">¶</a>
         </h3>
 <p id="section-3.3-1">The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in <span>[<a href="#RFC8032" class="cite xref">RFC8032</a>]</span> and
 <span><a href="#NIST.FIPS.186-5" class="internal xref">FIPS Pub 186-5</a> [<a href="#NIST.FIPS.186-5" class="cite xref">NIST.FIPS.186-5</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">The EdDSA is described along with a recommendation for the use of the curve25519 and
-curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the
-HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve
-combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not
-specified in this document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Two variants are defined for EdDSA: pure and pre-hash. The pure variant is called
+PureEdDSA and the pre-hash variant is called HashEdDSA. This document specifies the use
+of the PureEdDSA. The convention used for identifying the algorithm/curve combinations
+is to use Ed25519 and Ed448 for the PureEdDSA mode.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">The signature algorithm Ed25519 that <span class="bcp14">MUST</span> be used with SHA-512 message
 digest algorithms is identified by the following OIDs:<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.3-4">
@@ -1765,12 +1765,12 @@ confirmed has been signed using Ed448.<a href="#section-3.3-8" class="pilcrow">�
         <h3 id="name-ml-dsa">
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-ml-dsa" class="section-name selfRef">ML-DSA</a>
         </h3>
-<p id="section-3.4-1">The ML-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.204" class="internal xref">FIPS 204</a> [<a href="#NIST.FIPS.204" class="cite xref">NIST.FIPS.204</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant
-digital signature scheme standardized by the NIST.  This document specifies the use of
-the ML-DSA in CMP.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified
-in this document.  If pre-hasing is required, the External µ mode of ML-DSA can
-be used, see <span><a href="https://rfc-editor.org/rfc/rfc9881#appendix-D" class="relref">Appendix D</a> of [<a href="#RFC9881" class="cite xref">RFC9881</a>]</span>.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is defined in
+<span><a href="#NIST.FIPS.204" class="internal xref">FIPS Pub 204</a> [<a href="#NIST.FIPS.204" class="cite xref">NIST.FIPS.204</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Two variants are defined for ML-DSA: pure and pre-hash. The pure variant is called
+ML-DSA and the pre-hash variant is called HashML-DSA. This document specifies the use
+of the ML-DSA.  The use of HashML-DSA is not specified in this document. If pre-hasing
+is required, the External µ mode of ML-DSA can be used, see <span><a href="https://rfc-editor.org/rfc/rfc9881#appendix-D" class="relref">Appendix D</a> of [<a href="#RFC9881" class="cite xref">RFC9881</a>]</span>.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4-3">The signature algorithm ML-DSA is identified by the following OIDs:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.4-4">
 <pre>
@@ -1796,72 +1796,74 @@ used to calculate the certHash in the certConf messages <span class="bcp14">MUST
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-composite-ml-dsa" class="section-name selfRef">Composite ML-DSA</a>
         </h3>
 <p id="section-3.5-1">The Composite ML-DSA signature algorithm is defined in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">The Copmosite ML-DSA signature algorithm combines of ML-DSA (<a href="#ML-DSA" class="auto internal xref">Section 3.4</a>) with traditional
+<p id="section-3.5-2">The Composite ML-DSA signature algorithm combines of ML-DSA (<a href="#ML-DSA" class="auto internal xref">Section 3.4</a>) with traditional
 algorithms RSASSA-PKCS1-v1.5 (<a href="#RSASig" class="auto internal xref">Section 3.1</a>), RSASSA-PSS (<a href="#RSASig" class="auto internal xref">Section 3.1</a>), ECDSA (<a href="#ECDSA" class="auto internal xref">Section 3.2</a>),
-Ed25519 (<a href="#EdDSA" class="auto internal xref">Section 3.3</a>), and Ed448 (<a href="#EdDSA" class="auto internal xref">Section 3.3</a>) to new PQ/T Hybrid signature algorithms
-following the "Composite Design Philosophy" described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-19#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+and EdDSA (<a href="#EdDSA" class="auto internal xref">Section 3.3</a>) to new PQ/T Hybrid signature algorithms following the
+"Composite Design Philosophy" described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-19#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.5-3">The Composite ML-DSA signature algorithm is identified by the following OIDs:<a href="#section-3.5-3" class="pilcrow">¶</a></p>
 <div class="breakable lang-asn.1 sourcecode" id="section-3.5-4">
 <pre>
-id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 37 }
-id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 38 }
-id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 39 }
-id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 40 }
-id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 41 }
-id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 42 }
-id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 43 }
-id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 44 }
-id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 45 }
-id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 46 }
-id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 47 }
-id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 48 }
-id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 49 }
-id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 50 }
-id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 51 }
-id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 52 }
-id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 53 }
-id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 54 }
+   id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 37 }
+   id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 38 }
+   id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 39 }
+   id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 40 }
+   id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 41 }
+   id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 42 }
+   id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 43 }
+   id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 44 }
+   id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 45 }
+   id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 46 }
+   id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 47 }
+   id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 48 }
+   id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 49 }
+   id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 50 }
+   id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 51 }
+   id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 52 }
+   id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 53 }
+   id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 54 }
 </pre><a href="#section-3.5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.5-5">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to
-calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the respective Pre-Hash function
-as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-19#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.5-5">Specific conventions to be considered are specified in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>
+and <span>[<a href="#I-D.ietf-lamps-cms-composite-sigs" class="cite xref">I-D.ietf-lamps-cms-composite-sigs</a>]</span>.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.5-6">Note: If the hashAlg field in a certConf message is not present the hash algorithm used to
+calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the Pre-Hash function (PH) as specified
+in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span> for the respective OID.<a href="#section-3.5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="SLH-DSA">
@@ -1869,14 +1871,11 @@ as specified in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-
         <h3 id="name-slh-dsa">
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-slh-dsa" class="section-name selfRef">SLH-DSA</a>
         </h3>
-<p id="section-3.6-1">The SLH-DSA signature algorithm is defined in <span><a href="#NIST.FIPS.205" class="internal xref">FIPS 205</a> [<a href="#NIST.FIPS.205" class="cite xref">NIST.FIPS.205</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.6-2">The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant
-digital signature scheme standardized by the NIST.  This document specifies the use of
-the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although,
-OIDs for using HashSLH-DSA are specified in <span>[<a href="#RFC9909" class="cite xref">RFC9909</a>]</span>, <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span> only specifies the
-Pure SLH-DSA for usage with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>. Therefore, only Pure SLH-DSA signature
-algorithm OIDs are listed below.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
-<p id="section-3.6-3">The Pure SLH-DSA signature algorithm using SHA2 (<a href="#SHA2" class="auto internal xref">Section 2.1</a>) is identified by the following OIDs:<a href="#section-3.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.6-1">The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is defined in <span><a href="#NIST.FIPS.205" class="internal xref">FIPS Pub 205</a> [<a href="#NIST.FIPS.205" class="cite xref">NIST.FIPS.205</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.6-2">Two variants are defined for SLH-DSA: pure and pre-hash. The pure variant is called
+Pure SLH-DSA and the pre-hash variant is called HashSLH-DSA. This document specifies the use
+of the Pure SLH-DSA.  The use of HashSLH-DSA is not specified in this document.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-3">The Pure SLH-DSA signature algorithm using SHA2 is identified by the following OIDs:<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.6-4">
 <pre>
    id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
@@ -1899,7 +1898,7 @@ algorithm OIDs are listed below.<a href="#section-3.6-2" class="pilcrow">¶</a><
       gov(101) csor(3) sigAlg(4) 25 }
 </pre><a href="#section-3.6-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.6-5">The Pure SLH-DSA signature algorithm using SHAKE (<a href="#SHA3-SHAKE" class="auto internal xref">Section 2.2</a>) is identified by the
+<p id="section-3.6-5">The Pure SLH-DSA signature algorithm using SHAKE is identified by the
 following OIDs:<a href="#section-3.6-5" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.6-6">
 <pre>
@@ -1925,7 +1924,7 @@ following OIDs:<a href="#section-3.6-5" class="pilcrow">¶</a></p>
 </div>
 <p id="section-3.6-7">Specific conventions to be considered are specified in <span>[<a href="#RFC9909" class="cite xref">RFC9909</a>]</span> and <span>[<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-7" class="pilcrow">¶</a></p>
 <p id="section-3.6-8">Note: If the hashAlg field in a certConf message is not present the hash algorithm
-used to calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the hash function
+used to calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be the digestAlgorithm
 used in the SLH-DSA tree, see <span><a href="https://rfc-editor.org/rfc/rfc9814#section-4" class="relref">Section 4</a> of [<a href="#RFC9814" class="cite xref">RFC9814</a>]</span>.<a href="#section-3.6-8" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1933,7 +1932,28 @@ used in the SLH-DSA tree, see <span><a href="https://rfc-editor.org/rfc/rfc9814#
 <section id="section-3.7">
         <h3 id="name-fn-dsa">
 <a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-fn-dsa" class="section-name selfRef">FN-DSA</a>
-      </h3>
+        </h3>
+<p id="section-3.7-1">The Fast-Fourier Transform over NTRU-Lattice-Based Digital Signature Algorithm (FN-DSA)
+is defined in <span><a href="#NIST.FIPS.206" class="internal xref">FIPS Pub 206</a> [<a href="#NIST.FIPS.206" class="cite xref">NIST.FIPS.206</a>]</span>.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.7-2">Two variants are defined for FN-DSA: pure and pre-hash. The pure variant is called
+Pure FN-DSA and the pre-hash variant is called HashFN-DSA. This document specifies the use
+of the FN-DSA.  The use of HashSLH-DSA is not specified in this document.<a href="#section-3.7-2" class="pilcrow">¶</a></p>
+<p id="section-3.7-3">The FN-DSA signature algorithm using SHA2  is identified by the following OIDs:<a href="#section-3.7-3" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-3.7-4">
+<pre>
+   id-fn-dsa-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) TBD1 }
+   id-fn-dsa-1024 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) TBD2 }
+</pre><a href="#section-3.7-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.7-5">Specific conventions to be considered are specified in <span>[<a href="#I-D.ietf-lamps-fn-dsa-certificates" class="cite xref">I-D.ietf-lamps-fn-dsa-certificates</a>]</span>
+and <span>[<a href="#I-D.ietf-lamps-cms-fn-dsa" class="cite xref">I-D.ietf-lamps-cms-fn-dsa</a>]</span>.<a href="#section-3.7-5" class="pilcrow">¶</a></p>
+<p id="section-3.7-6">Note: If the hashAlg field in a certConf message is not present the hash algorithm
+used to calculate the certHash in the certConf messages <span class="bcp14">MUST</span> be SHA-512.<a href="#section-3.7-6" class="pilcrow">¶</a></p>
+<p id="section-3.7-7">ToDo: Verify and align with the use in CMS. Potentially change to SHAKE256.<a href="#section-3.7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3110,14 +3130,14 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"Fast Fourier Transform over NTRU-Lattice-Based Digital Signature Algorithm"</span>, <span>n.d.</span>. </dd>
 <dd class="break"></dd>
-<dt id="NIST.SP.800-185">[NIST.SP.800-185]</dt>
-        <dd>
-<span class="refAuthor">Kelsey, J.</span>, <span class="refAuthor">Change, S.</span>, and <span class="refAuthor">R. Perlner</span>, <span class="refTitle">"SHA-3 derived functions: cSHAKE, KMAC, TupleHash and ParallelHash"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-185</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-185">https://doi.org/10.6028/nist.sp.800-185</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-185</span>
-        </dd>
-<dd class="break"></dd>
 <dt id="NIST.SP.800-38d">[NIST.SP.800-38d]</dt>
         <dd>
 <span class="refAuthor">Dworkin, M.</span>, <span class="refTitle">"Recommendation for block cipher modes of operation :: GaloisCounter Mode (GCM) and GMAC"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-38d</span>, <time datetime="2007" class="refDate">2007</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-38d">https://doi.org/10.6028/nist.sp.800-38d</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-38d</span>
+        </dd>
+<dd class="break"></dd>
+<dt id="NIST.SP.800-185">[NIST.SP.800-185]</dt>
+        <dd>
+<span class="refAuthor">Kelsey, J.</span>, <span class="refAuthor">Change, S.</span>, and <span class="refAuthor">R. Perlner</span>, <span class="refTitle">"SHA-3 derived functions: cSHAKE, KMAC, TupleHash and ParallelHash"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-185</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-185">https://doi.org/10.6028/nist.sp.800-185</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-185</span>
         </dd>
 <dd class="break"></dd>
 <dt id="RFC2104">[RFC2104]</dt>
