@@ -76,32 +76,26 @@ informative:
     date: 2026-06
   NIST.SP.800-57pt1r5:
     =: DOI.10.6028/NIST.SP.800-57pt1r5
-    ann: >
-      NIST Special Publications (General) 800-57pt1r5
+    ann: NIST Special Publications (General) 800-57pt1r5
   RFC4210:
   RFC9481:
   I-D.ietf-pquip-pqc-engineers:
 normative:
   NIST.FIPS.180-4:
     =: DOI.10.6028/NIST.FIPS.180-4
-    ann: >
-      NIST Federal Information Processing Standards Publications 180-4
+    ann: NIST Federal Information Processing Standards Publications 180-4
   NIST.FIPS.186-5:
     =: DOI.10.6028/NIST.FIPS.186-5
-    ann: >
-      FIPS PUB 186-5
+    ann: FIPS PUB 186-5
   NIST.FIPS.197:
     =: DOI.10.6028/NIST.FIPS.197
-    ann: >
-      NIST FIPS 197
+    ann: NIST FIPS 197
   NIST.FIPS.198-1:
     =: DOI.10.6028/NIST.FIPS.198-1
-    ann: >
-      FIPS PUB 198-1
+    ann: FIPS PUB 198-1
   NIST.FIPS.202:
     =: DOI.10.6028/NIST.FIPS.202
-    ann: >
-      NIST Federal Information Processing Standards Publications 202
+    ann: NIST Federal Information Processing Standards Publications 202
   NIST.FIPS.204:
     target: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf
     title: Module-Lattice-Based Digital Signature Standard
@@ -124,12 +118,10 @@ normative:
     - org: NIST
   NIST.SP.800-185:
     =: DOI.10.6028/NIST.SP.800-185
-    ann: >
-      NIST Special Publications (General) 800-185
+    ann: NIST Special Publications (General) 800-185
   NIST.SP.800-38d:
     =: DOI.10.6028/NIST.SP.800-38d
-    ann: >
-      NIST Special Publications (General) 800-38d
+    ann: NIST Special Publications (General) 800-38d
   RFC2104:
   RFC2631:
   RFC2986:
@@ -146,6 +138,7 @@ normative:
   RFC5753:
   RFC5754:
   RFC5756:
+  RFC5758:
   RFC8017:
   RFC8018:
   RFC8032:
@@ -183,9 +176,9 @@ normative:
 
 
 This document describes the conventions for using several cryptographic algorithms
-with the Certificate Management Protocol (CMP).  CMP is used to enroll and
-further manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481
-and updates algorithm use profiles from Appendixes C and D of RFC 9810 and for RFC 9483.
+with the Certificate Management Protocol (CMP).  CMP is used to enroll and further
+manage the lifecycle of X.509 certificates.  This document obsoletes RFC 9481 and
+updates the algorithm use profiles for Appendixes C and D of RFC 9810 and for RFC 9483.
 
 --- middle
 
@@ -303,7 +296,7 @@ identified by the following OIDs:
       hashalgs(2) 3 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 2 of RFC5754}}.
+Specific conventions to be considered are specified in {{RFC5754}}.
 
 
 ## SHA3 and SHAKE {#SHA3-SHAKE}
@@ -331,7 +324,7 @@ identified by the following OIDs:
       hashalgs(2) 10 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 2 of RFC9688}}.
+Specific conventions to be considered are specified in {{RFC9688}}.
 
 SHAKE is an extendable-output function, and [FIPS Pub 202](#NIST.FIPS.202)
 prohibits using SHAKE as a general-purpose hash function.  When SHAKE is
@@ -350,7 +343,7 @@ following OIDs:
       hashalgs(2) 12 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.1 of RFC8702}}.
+Specific conventions to be considered are specified in {{RFC8702}}.
 
 
 # Signature Algorithms {#Sig}
@@ -393,8 +386,8 @@ algorithms is identified by the following OID:
       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 10 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3 of RFC4055}}
-and {{Section 2 of RFC4056}}. The OID for the specific hash function used is
+Specific conventions to be considered are specified in {{RFC4055}}
+and {{RFC4056}}. The OID for the specific hash function used is
 included in the hashAlgorithm field of algorithm parameter RSASSA-PSS-params.
 So it is applicable for SHA2 and SHA3, see also [ETSI TS 119 312 V2.1.1](#ETSI.TS.119312).
 
@@ -410,8 +403,8 @@ is identified by the following OIDs:
       mechanisms(5) pkix(7) algorithms(6) 31 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 4.1.1 of RFC8692}},
-{{RFC5756}}, and {{Section 3.2.1 of RFC8702}}.
+Specific conventions to be considered are specified in {{RFC8692}}, {{RFC5756}},
+and {{ RFC8702}}.
 
 The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
 algorithms is identified by the following OIDs:
@@ -427,8 +420,7 @@ algorithms is identified by the following OIDs:
       member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 13 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 5 of RFC4055}}
-and {{Section 3.2 of RFC5754}}.
+Specific conventions to be considered are specified in {{RFC4055}} and {{RFC5754}}.
 
 The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
 algorithms is identified by the following OIDs:
@@ -448,12 +440,14 @@ algorithms is identified by the following OIDs:
       gov(101) csor(3) nistAlgorithm(4) sigAlg(3) 16 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.1 of RFC9688}}.
+Specific conventions to be considered are specified in {{RFC9688}}.
 
 
 ## ECDSA {#ECDSA}
 
 The ECDSA signature algorithm is defined in [FIPS Pub 186-5](#NIST.FIPS.186-5).
+
+Specific conventions to be considered when using ECDSA are specified in {{RFC5480}} and {{RFC5753}}.
 
 The signature algorithm ECDSA used with SHA2 message digest algorithms is
 identified by the following OIDs:
@@ -469,7 +463,21 @@ identified by the following OIDs:
       us(840) ansi-X9-62(10045) signatures(4) ecdsa-with-SHA2(3) 4 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.2.2 of RFC8702}}.
+Specific conventions to be considered are specified in {{RFC5758}} and {{RFC5754}}.
+
+The signature algorithm ECDSA used with SHAKE message digest algorithms is
+identified by the following OIDs:
+
+~~~~ asn.1
+   id-ecdsa-with-shake128 OBJECT IDENTIFIER  ::=  { iso(1)
+      identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) algorithms(6) 32 }
+   id-ecdsa-with-shake256 OBJECT IDENTIFIER  ::=  { iso(1)
+      identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) algorithms(6) 33 }
+~~~~
+
+Specific conventions to be considered are specified in {{RFC8692}} and {{RFC8702}}.
 
 The signature algorithm ECDSA used with SHA3 message digest algorithms is
 identified by the following OIDs:
@@ -489,7 +497,7 @@ identified by the following OIDs:
       nistAlgorithm(4) sigAlg(3) 12 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.1 of RFC9688}}.
+Specific conventions to be considered are specified in {{RFC9688}}.
 
 As specified in {{RFC5480}}, the NIST-recommended curves are identified by the following OIDs:
 
@@ -506,22 +514,6 @@ As specified in {{RFC5480}}, the NIST-recommended curves are identified by the f
       identified-organization(3) certicom(132) curve(0) 35 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 3.3 of RFC5754}}.
-
-The signature algorithm ECDSA used with SHAKE message digest algorithms is
-identified by the following OIDs:
-
-~~~~ asn.1
-   id-ecdsa-with-shake128 OBJECT IDENTIFIER  ::=  { iso(1)
-      identified-organization(3) dod(6) internet(1) security(5)
-      mechanisms(5) pkix(7) algorithms(6) 32 }
-   id-ecdsa-with-shake256 OBJECT IDENTIFIER  ::=  { iso(1)
-      identified-organization(3) dod(6) internet(1) security(5)
-      mechanisms(5) pkix(7) algorithms(6) 33 }
-~~~~
-
-Specific conventions to be considered are specified in {{Section 3.2.2 of RFC8702}}.
-
 
 ## EdDSA {#EdDSA}
 
@@ -532,9 +524,7 @@ The EdDSA is described along with a recommendation for the use of the curve25519
 curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the
 HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve
 combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not
-specified in this document.  Ed25519 is intended to operate at around the 128-bit
-security level and Ed448 at around the 224-bit security level.  A sufficiently large
-quantum computer would be able to break both.
+specified in this document.
 
 The signature algorithm Ed25519 that MUST be used with SHA-512 message
 digest algorithms is identified by the following OIDs:
