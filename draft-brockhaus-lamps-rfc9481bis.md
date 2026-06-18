@@ -520,11 +520,10 @@ As specified in {{RFC5480}}, the NIST-recommended curves are identified by the f
 The Edwards-curve Digital Signature Algorithm (EdDSA) is defined in {{RFC8032}} and
 [FIPS Pub 186-5](#NIST.FIPS.186-5).
 
-The EdDSA is described along with a recommendation for the use of the curve25519 and
-curve448.  EdDSA has defined two modes: the PureEdDSA mode without prehashing and the
-HashEdDSA mode with prehashing.  The convention used for identifying the algorithm/curve
-combinations is to use "Ed25519" and "Ed448" for the PureEdDSA mode.  HashEdDSA is not
-specified in this document.
+Two variants are defined for EdDSA: pure and pre-hash. The pure variant is called
+PureEdDSA and the pre-hash variant is called HashEdDSA. This document specifies the use
+of the PureEdDSA. The convention used for identifying the algorithm/curve combinations
+is to use Ed25519 and Ed448 for the PureEdDSA mode.
 
 The signature algorithm Ed25519 that MUST be used with SHA-512 message
 digest algorithms is identified by the following OIDs:
@@ -552,13 +551,13 @@ confirmed has been signed using Ed448.
 
 ## ML-DSA {#ML-DSA}
 
-The ML-DSA signature algorithm is defined in [FIPS 204](#NIST.FIPS.204).
+The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is defined in
+[FIPS Pub 204](#NIST.FIPS.204).
 
-The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant
-digital signature scheme standardized by the NIST.  This document specifies the use of
-the ML-DSA in CMP.  The pre-hash varient of ML-DSA, called HashML-DSA, is not specified
-in this document.  If pre-hasing is required, the External &micro; mode of ML-DSA can
-be used, see {{Appendix D of RFC9881}}.
+Two variants are defined for ML-DSA: pure and pre-hash. The pure variant is called
+ML-DSA and the pre-hash variant is called HashML-DSA. This document specifies the use
+of the ML-DSA.  The use of HashML-DSA is not specified in this document. If pre-hasing
+is required, the External &micro; mode of ML-DSA can be used, see {{Appendix D of RFC9881}}.
 
 The signature algorithm ML-DSA is identified by the following OIDs:
 
@@ -583,86 +582,86 @@ used to calculate the certHash in the certConf messages MUST be SHA-512.
 
 The Composite ML-DSA signature algorithm is defined in {{I-D.ietf-lamps-pq-composite-sigs}}.
 
-The Copmosite ML-DSA signature algorithm combines of ML-DSA ({{ML-DSA}}) with traditional
+The Composite ML-DSA signature algorithm combines of ML-DSA ({{ML-DSA}}) with traditional
 algorithms RSASSA-PKCS1-v1.5 ({{RSASig}}), RSASSA-PSS ({{RSASig}}), ECDSA ({{ECDSA}}),
-Ed25519 ({{EdDSA}}), and Ed448 ({{EdDSA}}) to new PQ/T Hybrid signature algorithms
-following the "Composite Design Philosophy" described in {{Section 2.2 of I-D.ietf-lamps-pq-composite-sigs}}.
+and EdDSA ({{EdDSA}}) to new PQ/T Hybrid signature algorithms following the
+"Composite Design Philosophy" described in {{Section 2.2 of I-D.ietf-lamps-pq-composite-sigs}}.
 
 The Composite ML-DSA signature algorithm is identified by the following OIDs:
 
 ~~~~ asn.1
-id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 37 }
-id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 38 }
-id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 39 }
-id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 40 }
-id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 41 }
-id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 42 }
-id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 43 }
-id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 44 }
-id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 45 }
-id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 46 }
-id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 47 }
-id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 48 }
-id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 49 }
-id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 50 }
-id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 51 }
-id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 52 }
-id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 53 }
-id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
-   iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
-   pkix(7) alg(6) 54 }
+   id-MLDSA44-RSA2048-PSS-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 37 }
+   id-MLDSA44-RSA2048-PKCS15-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 38 }
+   id-MLDSA44-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 39 }
+   id-MLDSA44-ECDSA-P256-SHA256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 40 }
+   id-MLDSA65-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 41 }
+   id-MLDSA65-RSA3072-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 42 }
+   id-MLDSA65-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 43 }
+   id-MLDSA65-RSA4096-PKCS15-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 44 }
+   id-MLDSA65-ECDSA-P256-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 45 }
+   id-MLDSA65-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 46 }
+   id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 47 }
+   id-MLDSA65-Ed25519-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 48 }
+   id-MLDSA87-ECDSA-P384-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 49 }
+   id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 50 }
+   id-MLDSA87-Ed448-SHAKE256 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 51 }
+   id-MLDSA87-RSA3072-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 52 }
+   id-MLDSA87-RSA4096-PSS-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 53 }
+   id-MLDSA87-ECDSA-P521-SHA512 OBJECT IDENTIFIER ::= {
+      iso(1) org(3) dod(6) internet(1) security(5) mechanisms(5)
+      pkix(7) alg(6) 54 }
 ~~~~
 
+Specific conventions to be considered are specified in {{I-D.ietf-lamps-pq-composite-sigs}}
+and {{I-D.ietf-lamps-cms-composite-sigs}}.
+
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to
-calculate the certHash in the certConf messages MUST be the respective Pre-Hash function
-as specified in {{Section 7 of I-D.ietf-lamps-pq-composite-sigs}}.
+calculate the certHash in the certConf messages MUST be the Pre-Hash function (PH) as specified
+in {{I-D.ietf-lamps-pq-composite-sigs}} for the respective OID.
 
 ## SLH-DSA {#SLH-DSA}
 
-The SLH-DSA signature algorithm is defined in [FIPS 205](#NIST.FIPS.205).
+The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is defined in [FIPS Pub 205](#NIST.FIPS.205).
 
-The Stateless Hash-Based Digital Signature Algorithm (SLH-DSA) is a quantum-resistant
-digital signature scheme standardized by the NIST.  This document specifies the use of
-the SLH-DSA in CMP in the pure mode (Pure SLH-DSA) using either SHA2 or SHAKE.  Although,
-OIDs for using HashSLH-DSA are specified in {{RFC9909}}, {{RFC9814}} only specifies the
-Pure SLH-DSA for usage with [CMS](#RFC5652). Therefore, only Pure SLH-DSA signature
-algorithm OIDs are listed below.
+Two variants are defined for SLH-DSA: pure and pre-hash. The pure variant is called
+Pure SLH-DSA and the pre-hash variant is called HashSLH-DSA. This document specifies the use
+of the Pure SLH-DSA.  The use of HashSLH-DSA is not specified in this document.
 
-The Pure SLH-DSA signature algorithm using SHA2 ({{SHA2}}) is identified by the following OIDs:
+The Pure SLH-DSA signature algorithm using SHA2 is identified by the following OIDs:
 
 ~~~~ asn.1
    id-slh-dsa-sha2-128s OBJECT IDENTIFIER ::= {
@@ -685,7 +684,7 @@ The Pure SLH-DSA signature algorithm using SHA2 ({{SHA2}}) is identified by the 
       gov(101) csor(3) sigAlg(4) 25 }
 ~~~~
 
-The Pure SLH-DSA signature algorithm using SHAKE ({{SHA3-SHAKE}}) is identified by the
+The Pure SLH-DSA signature algorithm using SHAKE is identified by the
 following OIDs:
 
 ~~~~ asn.1
@@ -712,11 +711,37 @@ following OIDs:
 Specific conventions to be considered are specified in {{RFC9909}} and {{RFC9814}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm
-used to calculate the certHash in the certConf messages MUST be the hash function
+used to calculate the certHash in the certConf messages MUST be the digestAlgorithm
 used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
+
 
 ## FN-DSA {#FN-DSA}
 
+The Fast-Fourier Transform over NTRU-Lattice-Based Digital Signature Algorithm (FN-DSA)
+is defined in [FIPS Pub 206](#NIST.FIPS.206).
+
+Two variants are defined for FN-DSA: pure and pre-hash. The pure variant is called
+Pure FN-DSA and the pre-hash variant is called HashFN-DSA. This document specifies the use
+of the FN-DSA.  The use of HashSLH-DSA is not specified in this document.
+
+The FN-DSA signature algorithm using SHA2  is identified by the following OIDs:
+
+~~~~ asn.1
+   id-fn-dsa-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) TBD1 }
+   id-fn-dsa-1024 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) sigAlgs(3) TBD2 }
+~~~~
+
+Specific conventions to be considered are specified in {{I-D.ietf-lamps-fn-dsa-certificates}}
+and {{I-D.ietf-lamps-cms-fn-dsa}}.
+
+Note: If the hashAlg field in a certConf message is not present the hash algorithm
+used to calculate the certHash in the certConf messages MUST be SHA-512.
+
+ToDo: Verify and align with the use in CMS. Potentially change to SHAKE256.
 
 
 # Key Management Algorithms {#KeyMan}
