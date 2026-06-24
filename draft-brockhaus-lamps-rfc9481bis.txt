@@ -1992,6 +1992,10 @@ Acknowledgements
    feedback to this document.  Apologies to all not mentioned reviewers
    and supporters.
 
+   Adding post-quantum cryptographic algorithms to this document was
+   partly funded by the German Federal Ministry of Education and
+   Research in the project Quoryptan through grant number 16KIS2033.
+
 Authors' Addresses
 
    Hendrik Brockhaus
