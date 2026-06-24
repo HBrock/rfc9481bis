@@ -375,7 +375,7 @@ Signature values are located in the:
 
 ## RSA {#RSASig}
 
-The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is defined
+The RSA (RSASSA-PSS and PKCS #1 version 1.5) signature algorithm is defined
 in {{RFC8017}}.
 
 The signature algorithm RSASAA-PSS used with SHA2 or SHA3 message digest
@@ -406,7 +406,7 @@ is identified by the following OIDs:
 Specific conventions to be considered are specified in {{RFC8692}}, {{RFC5756}},
 and {{ RFC8702}}.
 
-The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message digest
+The signature algorithm PKCS #1 version 1.5 used with SHA2 message digest
 algorithms is identified by the following OIDs:
 
 ~~~~ asn.1
@@ -422,7 +422,7 @@ algorithms is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC4055}} and {{RFC5754}}.
 
-The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message digest
+The signature algorithm PKCS #1 version 1.5 used with SHA3 message digest
 algorithms is identified by the following OIDs:
 
 ~~~~ asn.1
@@ -543,10 +543,10 @@ digest algorithms is identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC8410}} and {{RFC8419}}.
 
-Note: The hash algorithm used to calculate the certHash in the certConf
-messages MUST be SHA-512 if the certificate to be confirmed has been
-signed using Ed25519 or SHAKE256 if the certificate to be
-confirmed has been signed using Ed448.
+Note: If the hashAlg field in a certConf message is not present the hash algorithm
+used to calculate the certHash in certConf messages MUST be SHA-512 if the certificate
+to be confirmed has been signed using Ed25519 or SHAKE256 with d=512 if the certificate
+to be confirmed has been signed using Ed448.
 
 
 ## ML-DSA {#ML-DSA}
@@ -576,7 +576,7 @@ The signature algorithm ML-DSA is identified by the following OIDs:
 Specific conventions to be considered are specified in {{RFC9881}} and {{RFC9882}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm
-used to calculate the certHash in the certConf messages MUST be SHA-512.
+used to calculate the certHash in certConf messages MUST be SHA-512.
 
 ## Composite ML-DSA {#C-ML-DSA}
 
@@ -650,7 +650,7 @@ Specific conventions to be considered are specified in {{I-D.ietf-lamps-pq-compo
 and {{I-D.ietf-lamps-cms-composite-sigs}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm used to
-calculate the certHash in the certConf messages MUST be the Pre-Hash function (PH) as specified
+calculate the certHash in certConf messages MUST be the Pre-Hash function (PH) as specified
 in {{I-D.ietf-lamps-pq-composite-sigs}} for the respective OID.
 
 ## SLH-DSA {#SLH-DSA}
@@ -711,7 +711,7 @@ following OIDs:
 Specific conventions to be considered are specified in {{RFC9909}} and {{RFC9814}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm
-used to calculate the certHash in the certConf messages MUST be the digestAlgorithm
+used to calculate the certHash in certConf messages MUST be the digestAlgorithm
 used in the SLH-DSA tree, see {{Section 4 of RFC9814}}.
 
 
@@ -739,7 +739,7 @@ Specific conventions to be considered are specified in {{I-D.ietf-lamps-fn-dsa-c
 and {{I-D.ietf-lamps-cms-fn-dsa}}.
 
 Note: If the hashAlg field in a certConf message is not present the hash algorithm
-used to calculate the certHash in the certConf messages MUST be SHA-512.
+used to calculate the certHash in certConf messages MUST be SHA-512.
 
 ToDo: Verify and align with the use in CMS. Potentially change to SHAKE256.
 
@@ -747,20 +747,19 @@ ToDo: Verify and align with the use in CMS. Potentially change to SHAKE256.
 # Key Management Algorithms {#KeyMan}
 
 CMP utilizes the following general key management techniques: key agreement,
-key transport, and passwords.
+key transport, key encapsulation, and passwords.
 
 [CRMF](#RFC4211) and [CMP](#RFC9810) promote the use of
 [CMS EnvelopedData](#RFC5652) by deprecating the use of EncryptedValue.
 
 ## Key Agreement Algorithms {#KeyAgree}
 
-The key agreement algorithm is referred to as PROT_ENC_ALG in [CMP]
-{{Appendices C and D of RFC9810}} and as KM_KA_ALG in the [Lightweight
-CMP Profile](#RFC9483) and {{AlgProf}}.
+The key agreement algorithm is referred to as PROT_ENC_ALG in
+{{Appendices C and D of RFC9810}}, as KM_KA_ALG in the [Lightweight
+CMP Profile](#RFC9483), and {{AlgProf}}.
 
-Key agreement algorithms are only used in CMP when using [CMS
-EnvelopedData](#RFC5652) together with the key agreement key management
-technique. When a key agreement
+Key agreement algorithms are only used in CMP when using [CMS EnvelopedData](#RFC5652)
+together with the key agreement key management technique. When a key agreement
 algorithm is used, a key-encryption algorithm ({{SymKeyEnc}}) is needed next to the
 content-encryption algorithm ({{Enc}}).
 
@@ -799,13 +798,14 @@ Specific conventions to be considered are specified in {{Section 4.1 of RFC3370}
 ### ECDH {#ECDH}
 
 The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-{{RFC5753}} and SHALL be used in the ephemeral-static variant, as
-specified in {{RFC5753}}, or the 1-Pass Elliptic Curve
-Menezes-Qu-Vanstone (ECMQV) variant, as specified in
-{{RFC5753}}. Static-static variants SHALL NOT be used.
+{#RFC5753} and SHALL be used in the
+ephemeral-static variant, as specified in {{Section 3.1 of RFC5753}},
+or the 1-Pass Elliptic Curve Menezes-Qu-Vanstone (ECMQV) variant, as
+specified in {{Section 3.2 of RFC5753}}. Static-static variants SHALL
+NOT be used.
 
 The ECDH key agreement algorithm used together with NIST-recommended SECP
-curves are identified by the following OIDs:
+curves, see {{ECDSA}}, are identified by the following OIDs:
 
 ~~~~ asn.1
    dhSinglePass-stdDH-sha224kdf-scheme OBJECT IDENTIFIER ::= { iso(1)
@@ -838,22 +838,6 @@ curves are identified by the following OIDs:
       identified-organization(3) certicom(132) schemes(1) 15(15) 3 }
 ~~~~
 
-As specified in {{RFC5480}}, the NIST-recommended SECP curves are
-identified by the following OIDs:
-
-~~~~ asn.1
-   secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
-      us(840) ansi-X9-62(10045) curves(3) prime(1) 1 }
-   secp224r1 OBJECT IDENTIFIER ::= { iso(1)
-      identified-organization(3) certicom(132) curve(0) 33 }
-   secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
-      us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }
-   secp384r1 OBJECT IDENTIFIER ::= { iso(1)
-      identified-organization(3) certicom(132) curve(0) 34 }
-   secp521r1 OBJECT IDENTIFIER ::= { iso(1)
-      identified-organization(3) certicom(132) curve(0) 35 }
-~~~~
-
 Specific conventions to be considered are specified in {{RFC5753}}.
 
 The ECDH key agreement algorithm used together with curve25519 or curve448
@@ -867,7 +851,6 @@ is identified by the following OIDs:
 ~~~~
 
 Specific conventions to be considered are specified in {{RFC8418}}.
-
 
 
 ## Key Transport Algorithms {#KeyTrans}
@@ -1008,9 +991,8 @@ Key derivation algorithm identifiers are located in the:
 
 * keyDerivationAlgorithm field of PasswordRecipientInfo.
 
-When using the KEM-based key management technique with
-EnvelopedData together with
-PKIProtection based on the message authentication code (MAC), the salt
+When using the KEM-based key management technique with EnvelopedData together
+with PKIProtection based on the message authentication code (MAC), the salt
 for the password-based MAC and key derivation function (KDF) must be
 chosen independently to ensure usage of independent symmetric keys.
 
