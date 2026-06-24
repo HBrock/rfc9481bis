@@ -754,6 +754,9 @@ key transport, key encapsulation, and passwords.
 
 ## Key Agreement Algorithms {#KeyAgree}
 
+This section provides references to object identifiers and conventions for key
+agreement algorithms to be employed by CMP implementations.
+
 The key agreement algorithm is referred to as PROT_ENC_ALG in
 {{Appendices C and D of RFC9810}}, as KM_KA_ALG in the [Lightweight
 CMP Profile](#RFC9483), and {{AlgProf}}.
@@ -798,7 +801,7 @@ Specific conventions to be considered are specified in {{Section 4.1 of RFC3370}
 ### ECDH {#ECDH}
 
 The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-{#RFC5753} and SHALL be used in the
+{{RFC5753}} and SHALL be used in the
 ephemeral-static variant, as specified in {{Section 3.1 of RFC5753}},
 or the 1-Pass Elliptic Curve Menezes-Qu-Vanstone (ECMQV) variant, as
 specified in {{Section 3.2 of RFC5753}}. Static-static variants SHALL
@@ -855,6 +858,9 @@ Specific conventions to be considered are specified in {{RFC8418}}.
 
 ## Key Transport Algorithms {#KeyTrans}
 
+This section provides references to object identifiers and conventions for key
+transport algorithms to be employed by CMP implementations.
+
 The key transport algorithm is also referred to as PROT_ENC_ALG in
 [CMP]{{Appendices C and D of RFC9810}} and as KM_KT_ALG in the [Lightweight
 CMP Profile](#RFC9483) and {{AlgProf}}.
@@ -895,6 +901,9 @@ Further conventions to be considered for PKCS #1 v1.5 are specified in
 
 ## Key Encapsulation Mechanism {#KEM}
 
+This section provides references to object identifiers and conventions for key
+encapsulation mechanism algorithms to be employed by CMP implementations.
+
 The key encapsulation mechanism algorithm identifiers are located in the:
 
 * kem field of KemCiphertextInfo and KEMRecipientInfo
@@ -925,6 +934,9 @@ ToDo FrodoKEM
 
 
 ## Symmetric Key-Encryption Algorithms {#SymKeyEnc}
+
+This section provides references to object identifiers and conventions for
+symmetric key-encryption algorithms to be employed by CMP implementations.
 
 The symmetric key-encryption algorithm is also referred to as
 KM_KW_ALG in {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
@@ -978,6 +990,9 @@ Further conventions to be considered for AES key wrap are specified in
 
 ## Key Derivation Algorithms {#KDF}
 
+This section provides references to object identifiers and conventions for key
+derivation algorithms to be employed by CMP implementations.
+
 The key derivation algorithm is also referred to as KM_KD_ALG in
 {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
 
@@ -985,7 +1000,7 @@ Key derivation algorithms are only used in [CMP](#RFC9810) when using CMS
 EnvelopedData together with the password-based key management technique
 [CMS Password Recipient Info](#RFC5652) or together with [CMS KEM Recipient Info] (#RFC9629).
 
-### Key Derivation with PasswordRecipientInfo
+### Key Derivation with Password Recipient Info
 
 Key derivation algorithm identifiers are located in the:
 
@@ -1010,7 +1025,7 @@ PBKDF2 has the algorithm identifier:
 Further conventions to be considered for PBKDF2 are specified in
 {{Section 4.4.1 of RFC3370}} and {{Section 5.2 of RFC8018}}.
 
-### Key Derivation with KEMRecipientInfo
+### Key Derivation with KEM Recipient Info
 
 Key derivation algorithm identifiers are located in the:
 
@@ -1032,6 +1047,9 @@ see RFC 9688
 
 
 # Content-Encryption Algorithms {#Enc}
+
+This section provides references to object identifiers and conventions for
+content-encryption algorithms to be employed by CMP implementations.
 
 The content-encryption algorithm is also referred to as PROT_SYM_ALG
 in [CMP]{{Appendices C and D of RFC9810}}, in the [Lightweight CMP Profile](#RFC9483),
@@ -1077,6 +1095,9 @@ specified in {{RFC3565}}.
 
 
 # Message Authentication Code Algorithms {#MAC}
+
+This section provides references to object identifiers and conventions for
+message authentication code algorithms to be employed by CMP implementations.
 
 The message authentication code (MAC) is either used for shared secret-based
 CMP message protection or together with the password-based key derivation
