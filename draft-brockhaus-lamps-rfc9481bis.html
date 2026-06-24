@@ -2126,11 +2126,11 @@ management technique.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 </div>
 <p id="section-4.2.1-6">Specific conventions to be considered for PKCS #1 v1.5 are specified in
 <span>[<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and for RSAES-OAEP in <span>[<a href="#RFC3560" class="cite xref">RFC3560</a>]</span>.<a href="#section-4.2.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.2.1-7">For using RSA as key encapsulation mechanism algorithm please refer to <a href="#RSA-KEM" class="auto internal xref">Section 4.3.1</a>.
-For backward compatibility, implementations <span class="bcp14">MAY</span> also support the RSA-KEM sd key transport
+<p id="section-4.2.1-7">For using RSA as key encapsolation mechanism algorithm please refer to <a href="#RSA-KEM" class="auto internal xref">Section 4.3.1</a>.
+For backward compatibility, implementations <span class="bcp14">MAY</span> also support the RSA-KEM as key transport
 algorithm, identified by id-rsa-kem-spki, which uses KeyTransRecipientInfo as specified
-in <span>[<a href="#RFC5990" class="cite xref">RFC5990</a>]</span>. To avoid confusion with id‑kem‑rsa, see <a href="#RSA-KEM" class="auto internal xref">Section 4.3.1</a>, id‑rsa‑kem‑spki is
-introduced as an alias for id-rsa-kem.<a href="#section-4.2.1-7" class="pilcrow">¶</a></p>
+in <span>[<a href="#RFC5990" class="cite xref">RFC5990</a>]</span> and <span>[<a href="#RFC9690" class="cite xref">RFC9690</a>]</span>. To avoid confusion with id‑kem‑rsa, see <a href="#RSA-KEM" class="auto internal xref">Section 4.3.1</a>,
+id‑rsa‑kem‑spki is introduced as an alias for id-rsa-kem.<a href="#section-4.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-4.2.1-8">The algorithm identifier for RSA-KEM with KeyTransRecipientInfo is:<a href="#section-4.2.1-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4.2.1-9">
 <pre>

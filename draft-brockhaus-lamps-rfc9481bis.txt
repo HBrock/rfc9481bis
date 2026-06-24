@@ -831,12 +831,13 @@ Table of Contents
    Specific conventions to be considered for PKCS #1 v1.5 are specified
    in [RFC3370] and for RSAES-OAEP in [RFC3560].
 
-   For using RSA as key encapsulation mechanism algorithm please refer
+   For using RSA as key encapsolation mechanism algorithm please refer
    to Section 4.3.1.  For backward compatibility, implementations MAY
-   also support the RSA-KEM sd key transport algorithm, identified by
+   also support the RSA-KEM as key transport algorithm, identified by
    id-rsa-kem-spki, which uses KeyTransRecipientInfo as specified in
-   [RFC5990].  To avoid confusion with id-kem-rsa, see Section 4.3.1,
-   id-rsa-kem-spki is introduced as an alias for id-rsa-kem.
+   [RFC5990] and [RFC9690].  To avoid confusion with id-kem-rsa, see
+   Section 4.3.1, id-rsa-kem-spki is introduced as an alias for id-rsa-
+   kem.
 
    The algorithm identifier for RSA-KEM with KeyTransRecipientInfo is:
 
