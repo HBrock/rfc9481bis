@@ -831,11 +831,34 @@ Table of Contents
    Specific conventions to be considered for PKCS #1 v1.5 are specified
    in [RFC3370] and for RSAES-OAEP in [RFC3560].
 
+   For using RSA as key encapsulation mechanism algorithm please refer
+   to Section 4.3.1.  For backward compatibility, implementations MAY
+   also support the RSA-KEM sd key transport algorithm, identified by
+   id-rsa-kem-spki, which uses KeyTransRecipientInfo as specified in
+   [RFC5990].  To avoid confusion with id-kem-rsa, see Section 4.3.1,
+   id-rsa-kem-spki is introduced as an alias for id-rsa-kem.
+
+   The algorithm identifier for RSA-KEM with KeyTransRecipientInfo is:
+
+      id-rsa-kem-spki OID ::= { iso(1) member-body(2) us(840) rsadsi(113549)
+         pkcs(1) pkcs-9(9) smime(16) alg(3) 14 }
+
+   Specific conventions to be considered are specified in [RFC5990] and
+   [RFC9690].
+
 4.3.  Key Encapsulation Mechanism
 
    This section provides references to object identifiers and
    conventions for key encapsulation mechanism algorithms to be employed
    by CMP implementations.
+
+   In CMS KEM Recipient Info [RFC9629], the shared-secret value is input
+   to a key derivation function (KDF), Section 4.5.2, to compute a key-
+   encryption key and wrap, Section 4.4, a symmetric content-encryption
+   key with the key-encryption key.  In this way, both sides end up with
+   the same symmetric key to be used in CMP for MAC-based protection or
+   to encrypt a certificate, a private key, a POP challenge, or a
+   revocation passphrase.
 
    The key encapsulation mechanism algorithm identifiers are located in
    the:
@@ -850,19 +873,30 @@ Table of Contents
 
 4.3.1.  RSA-KEM
 
-   ToDo RSA-KEM
+   The RSA Key Encapsulation Mechanism (RSA-KEM) algorithm is the RSA
+   encryption scheme defined in ISO/IEC: 18033-2:2006 [ISO.18033-2].
+
+   The algorithm identifier for RSA-KEM is:
+
+      id-kem-rsa OID ::= { iso(1) standard(0) is18033(18033) part2(2)
+         key-encapsulation-mechanism(2) 4 }
+
+   Specific conventions to be considered are specified in [RFC9690].
 
 4.3.2.  ML-KEM
 
-   ToDo ML-KEM
+   FIPS Pub 203 [NIST.FIPS.203], [I-D.ietf-lamps-kyber-certificates],
+   and [I-D.ietf-lamps-cms-kyber]
 
 4.3.3.  Composite ML-KEM
 
-   ToDo Composite KEM
+   [I-D.ietf-lamps-pq-composite-kem] and
+   [I-D.ietf-lamps-cms-composite-kem]
 
 4.3.4.  FrodoKEM
 
-   ToDo FrodoKEM
+   [I-D.longa-cfrg-frodokem], [I-D.smyslov-lamps-frodokem-certificates],
+   and [I-D.chen-lamps-cms-frodokem]
 
 4.4.  Symmetric Key-Encryption Algorithms
 
@@ -876,7 +910,7 @@ Table of Contents
    As the symmetric key-encryption key management technique is not used
    by CMP, the symmetric key-encryption algorithm is only needed when
    using the key agreement, password, or KEM-based key management
-   technique with CMS [RFC5652][RFC9629] EnvelopedData.
+   technique with CMS EnvelopedData [RFC5652][RFC9629].
 
    Key wrap algorithm identifiers are located in the:
 
@@ -962,15 +996,15 @@ Table of Contents
 
 4.5.2.1.  HKDF with SHA2 and SHA3
 
-   see RFC 8619 , RFC 9709 , and RFC 9688
+   [RFC8619], [RFC9709], and [RFC9688]
 
 4.5.2.2.  KMAC128 and KMAC256 as KDF
 
-   see RFC 9688
+   [RFC9688]
 
 4.5.2.3.  KDF2 and KDF3 with SHA3
 
-   see RFC 9688
+   [RFC9688]
 
 5.  Content-Encryption Algorithms
 
@@ -1583,6 +1617,13 @@ Table of Contents
               00, 20 May 2026, <https://datatracker.ietf.org/doc/html/
               draft-ietf-lamps-cms-fn-dsa-00>.
 
+   [I-D.ietf-lamps-cms-kyber]
+              Prat, J., Ounsworth, M., and D. Van Geest, "Use of ML-KEM
+              in the Cryptographic Message Syntax (CMS)", Work in
+              Progress, Internet-Draft, draft-ietf-lamps-cms-kyber-13,
+              23 September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-cms-kyber-13>.
+
    [I-D.ietf-lamps-fn-dsa-certificates]
               Massimo, J., Kampanakis, P., Turner, S., and B.
               Westerbaan, "Internet X.509 Public Key Infrastructure --
@@ -1592,6 +1633,15 @@ Table of Contents
               certificates-00, 20 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
               fn-dsa-certificates-00>.
+
+   [I-D.ietf-lamps-kyber-certificates]
+              Turner, S., Kampanakis, P., Massimo, J., and B.
+              Westerbaan, "Internet X.509 Public Key Infrastructure -
+              Algorithm Identifiers for the Module-Lattice-Based Key-
+              Encapsulation Mechanism (ML-KEM)", Work in Progress,
+              Internet-Draft, draft-ietf-lamps-kyber-certificates-11, 22
+              July 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-kyber-certificates-11>.
 
    [I-D.ietf-lamps-pq-composite-kem]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
@@ -1626,6 +1676,11 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-smyslov-
               lamps-frodokem-certificates-01>.
 
+   [ISO.18033-2]
+              ISO/IEC, "Information technology -- Security techniques --
+              Encryption algorithms -- Part 2: Asymmetric ciphers", May
+              2006, <https://www.iso.org/standard/37971.html>.
+
    [NIST.FIPS.180-4]
               "Secure hash standard", National Institute of Standards
               and Technology (U.S.), DOI 10.6028/nist.fips.180-4, 2015,
@@ -1657,17 +1712,26 @@ Table of Contents
               <https://doi.org/10.6028/nist.fips.202>.  NIST Federal
               Information Processing Standards Publications 202
 
+   [NIST.FIPS.203]
+              "Module-lattice-based key-encapsulation mechanism
+              standard", National Institute of Standards and Technology
+              (U.S.), DOI 10.6028/nist.fips.203, August 2024,
+              <https://doi.org/10.6028/nist.fips.203>.  NIST Federal
+              Information Processing Standards Publications 203
+
    [NIST.FIPS.204]
-              NIST, "Module-Lattice-Based Digital Signature Standard",
-              NIST DOI 10.6028/nist.fips.204, August 2024,
-              <https://nvlpubs.nist.gov/nistpubs/FIPS/
-              NIST.FIPS.204.pdf>.
+              "Module-lattice-based digital signature standard",
+              National Institute of Standards and Technology (U.S.),
+              DOI 10.6028/nist.fips.204, August 2024,
+              <https://doi.org/10.6028/nist.fips.204>.  NIST Federal
+              Information Processing Standards Publications 204
 
    [NIST.FIPS.205]
-              NIST, "Stateless Hash-Based Digital Signature Standard",
-              NIST DOI 10.6028/nist.fips.205, August 2024,
-              <https://nvlpubs.nist.gov/nistpubs/FIPS/
-              NIST.FIPS.205.pdf>.
+              "Stateless hash-based digital signature standard",
+              National Institute of Standards and Technology (U.S.),
+              DOI 10.6028/nist.fips.205, August 2024,
+              <https://doi.org/10.6028/nist.fips.205>.  NIST Federal
+              Information Processing Standards Publications 205
 
    [NIST.FIPS.206]
               NIST, "Fast Fourier Transform over NTRU-Lattice-Based
@@ -1697,6 +1761,14 @@ Table of Contents
               DOI 10.6028/nist.sp.800-186, February 2023,
               <https://doi.org/10.6028/nist.sp.800-186>.  NIST Special
               Publications (General) 800-186
+
+   [NIST.SP.800-227]
+              Alagic, G., Barker, E., Chen, L., Moody, D., Robinson, A.,
+              Silberg, H., and N. Waller, "Recommendations for key-
+              encapsulation mechanisms", National Institute of Standards
+              and Technology (U.S.), DOI 10.6028/nist.sp.800-227,
+              September 2025, <https://doi.org/10.6028/nist.sp.800-227>.
+              NIST Special Publications (General) 800-227
 
    [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
               Hashing for Message Authentication", RFC 2104,
@@ -1832,6 +1904,11 @@ Table of Contents
               Message Specification", RFC 8551, DOI 10.17487/RFC8551,
               April 2019, <https://www.rfc-editor.org/rfc/rfc8551>.
 
+   [RFC8619]  Housley, R., "Algorithm Identifiers for the HMAC-based
+              Extract-and-Expand Key Derivation Function (HKDF)",
+              RFC 8619, DOI 10.17487/RFC8619, June 2019,
+              <https://www.rfc-editor.org/rfc/rfc8619>.
+
    [RFC8692]  Kampanakis, P. and Q. Dang, "Internet X.509 Public Key
               Infrastructure: Additional Algorithm Identifiers for
               RSASSA-PSS and ECDSA Using SHAKEs", RFC 8692,
@@ -1874,6 +1951,11 @@ Table of Contents
               in the Cryptographic Message Syntax (CMS)", RFC 9690,
               DOI 10.17487/RFC9690, February 2025,
               <https://www.rfc-editor.org/rfc/rfc9690>.
+
+   [RFC9709]  Housley, R., "Encryption Key Derivation in the
+              Cryptographic Message Syntax (CMS) Using HKDF with SHA-
+              256", RFC 9709, DOI 10.17487/RFC9709, January 2025,
+              <https://www.rfc-editor.org/rfc/rfc9709>.
 
    [RFC9810]  Brockhaus, H., von Oheimb, D., Ounsworth, M., and J. Gray,
               "Internet X.509 Public Key Infrastructure -- Certificate
@@ -1960,6 +2042,12 @@ Table of Contents
               DOI 10.17487/RFC4210, September 2005,
               <https://www.rfc-editor.org/rfc/rfc4210>.
 
+   [RFC5990]  Randall, J., Kaliski, B., Brainard, J., and S. Turner,
+              "Use of the RSA-KEM Key Transport Algorithm in the
+              Cryptographic Message Syntax (CMS)", RFC 5990,
+              DOI 10.17487/RFC5990, September 2010,
+              <https://www.rfc-editor.org/rfc/rfc5990>.
+
    [RFC9481]  Brockhaus, H., Aschauer, H., Ounsworth, M., and J. Gray,
               "Certificate Management Protocol (CMP) Algorithms",
               RFC 9481, DOI 10.17487/RFC9481, November 2023,
@@ -1974,13 +2062,13 @@ Appendix A.  History of Changes
 
    *  Added SHA3 to Sections 2.2, 3.1, 3.2, and 4.2.1
 
-   *  Added ML-DSA, Composite ML-DSA, and SLH-DSA to Section 3
+   *  Added ML-DSA, Composite ML-DSA, SLH-DSA, and FN-DSA to Section 3
 
    *  Added new Section 4.3 for Key Encapsulation Mechanisms containing
-      RSA-KEM, ML-KEM, and Composite ML-KEM
+      RSA-KEM, ML-KEM, Composite ML-KEM, and FrodoKEM
 
    *  Updated Section 4.5 and added Section 4.5.1 on Key Derivation with
-      KEMRecipientInfo containing HKDF, KMAC128 and KDF256 as KDF, and
+      KEM Recipient Info containing HKDF, KMAC128 and KDF256 as KDF, and
       KDF2 and KDF3
 
    *  Added SHA3-based HAMAC to Section 6.2
