@@ -1528,3 +1528,7 @@ draft-brockhaus-lamps-rfc9481bis version 00:
 
 May thanks also to all reviewers like ... for their input and feedback to this
 document. Apologies to all not mentioned reviewers and supporters.
+
+Adding post-quantum cryptographic algorithms to this document was partly funded
+by the German Federal Ministry of Education and Research in the project Quoryptan
+through grant number 16KIS2033.
