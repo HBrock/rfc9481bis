@@ -7,8 +7,8 @@ Internet-Draft                                               H. Aschauer
 Obsoletes: 9481 (if approved)                                    Siemens
 Updates: 9810 (if approved)                                 M. Ounsworth
 Intended status: Standards Track                                 J. Gray
-Expires: 20 December 2026                                        Entrust
-                                                            18 June 2026
+Expires: 26 December 2026                                        Entrust
+                                                            24 June 2026
 
 
             Certificate Management Protocol (CMP) Algorithms
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 December 2026.
+   This Internet-Draft will expire on 26 December 2026.
 
 Copyright Notice
 
@@ -326,7 +326,7 @@ Table of Contents
 
 3.1.  RSA
 
-   The RSA (RSASSA-PSS and RSASSA-PKCS1-v1_5) signature algorithm is
+   The RSA (RSASSA-PSS and PKCS #1 version 1.5) signature algorithm is
    defined in [RFC8017].
 
    The signature algorithm RSASAA-PSS used with SHA2 or SHA3 message
@@ -354,7 +354,7 @@ Table of Contents
    Specific conventions to be considered are specified in [RFC8692],
    [RFC5756], and [RFC8702].
 
-   The signature algorithm RSASSA-PKCS1-v1_5 used with SHA2 message
+   The signature algorithm PKCS #1 version 1.5 used with SHA2 message
    digest algorithms is identified by the following OIDs:
 
       sha224WithRSAEncryption OBJECT IDENTIFIER ::= { iso(1)
@@ -369,7 +369,7 @@ Table of Contents
    Specific conventions to be considered are specified in [RFC4055] and
    [RFC5754].
 
-   The signature algorithm RSASSA-PKCS1-v1_5 used with SHA3 message
+   The signature algorithm PKCS #1 version 1.5 used with SHA3 message
    digest algorithms is identified by the following OIDs:
 
       id-rsassa-pkcs1-v1-5-with-sha3-224 OBJECT IDENTIFIER ::= {
@@ -481,9 +481,10 @@ Table of Contents
    Specific conventions to be considered are specified in [RFC8410] and
    [RFC8419].
 
-   Note: The hash algorithm used to calculate the certHash in the
-   certConf messages MUST be SHA-512 if the certificate to be confirmed
-   has been signed using Ed25519 or SHAKE256 if the certificate to be
+   Note: If the hashAlg field in a certConf message is not present the
+   hash algorithm used to calculate the certHash in certConf messages
+   MUST be SHA-512 if the certificate to be confirmed has been signed
+   using Ed25519 or SHAKE256 with d=512 if the certificate to be
    confirmed has been signed using Ed448.
 
 3.4.  ML-DSA
@@ -514,8 +515,8 @@ Table of Contents
    [RFC9882].
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash in the certConf
-   messages MUST be SHA-512.
+   hash algorithm used to calculate the certHash in certConf messages
+   MUST be SHA-512.
 
 3.5.  Composite ML-DSA
 
@@ -592,8 +593,8 @@ Table of Contents
    [I-D.ietf-lamps-cms-composite-sigs].
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash in the certConf
-   messages MUST be the Pre-Hash function (PH) as specified in
+   hash algorithm used to calculate the certHash in certConf messages
+   MUST be the Pre-Hash function (PH) as specified in
    [I-D.ietf-lamps-pq-composite-sigs] for the respective OID.
 
 3.6.  SLH-DSA
@@ -654,9 +655,9 @@ Table of Contents
    [RFC9814].
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash in the certConf
-   messages MUST be the digestAlgorithm used in the SLH-DSA tree, see
-   Section 4 of [RFC9814].
+   hash algorithm used to calculate the certHash in certConf messages
+   MUST be the digestAlgorithm used in the SLH-DSA tree, see Section 4
+   of [RFC9814].
 
 3.7.  FN-DSA
 
@@ -682,8 +683,8 @@ Table of Contents
    [I-D.ietf-lamps-fn-dsa-certificates] and [I-D.ietf-lamps-cms-fn-dsa].
 
    Note: If the hashAlg field in a certConf message is not present the
-   hash algorithm used to calculate the certHash in the certConf
-   messages MUST be SHA-512.
+   hash algorithm used to calculate the certHash in certConf messages
+   MUST be SHA-512.
 
    ToDo: Verify and align with the use in CMS.  Potentially change to
    SHAKE256.
@@ -691,16 +692,16 @@ Table of Contents
 4.  Key Management Algorithms
 
    CMP utilizes the following general key management techniques: key
-   agreement, key transport, and passwords.
+   agreement, key transport, key encapsulation, and passwords.
 
    CRMF [RFC4211] and CMP [RFC9810] promote the use of CMS EnvelopedData
    [RFC5652] by deprecating the use of EncryptedValue.
 
 4.1.  Key Agreement Algorithms
 
-   The key agreement algorithm is referred to as PROT_ENC_ALG in [CMP]
-   Appendices C and D of [RFC9810] and as KM_KA_ALG in the Lightweight
-   CMP Profile [RFC9483] and Section 7.
+   The key agreement algorithm is referred to as PROT_ENC_ALG in
+   Appendices C and D of [RFC9810], as KM_KA_ALG in the Lightweight CMP
+   Profile [RFC9483], and Section 7.
 
    Key agreement algorithms are only used in CMP when using CMS
    EnvelopedData [RFC5652] together with the key agreement key
@@ -738,13 +739,13 @@ Table of Contents
 4.1.2.  ECDH
 
    The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-   [RFC5753] and SHALL be used in the ephemeral-static variant, as
-   specified in [RFC5753], or the 1-Pass Elliptic Curve Menezes-Qu-
-   Vanstone (ECMQV) variant, as specified in [RFC5753].  Static-static
-   variants SHALL NOT be used.
+   {#RFC5753} and SHALL be used in the ephemeral-static variant, as
+   specified in Section 3.1 of [RFC5753], or the 1-Pass Elliptic Curve
+   Menezes-Qu-Vanstone (ECMQV) variant, as specified in Section 3.2 of
+   [RFC5753].  Static-static variants SHALL NOT be used.
 
    The ECDH key agreement algorithm used together with NIST-recommended
-   SECP curves are identified by the following OIDs:
+   SECP curves, see Section 3.2, are identified by the following OIDs:
 
       dhSinglePass-stdDH-sha224kdf-scheme OBJECT IDENTIFIER ::= { iso(1)
          identified-organization(3) certicom(132) schemes(1) 11(11) 0 }
@@ -774,20 +775,6 @@ Table of Contents
          identified-organization(3) certicom(132) schemes(1) 15(15) 2 }
       mqvSinglePass-sha512kdf-scheme OBJECT IDENTIFIER ::= { iso(1)
          identified-organization(3) certicom(132) schemes(1) 15(15) 3 }
-
-   As specified in [RFC5480], the NIST-recommended SECP curves are
-   identified by the following OIDs:
-
-      secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
-         us(840) ansi-X9-62(10045) curves(3) prime(1) 1 }
-      secp224r1 OBJECT IDENTIFIER ::= { iso(1)
-         identified-organization(3) certicom(132) curve(0) 33 }
-      secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
-         us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }
-      secp384r1 OBJECT IDENTIFIER ::= { iso(1)
-         identified-organization(3) certicom(132) curve(0) 34 }
-      secp521r1 OBJECT IDENTIFIER ::= { iso(1)
-         identified-organization(3) certicom(132) curve(0) 35 }
 
    Specific conventions to be considered are specified in [RFC5753].
 
@@ -1608,9 +1595,9 @@ Table of Contents
               Longa, P., Bos, J. W., Ehlen, S., and D. Stebila,
               "FrodoKEM: key encapsulation from learning with errors",
               Work in Progress, Internet-Draft, draft-longa-cfrg-
-              frodokem-02, 18 March 2026,
+              frodokem-03, 22 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-longa-cfrg-
-              frodokem-02>.
+              frodokem-03>.
 
    [I-D.smyslov-lamps-frodokem-certificates]
               Smyslov, V., "Internet X.509 Public Key Infrastructure -
@@ -1898,7 +1885,11 @@ Table of Contents
               DOI 10.17487/RFC9936, March 2026,
               <https://www.rfc-editor.org/rfc/rfc9936>.
 
-   [RFC9986]  "*** BROKEN REFERENCE ***".
+   [RFC9986]  DeKok, A., Jethanandani, M., Agarwal, S., Mishra, A., and
+              J. Haas, "Meticulous Keyed ISAAC for Bidirectional
+              Forwarding Detection (BFD) Optimized Authentication",
+              RFC 9986, DOI 10.17487/RFC9986, June 2026,
+              <https://www.rfc-editor.org/rfc/rfc9986>.
 
 10.2.  Informative References
 
