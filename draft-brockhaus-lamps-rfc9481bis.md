@@ -122,6 +122,9 @@ normative:
   NIST.SP.800-38d:
     =: DOI.10.6028/NIST.SP.800-38d
     ann: NIST Special Publications (General) 800-38d
+  NIST.SP.800-186:
+    =: DOI.10.6028/NIST.SP.800-186
+    ann: NIST Special Publications (General) 800-186
   RFC2104:
   RFC2631:
   RFC2986:
@@ -139,6 +142,7 @@ normative:
   RFC5754:
   RFC5756:
   RFC5758:
+  RFC6033:
   RFC8017:
   RFC8018:
   RFC8032:
@@ -500,7 +504,8 @@ identified by the following OIDs:
 
 Specific conventions to be considered are specified in {{RFC9688}}.
 
-As specified in {{RFC5480}}, the NIST-recommended curves are identified by the following OIDs:
+As specified in [NIST SP 800-186](#NIST.SP.800-186) and {{RFC5480}}, the NIST-recommended
+named curves are identified by the following OIDs:
 
 ~~~~ asn.1
    secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
@@ -796,7 +801,7 @@ The DH key agreement algorithm is identified by the following OID:
       us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 5 }
 ~~~~
 
-Specific conventions to be considered are specified in {{Section 4.1 of RFC3370}}.
+Specific conventions to be considered are specified in {{RFC3370}}.
 
 
 ### ECDH {#ECDH}
@@ -807,7 +812,7 @@ specified in {{Section 3.1 of RFC5753}}, or the 1-Pass Elliptic Curve
 Menezes-Qu-Vanstone (ECMQV) variant, as specified in {{Section 3.2 of RFC5753}}.
 Static-static variants SHALL NOT be used.
 
-The ECDH key agreement algorithm used together with NIST-recommended SECP
+The ECDH key agreement algorithm used together with NIST-recommended named
 curves, see {{ECDSA}}, are identified by the following OIDs:
 
 ~~~~ asn.1
@@ -896,8 +901,8 @@ The algorithm identifier for RSAES-OAEP is:
       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 7 }
 ~~~~
 
-Further conventions to be considered for PKCS #1 v1.5 are specified in
-{{Section 4.2.1 of RFC3370}} and for RSAES-OAEP in {{RFC3560}}.
+Specific conventions to be considered for PKCS #1 v1.5 are specified in
+{{RFC3370}} and for RSAES-OAEP in {{RFC3560}}.
 
 ## Key Encapsulation Mechanism {#KEM}
 
@@ -913,8 +918,6 @@ Key encapsulation ciphertext is located in the:
 * ct field of KemCiphertextInfo
 
 * kemct field of KEMRecipientInfo
-
-< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 ### RSA-KEM {#RSA-KEM}
 
@@ -944,20 +947,19 @@ the [Lightweight CMP Profile](#RFC9483) as KM_KW_ALG.
 As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
 using the key agreement, password, or KEM-based key management technique
-with [CMS](#RFC5652) (#RFC9629) EnvelopedData.
+with [CMS](#RFC5652){{RFC9629}} EnvelopedData.
 
 Key wrap algorithm identifiers are located in the:
 
-* parameters field of the KeyEncryptionAlgorithmIdentifier of
-  KeyAgreeRecipientInfo, PasswordRecipientInfo, and KEMRecipientInfo.
+* keyEncryptionAlgorithm field of KeyTransRecipientInfo, KeyAgreeRecipientInfo,
+  and PasswordRecipientInfo
+
+* wrap field of KEMRecipientInfo and CMSORIforKEMOtherInfo.
 
 Wrapped content-encryption keys are located in the:
 
-* encryptedKey field of RecipientEncryptedKeys (for key agreement),
-PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo
-(for KEM).
-
-< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
+* encryptedKey field of KeyTransRecipientInfo, RecipientEncryptedKey (in
+  KeyAgreeRecipientInfo), PasswordRecipientInfo, and KEMRecipientInfo.
 
 
 ### AES Key Wrap {#AESWrap}
@@ -983,10 +985,10 @@ AES key encryption has the algorithm identifier:
 The underlying encryption functions for the key wrap and
 content-encryption algorithms (as specified in {{Enc}}) and the key
 sizes for the two algorithms MUST be the same (e.g., AES-128 key wrap
-algorithm with AES-128 content-encryption algorithm); see {{RFC8551}}.
+algorithm with AES-128 content-encryption algorithm); see {{RFC6033}}.
 
 Further conventions to be considered for AES key wrap are specified in
-{{Section 2.2 of RFC3394}} and {{Section 2.3.2 of RFC3565}}.
+{{RFC3394}} and {{RFC3565}}.
 
 ## Key Derivation Algorithms {#KDF}
 
@@ -997,16 +999,16 @@ The key derivation algorithm is referenced in {{AlgProfLWP}} and in the
 [Lightweight CMP Profile](#RFC9483) as KM_KD_ALG.
 
 Key derivation algorithms are only used in [CMP](#RFC9810) when using CMS
-EnvelopedData together with the password-based key management technique
-[CMS Password Recipient Info](#RFC5652) or together with [CMS KEM Recipient Info] (#RFC9629).
+EnvelopedData together with [CMS Password Recipient Info](#RFC5652) or
+together with [CMS KEM Recipient Info](#RFC9629).
 
-### Key Derivation with Password Recipient Info
+### Key Derivation with Password Recipient Info {#KDFPW}
 
 Key derivation algorithm identifiers are located in the:
 
 * keyDerivationAlgorithm field of PasswordRecipientInfo.
 
-When using the KEM-based key management technique with EnvelopedData together
+When using the password-based key management technique with EnvelopedData together
 with PKIProtection based on the message authentication code (MAC), the salt
 for the password-based MAC and key derivation function (KDF) must be
 chosen independently to ensure usage of independent symmetric keys.
@@ -1023,15 +1025,13 @@ PBKDF2 has the algorithm identifier:
 ~~~~
 
 Further conventions to be considered for PBKDF2 are specified in
-{{Section 4.4.1 of RFC3370}} and {{Section 5.2 of RFC8018}}.
+{{RFC3370}} and {{RFC8018}}.
 
-### Key Derivation with KEM Recipient Info
+### Key Derivation with KEM Recipient Info {#KDFKEM}
 
 Key derivation algorithm identifiers are located in the:
 
 * kdf field of KemBMParameter and KEMRecipientInfo.
-
-< Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&url2=rfc9810&difftype=--html and RFC9629 >
 
 #### HKDF with SHA2 and SHA3 {#HKDF}
 
@@ -1162,7 +1162,8 @@ Specific conventions to be considered for PBMAC1 are specified in
 
 Symmetric key-based message authentication code (MAC) algorithms are used
 for deriving the symmetric encryption key when using PBKDF2, as described
-in {{PBKDF2}}, as well as with password-based MAC, as described in {{PBMac}}.
+in {{PBKDF2}}, with password-based MAC, as described in {{PBMac}}, and with
+kem-based MAC, as described in {{KDFKEM}}.
 
 MAC algorithm identifiers are located in the:
 
@@ -1170,7 +1171,7 @@ MAC algorithm identifiers are located in the:
 
 * messageAuthScheme field of PBMAC1,
 
-* mac field of KemBMParameter and PBMParameter, and
+* mac field of PBMParameter and KemBMParameter, and
 
 * prf field of PBKDF2-params.
 
