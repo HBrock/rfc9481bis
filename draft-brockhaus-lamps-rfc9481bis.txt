@@ -95,8 +95,8 @@ Table of Contents
      4.4.  Symmetric Key-Encryption Algorithms
        4.4.1.  AES Key Wrap
      4.5.  Key Derivation Algorithms
-       4.5.1.  Key Derivation with PasswordRecipientInfo
-       4.5.2.  Key Derivation with KEMRecipientInfo
+       4.5.1.  Key Derivation with Password Recipient Info
+       4.5.2.  Key Derivation with KEM Recipient Info
    5.  Content-Encryption Algorithms
      5.1.  AES-CBC
    6.  Message Authentication Code Algorithms
@@ -699,6 +699,10 @@ Table of Contents
 
 4.1.  Key Agreement Algorithms
 
+   This section provides references to object identifiers and
+   conventions for key agreement algorithms to be employed by CMP
+   implementations.
+
    The key agreement algorithm is referred to as PROT_ENC_ALG in
    Appendices C and D of [RFC9810], as KM_KA_ALG in the Lightweight CMP
    Profile [RFC9483], and Section 7.
@@ -739,7 +743,7 @@ Table of Contents
 4.1.2.  ECDH
 
    The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-   {#RFC5753} and SHALL be used in the ephemeral-static variant, as
+   [RFC5753] and SHALL be used in the ephemeral-static variant, as
    specified in Section 3.1 of [RFC5753], or the 1-Pass Elliptic Curve
    Menezes-Qu-Vanstone (ECMQV) variant, as specified in Section 3.2 of
    [RFC5753].  Static-static variants SHALL NOT be used.
@@ -790,6 +794,10 @@ Table of Contents
 
 4.2.  Key Transport Algorithms
 
+   This section provides references to object identifiers and
+   conventions for key transport algorithms to be employed by CMP
+   implementations.
+
    The key transport algorithm is also referred to as PROT_ENC_ALG in
    [CMP]Appendices C and D of [RFC9810] and as KM_KT_ALG in the
    Lightweight CMP Profile [RFC9483] and Section 7.
@@ -826,6 +834,10 @@ Table of Contents
 
 4.3.  Key Encapsulation Mechanism
 
+   This section provides references to object identifiers and
+   conventions for key encapsulation mechanism algorithms to be employed
+   by CMP implementations.
+
    The key encapsulation mechanism algorithm identifiers are located in
    the:
 
@@ -857,6 +869,10 @@ Table of Contents
    ToDo FrodoKEM
 
 4.4.  Symmetric Key-Encryption Algorithms
+
+   This section provides references to object identifiers and
+   conventions for symmetric key-encryption algorithms to be employed by
+   CMP implementations.
 
    The symmetric key-encryption algorithm is also referred to as
    KM_KW_ALG in Section 7.2 and the Lightweight CMP Profile [RFC9483].
@@ -908,6 +924,10 @@ Table of Contents
 
 4.5.  Key Derivation Algorithms
 
+   This section provides references to object identifiers and
+   conventions for key derivation algorithms to be employed by CMP
+   implementations.
+
    The key derivation algorithm is also referred to as KM_KD_ALG in
    Section 7.2 and the Lightweight CMP Profile [RFC9483].
 
@@ -916,7 +936,7 @@ Table of Contents
    technique CMS Password Recipient Info [RFC5652] or together with [CMS
    KEM Recipient Info] (#RFC9629).
 
-4.5.1.  Key Derivation with PasswordRecipientInfo
+4.5.1.  Key Derivation with Password Recipient Info
 
    Key derivation algorithm identifiers are located in the:
 
@@ -941,7 +961,7 @@ Table of Contents
    Further conventions to be considered for PBKDF2 are specified in
    Section 4.4.1 of [RFC3370] and Section 5.2 of [RFC8018].
 
-4.5.2.  Key Derivation with KEMRecipientInfo
+4.5.2.  Key Derivation with KEM Recipient Info
 
    Key derivation algorithm identifiers are located in the:
 
@@ -963,6 +983,10 @@ Table of Contents
    see RFC 9688
 
 5.  Content-Encryption Algorithms
+
+   This section provides references to object identifiers and
+   conventions for content-encryption algorithms to be employed by CMP
+   implementations.
 
    The content-encryption algorithm is also referred to as PROT_SYM_ALG
    in [CMP]Appendices C and D of [RFC9810], in the Lightweight CMP
@@ -1004,6 +1028,10 @@ Table of Contents
    are specified in [RFC3565].
 
 6.  Message Authentication Code Algorithms
+
+   This section provides references to object identifiers and
+   conventions for message authentication code algorithms to be employed
+   by CMP implementations.
 
    The message authentication code (MAC) is either used for shared
    secret-based CMP message protection or together with the password-
