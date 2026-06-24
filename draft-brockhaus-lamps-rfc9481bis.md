@@ -351,8 +351,9 @@ Specific conventions to be considered are specified in {{RFC8702}}.
 This section provides references to object identifiers and conventions for signature
 algorithms to be employed by CMP implementations.
 
-The signature algorithm is referred to as MSG_SIG_ALG in {{Appendices C and D of RFC9810}},
-in the [Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}}.
+The signature algorithm is referenced in {{Appendices C and D of RFC9810}}, in the
+[Lightweight CMP Profile](#RFC9483), and in {{AlgProfLWP}} as MSG_SIG_ALG.
+
 
 Signature algorithm identifiers are located in the:
 
@@ -750,16 +751,16 @@ CMP utilizes the following general key management techniques: key agreement,
 key transport, key encapsulation, and passwords.
 
 [CRMF](#RFC4211) and [CMP](#RFC9810) promote the use of
-[CMS EnvelopedData](#RFC5652) by deprecating the use of EncryptedValue.
+[CMS EnvelopedData](#RFC5652){{RFC9629}} by deprecating the use of EncryptedValue.
 
 ## Key Agreement Algorithms {#KeyAgree}
 
 This section provides references to object identifiers and conventions for key
 agreement algorithms to be employed by CMP implementations.
 
-The key agreement algorithm is referred to as PROT_ENC_ALG in
-{{Appendices C and D of RFC9810}}, as KM_KA_ALG in the [Lightweight
-CMP Profile](#RFC9483), and {{AlgProf}}.
+The key agreement algorithm is referenced in {{Appendices C and D of RFC9810}}
+as PROT_ENC_ALG, in the [Lightweight CMP Profile](#RFC9483) as KM_KA_ALG, and in
+{{AlgProf}}.
 
 Key agreement algorithms are only used in CMP when using [CMS EnvelopedData](#RFC5652)
 together with the key agreement key management technique. When a key agreement
@@ -801,11 +802,10 @@ Specific conventions to be considered are specified in {{Section 4.1 of RFC3370}
 ### ECDH {#ECDH}
 
 The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-{{RFC5753}} and SHALL be used in the
-ephemeral-static variant, as specified in {{Section 3.1 of RFC5753}},
-or the 1-Pass Elliptic Curve Menezes-Qu-Vanstone (ECMQV) variant, as
-specified in {{Section 3.2 of RFC5753}}. Static-static variants SHALL
-NOT be used.
+{{RFC5753}} and SHALL be used in the ephemeral-static variant, as
+specified in {{Section 3.1 of RFC5753}}, or the 1-Pass Elliptic Curve
+Menezes-Qu-Vanstone (ECMQV) variant, as specified in {{Section 3.2 of RFC5753}}.
+Static-static variants SHALL NOT be used.
 
 The ECDH key agreement algorithm used together with NIST-recommended SECP
 curves, see {{ECDSA}}, are identified by the following OIDs:
@@ -861,9 +861,9 @@ Specific conventions to be considered are specified in {{RFC8418}}.
 This section provides references to object identifiers and conventions for key
 transport algorithms to be employed by CMP implementations.
 
-The key transport algorithm is also referred to as PROT_ENC_ALG in
-[CMP]{{Appendices C and D of RFC9810}} and as KM_KT_ALG in the [Lightweight
-CMP Profile](#RFC9483) and {{AlgProf}}.
+The key transport algorithm is referenced in {{Appendices C and D of RFC9810}} as
+PROT_ENC_ALG and in the [Lightweight CMP Profile](#RFC9483) as KM_KT_ALG and in
+{{AlgProf}}.
 
 Key transport algorithms are only used in CMP when using
 [CMS](#RFC5652) EnvelopedData together with the key transport key
@@ -938,8 +938,8 @@ ToDo FrodoKEM
 This section provides references to object identifiers and conventions for
 symmetric key-encryption algorithms to be employed by CMP implementations.
 
-The symmetric key-encryption algorithm is also referred to as
-KM_KW_ALG in {{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
+The symmetric key-encryption algorithm is referenced in {{AlgProfLWP}} and in
+the [Lightweight CMP Profile](#RFC9483) as KM_KW_ALG.
 
 As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
@@ -993,8 +993,8 @@ Further conventions to be considered for AES key wrap are specified in
 This section provides references to object identifiers and conventions for key
 derivation algorithms to be employed by CMP implementations.
 
-The key derivation algorithm is also referred to as KM_KD_ALG in
-{{AlgProfLWP}} and the [Lightweight CMP Profile](#RFC9483).
+The key derivation algorithm is referenced in {{AlgProfLWP}} and in the
+[Lightweight CMP Profile](#RFC9483) as KM_KD_ALG.
 
 Key derivation algorithms are only used in [CMP](#RFC9810) when using CMS
 EnvelopedData together with the password-based key management technique
@@ -1051,9 +1051,8 @@ see RFC 9688
 This section provides references to object identifiers and conventions for
 content-encryption algorithms to be employed by CMP implementations.
 
-The content-encryption algorithm is also referred to as PROT_SYM_ALG
-in [CMP]{{Appendices C and D of RFC9810}}, in the [Lightweight CMP Profile](#RFC9483),
-and in {{AlgProf}}.
+The content-encryption algorithm is referenced in {{Appendices C and D of RFC9810}},
+in the [Lightweight CMP Profile](#RFC9483), and in {{AlgProf}} as PROT_SYM_ALG.
 
 Content-encryption algorithms are used in CMP when using [CMS
 EnvelopedData](#RFC5652) to transport a signed private key package in
@@ -1103,8 +1102,8 @@ The message authentication code (MAC) is either used for shared secret-based
 CMP message protection or together with the password-based key derivation
 function (PBKDF2).
 
-The MAC algorithm is also referred to as MSG_MAC_ALG in {{AlgProf}}, [CMP]
-{{Appendices C and D of RFC9810}}, and the [Lightweight CMP Profile](#RFC9483).
+The MAC algorithm is referenced in {{Appendices C and D of RFC9810}}, in the
+[Lightweight CMP Profile](#RFC9483), and in {{AlgProf}} as MSG_MAC_ALG.
 
 ## Password-Based MAC {#PBMac}
 
