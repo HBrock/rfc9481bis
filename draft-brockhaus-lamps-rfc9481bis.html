@@ -1559,8 +1559,8 @@ following OIDs:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-3-1">This section provides references to object identifiers and conventions for signature
 algorithms to be employed by CMP implementations.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The signature algorithm is referred to as MSG_SIG_ALG in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>,
-in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">The signature algorithm is referenced in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, in the
+<span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> as MSG_SIG_ALG.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Signature algorithm identifiers are located in the:<a href="#section-3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-4.1">
@@ -1966,7 +1966,7 @@ used to calculate the certHash in certConf messages <span class="bcp14">MUST</sp
 <p id="section-4-1">CMP utilizes the following general key management techniques: key agreement,
 key transport, key encapsulation, and passwords.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2"><span><a href="#RFC4211" class="internal xref">CRMF</a> [<a href="#RFC4211" class="cite xref">RFC4211</a>]</span> and <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> promote the use of
-<span><a href="#RFC5652" class="internal xref">CMS EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> by deprecating the use of EncryptedValue.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<span><a href="#RFC5652" class="internal xref">CMS EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span><span>[<a href="#RFC9629" class="cite xref">RFC9629</a>]</span> by deprecating the use of EncryptedValue.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <div id="KeyAgree">
 <section id="section-4.1">
         <h3 id="name-key-agreement-algorithms">
@@ -1974,9 +1974,9 @@ key transport, key encapsulation, and passwords.<a href="#section-4-1" class="pi
         </h3>
 <p id="section-4.1-1">This section provides references to object identifiers and conventions for key
 agreement algorithms to be employed by CMP implementations.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">The key agreement algorithm is referred to as PROT_ENC_ALG in
-Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, as KM_KA_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
-CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">The key agreement algorithm is referenced in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>
+as PROT_ENC_ALG, in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> as KM_KA_ALG, and in
+<a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">Key agreement algorithms are only used in CMP when using <span><a href="#RFC5652" class="internal xref">CMS EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>
 together with the key agreement key management technique. When a key agreement
 algorithm is used, a key-encryption algorithm (<a href="#SymKeyEnc" class="auto internal xref">Section 4.4</a>) is needed next to the
@@ -2024,10 +2024,10 @@ KeyAgreeRecipientInfo.<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
 <a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-ecdh" class="section-name selfRef">ECDH</a>
           </h4>
 <p id="section-4.1.2-1">The Elliptic Curve Diffie-Hellman (ECDH) key agreement is defined in
-<span>[<a href="#RFC5753" class="cite xref">RFC5753</a>]</span> and <span class="bcp14">SHALL</span> be used in the
-ephemeral-static variant, as specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>,
-or the 1-Pass Elliptic Curve Menezes-Qu-Vanstone (ECMQV) variant, as
-specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>. Static-static variants <span class="bcp14">SHALL NOT</span> be used.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC5753" class="cite xref">RFC5753</a>]</span> and <span class="bcp14">SHALL</span> be used in the ephemeral-static variant, as
+specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>, or the 1-Pass Elliptic Curve
+Menezes-Qu-Vanstone (ECMQV) variant, as specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>.
+Static-static variants <span class="bcp14">SHALL NOT</span> be used.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2-2">The ECDH key agreement algorithm used together with NIST-recommended SECP
 curves, see <a href="#ECDSA" class="auto internal xref">Section 3.2</a>, are identified by the following OIDs:<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4.1.2-3">
@@ -2085,9 +2085,9 @@ is identified by the following OIDs:<a href="#section-4.1.2-5" class="pilcrow">�
         </h3>
 <p id="section-4.2-1">This section provides references to object identifiers and conventions for key
 transport algorithms to be employed by CMP implementations.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">The key transport algorithm is also referred to as PROT_ENC_ALG in
-[CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> and as KM_KT_ALG in the <span><a href="#RFC9483" class="internal xref">Lightweight
-CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> and <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">The key transport algorithm is referenced in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> as
+PROT_ENC_ALG and in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> as KM_KT_ALG and in
+<a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">Key transport algorithms are only used in CMP when using
 <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> EnvelopedData together with the key transport key
 management technique.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
@@ -2193,8 +2193,8 @@ encapsulation mechanism algorithms to be employed by CMP implementations.<a href
         </h3>
 <p id="section-4.4-1">This section provides references to object identifiers and conventions for
 symmetric key-encryption algorithms to be employed by CMP implementations.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">The symmetric key-encryption algorithm is also referred to as
-KM_KW_ALG in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">The symmetric key-encryption algorithm is referenced in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and in
+the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> as KM_KW_ALG.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4-3">As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
 using the key agreement, password, or KEM-based key management technique
@@ -2254,8 +2254,8 @@ algorithm with AES-128 content-encryption algorithm); see <span>[<a href="#RFC85
         </h3>
 <p id="section-4.5-1">This section provides references to object identifiers and conventions for key
 derivation algorithms to be employed by CMP implementations.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.5-2">The key derivation algorithm is also referred to as KM_KD_ALG in
-<a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">The key derivation algorithm is referenced in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and in the
+<span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> as KM_KD_ALG.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.5-3">Key derivation algorithms are only used in <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> when using CMS
 EnvelopedData together with the password-based key management technique
 <span><a href="#RFC5652" class="internal xref">CMS Password Recipient Info</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> or together with [CMS KEM Recipient Info] (#RFC9629).<a href="#section-4.5-3" class="pilcrow">¶</a></p>
@@ -2342,9 +2342,8 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
       </h2>
 <p id="section-5-1">This section provides references to object identifiers and conventions for
 content-encryption algorithms to be employed by CMP implementations.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The content-encryption algorithm is also referred to as PROT_SYM_ALG
-in [CMP]Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>,
-and in <a href="#AlgProf" class="auto internal xref">Section 7</a>.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">The content-encryption algorithm is referenced in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>,
+in the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProf" class="auto internal xref">Section 7</a> as PROT_SYM_ALG.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">Content-encryption algorithms are used in CMP when using <span><a href="#RFC5652" class="internal xref">CMS
 EnvelopedData</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> to transport a signed private key package in
 case of central key generation or key archiving, a certificate to
@@ -2399,8 +2398,8 @@ message authentication code algorithms to be employed by CMP implementations.<a 
 <p id="section-6-2">The message authentication code (MAC) is either used for shared secret-based
 CMP message protection or together with the password-based key derivation
 function (PBKDF2).<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">The MAC algorithm is also referred to as MSG_MAC_ALG in <a href="#AlgProf" class="auto internal xref">Section 7</a>, [CMP]
-Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, and the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-3">The MAC algorithm is referenced in Appendices <a href="https://rfc-editor.org/rfc/rfc9810#appendix-C" class="relref">C</a> and <a href="https://rfc-editor.org/rfc/rfc9810#appendix-D" class="relref">D</a> of <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>, in the
+<span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span>, and in <a href="#AlgProf" class="auto internal xref">Section 7</a> as MSG_MAC_ALG.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <div id="PBMac">
 <section id="section-6.1">
         <h3 id="name-password-based-mac">

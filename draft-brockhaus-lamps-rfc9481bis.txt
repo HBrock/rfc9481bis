@@ -303,9 +303,9 @@ Table of Contents
    conventions for signature algorithms to be employed by CMP
    implementations.
 
-   The signature algorithm is referred to as MSG_SIG_ALG in Appendices C
-   and D of [RFC9810], in the Lightweight CMP Profile [RFC9483], and in
-   Section 7.2.
+   The signature algorithm is referenced in Appendices C and D of
+   [RFC9810], in the Lightweight CMP Profile [RFC9483], and in
+   Section 7.2 as MSG_SIG_ALG.
 
    Signature algorithm identifiers are located in the:
 
@@ -695,7 +695,7 @@ Table of Contents
    agreement, key transport, key encapsulation, and passwords.
 
    CRMF [RFC4211] and CMP [RFC9810] promote the use of CMS EnvelopedData
-   [RFC5652] by deprecating the use of EncryptedValue.
+   [RFC5652][RFC9629] by deprecating the use of EncryptedValue.
 
 4.1.  Key Agreement Algorithms
 
@@ -703,9 +703,9 @@ Table of Contents
    conventions for key agreement algorithms to be employed by CMP
    implementations.
 
-   The key agreement algorithm is referred to as PROT_ENC_ALG in
-   Appendices C and D of [RFC9810], as KM_KA_ALG in the Lightweight CMP
-   Profile [RFC9483], and Section 7.
+   The key agreement algorithm is referenced in Appendices C and D of
+   [RFC9810] as PROT_ENC_ALG, in the Lightweight CMP Profile [RFC9483]
+   as KM_KA_ALG, and in Section 7.
 
    Key agreement algorithms are only used in CMP when using CMS
    EnvelopedData [RFC5652] together with the key agreement key
@@ -798,9 +798,9 @@ Table of Contents
    conventions for key transport algorithms to be employed by CMP
    implementations.
 
-   The key transport algorithm is also referred to as PROT_ENC_ALG in
-   [CMP]Appendices C and D of [RFC9810] and as KM_KT_ALG in the
-   Lightweight CMP Profile [RFC9483] and Section 7.
+   The key transport algorithm is referenced in Appendices C and D of
+   [RFC9810] as PROT_ENC_ALG and in the Lightweight CMP Profile
+   [RFC9483] as KM_KT_ALG and in Section 7.
 
    Key transport algorithms are only used in CMP when using CMS
    [RFC5652] EnvelopedData together with the key transport key
@@ -874,8 +874,8 @@ Table of Contents
    conventions for symmetric key-encryption algorithms to be employed by
    CMP implementations.
 
-   The symmetric key-encryption algorithm is also referred to as
-   KM_KW_ALG in Section 7.2 and the Lightweight CMP Profile [RFC9483].
+   The symmetric key-encryption algorithm is referenced in Section 7.2
+   and in the Lightweight CMP Profile [RFC9483] as KM_KW_ALG.
 
    As the symmetric key-encryption key management technique is not used
    by CMP, the symmetric key-encryption algorithm is only needed when
@@ -928,8 +928,8 @@ Table of Contents
    conventions for key derivation algorithms to be employed by CMP
    implementations.
 
-   The key derivation algorithm is also referred to as KM_KD_ALG in
-   Section 7.2 and the Lightweight CMP Profile [RFC9483].
+   The key derivation algorithm is referenced in Section 7.2 and in the
+   Lightweight CMP Profile [RFC9483] as KM_KD_ALG.
 
    Key derivation algorithms are only used in CMP [RFC9810] when using
    CMS EnvelopedData together with the password-based key management
@@ -988,9 +988,9 @@ Table of Contents
    conventions for content-encryption algorithms to be employed by CMP
    implementations.
 
-   The content-encryption algorithm is also referred to as PROT_SYM_ALG
-   in [CMP]Appendices C and D of [RFC9810], in the Lightweight CMP
-   Profile [RFC9483], and in Section 7.
+   The content-encryption algorithm is referenced in Appendices C and D
+   of [RFC9810], in the Lightweight CMP Profile [RFC9483], and in
+   Section 7 as PROT_SYM_ALG.
 
    Content-encryption algorithms are used in CMP when using CMS
    EnvelopedData [RFC5652] to transport a signed private key package in
@@ -1037,9 +1037,9 @@ Table of Contents
    secret-based CMP message protection or together with the password-
    based key derivation function (PBKDF2).
 
-   The MAC algorithm is also referred to as MSG_MAC_ALG in Section 7,
-   [CMP] Appendices C and D of [RFC9810], and the Lightweight CMP
-   Profile [RFC9483].
+   The MAC algorithm is referenced in Appendices C and D of [RFC9810],
+   in the Lightweight CMP Profile [RFC9483], and in Section 7 as
+   MSG_MAC_ALG.
 
 6.1.  Password-Based MAC
 
