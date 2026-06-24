@@ -1709,7 +1709,8 @@ identified by the following OIDs:<a href="#section-3.2-9" class="pilcrow">¶</a>
 </pre><a href="#section-3.2-10" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-11">Specific conventions to be considered are specified in <span>[<a href="#RFC9688" class="cite xref">RFC9688</a>]</span>.<a href="#section-3.2-11" class="pilcrow">¶</a></p>
-<p id="section-3.2-12">As specified in <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span>, the NIST-recommended curves are identified by the following OIDs:<a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2-12">As specified in <span><a href="#NIST.SP.800-186" class="internal xref">NIST SP 800-186</a> [<a href="#NIST.SP.800-186" class="cite xref">NIST.SP.800-186</a>]</span> and <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span>, the NIST-recommended
+named curves are identified by the following OIDs:<a href="#section-3.2-12" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3.2-13">
 <pre>
    secp192r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
@@ -2015,7 +2016,7 @@ KeyAgreeRecipientInfo.<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
       us(840) rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 5 }
 </pre><a href="#section-4.1.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-4.1.1-4">Specific conventions to be considered are specified in <span><a href="https://rfc-editor.org/rfc/rfc3370#section-4.1" class="relref">Section 4.1</a> of [<a href="#RFC3370" class="cite xref">RFC3370</a>]</span>.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-4">Specific conventions to be considered are specified in <span>[<a href="#RFC3370" class="cite xref">RFC3370</a>]</span>.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ECDH">
@@ -2028,7 +2029,7 @@ KeyAgreeRecipientInfo.<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
 specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>, or the 1-Pass Elliptic Curve
 Menezes-Qu-Vanstone (ECMQV) variant, as specified in <span><a href="https://rfc-editor.org/rfc/rfc5753#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC5753" class="cite xref">RFC5753</a>]</span>.
 Static-static variants <span class="bcp14">SHALL NOT</span> be used.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-2">The ECDH key agreement algorithm used together with NIST-recommended SECP
+<p id="section-4.1.2-2">The ECDH key agreement algorithm used together with NIST-recommended named
 curves, see <a href="#ECDSA" class="auto internal xref">Section 3.2</a>, are identified by the following OIDs:<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4.1.2-3">
 <pre>
@@ -2123,8 +2124,8 @@ management technique.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
       us(840) rsadsi(113549) pkcs(1) pkcs-1(1) 7 }
 </pre><a href="#section-4.2.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2.1-6">Further conventions to be considered for PKCS #1 v1.5 are specified in
-<span><a href="https://rfc-editor.org/rfc/rfc3370#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and for RSAES-OAEP in <span>[<a href="#RFC3560" class="cite xref">RFC3560</a>]</span>.<a href="#section-4.2.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-6">Specific conventions to be considered for PKCS #1 v1.5 are specified in
+<span>[<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and for RSAES-OAEP in <span>[<a href="#RFC3560" class="cite xref">RFC3560</a>]</span>.<a href="#section-4.2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2151,7 +2152,6 @@ encapsulation mechanism algorithms to be employed by CMP implementations.<a href
             <p id="section-4.3-5.2.1">kemct field of KEMRecipientInfo<a href="#section-4.3-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.3-6">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.3-6" class="pilcrow">¶</a></p>
 <div id="RSA-KEM">
 <section id="section-4.3.1">
           <h4 id="name-rsa-kem">
@@ -2198,23 +2198,24 @@ the <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [
 <p id="section-4.4-3">As the symmetric key-encryption key management technique is not used
 by CMP, the symmetric key-encryption algorithm is only needed when
 using the key agreement, password, or KEM-based key management technique
-with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> (#RFC9629) EnvelopedData.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+with <span><a href="#RFC5652" class="internal xref">CMS</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span><span>[<a href="#RFC9629" class="cite xref">RFC9629</a>]</span> EnvelopedData.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.4-4">Key wrap algorithm identifiers are located in the:<a href="#section-4.4-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4-5.1">
-            <p id="section-4.4-5.1.1">parameters field of the KeyEncryptionAlgorithmIdentifier of
-KeyAgreeRecipientInfo, PasswordRecipientInfo, and KEMRecipientInfo.<a href="#section-4.4-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.4-5.1.1">keyEncryptionAlgorithm field of KeyTransRecipientInfo, KeyAgreeRecipientInfo,
+and PasswordRecipientInfo<a href="#section-4.4-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.4-5.2">
+            <p id="section-4.4-5.2.1">wrap field of KEMRecipientInfo and CMSORIforKEMOtherInfo.<a href="#section-4.4-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-4.4-6">Wrapped content-encryption keys are located in the:<a href="#section-4.4-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4-7.1">
-            <p id="section-4.4-7.1.1">encryptedKey field of RecipientEncryptedKeys (for key agreement),
-PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo
-(for KEM).<a href="#section-4.4-7.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.4-7.1.1">encryptedKey field of KeyTransRecipientInfo, RecipientEncryptedKey (in
+KeyAgreeRecipientInfo), PasswordRecipientInfo, and KEMRecipientInfo.<a href="#section-4.4-7.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.4-8">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.4-8" class="pilcrow">¶</a></p>
 <div id="AESWrap">
 <section id="section-4.4.1">
           <h4 id="name-aes-key-wrap">
@@ -2240,9 +2241,9 @@ PasswordRecipientInfo (for password-based key management), and KEMRecipientInfo
 <p id="section-4.4.1-4">The underlying encryption functions for the key wrap and
 content-encryption algorithms (as specified in <a href="#Enc" class="auto internal xref">Section 5</a>) and the key
 sizes for the two algorithms <span class="bcp14">MUST</span> be the same (e.g., AES-128 key wrap
-algorithm with AES-128 content-encryption algorithm); see <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>.<a href="#section-4.4.1-4" class="pilcrow">¶</a></p>
+algorithm with AES-128 content-encryption algorithm); see <span>[<a href="#RFC6033" class="cite xref">RFC6033</a>]</span>.<a href="#section-4.4.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.4.1-5">Further conventions to be considered for AES key wrap are specified in
-<span><a href="https://rfc-editor.org/rfc/rfc3394#section-2.2" class="relref">Section 2.2</a> of [<a href="#RFC3394" class="cite xref">RFC3394</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc3565#section-2.3.2" class="relref">Section 2.3.2</a> of [<a href="#RFC3565" class="cite xref">RFC3565</a>]</span>.<a href="#section-4.4.1-5" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC3394" class="cite xref">RFC3394</a>]</span> and <span>[<a href="#RFC3565" class="cite xref">RFC3565</a>]</span>.<a href="#section-4.4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2257,9 +2258,9 @@ derivation algorithms to be employed by CMP implementations.<a href="#section-4.
 <p id="section-4.5-2">The key derivation algorithm is referenced in <a href="#AlgProfLWP" class="auto internal xref">Section 7.2</a> and in the
 <span><a href="#RFC9483" class="internal xref">Lightweight CMP Profile</a> [<a href="#RFC9483" class="cite xref">RFC9483</a>]</span> as KM_KD_ALG.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.5-3">Key derivation algorithms are only used in <span><a href="#RFC9810" class="internal xref">CMP</a> [<a href="#RFC9810" class="cite xref">RFC9810</a>]</span> when using CMS
-EnvelopedData together with the password-based key management technique
-<span><a href="#RFC5652" class="internal xref">CMS Password Recipient Info</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> or together with [CMS KEM Recipient Info] (#RFC9629).<a href="#section-4.5-3" class="pilcrow">¶</a></p>
-<div id="key-derivation-with-password-recipient-info">
+EnvelopedData together with <span><a href="#RFC5652" class="internal xref">CMS Password Recipient Info</a> [<a href="#RFC5652" class="cite xref">RFC5652</a>]</span> or
+together with <span><a href="#RFC9629" class="internal xref">CMS KEM Recipient Info</a> [<a href="#RFC9629" class="cite xref">RFC9629</a>]</span>.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<div id="KDFPW">
 <section id="section-4.5.1">
           <h4 id="name-key-derivation-with-passwor">
 <a href="#section-4.5.1" class="section-number selfRef">4.5.1. </a><a href="#name-key-derivation-with-passwor" class="section-name selfRef">Key Derivation with Password Recipient Info</a>
@@ -2270,7 +2271,7 @@ EnvelopedData together with the password-based key management technique
               <p id="section-4.5.1-2.1.1">keyDerivationAlgorithm field of PasswordRecipientInfo.<a href="#section-4.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.5.1-3">When using the KEM-based key management technique with EnvelopedData together
+<p id="section-4.5.1-3">When using the password-based key management technique with EnvelopedData together
 with PKIProtection based on the message authentication code (MAC), the salt
 for the password-based MAC and key derivation function (KDF) must be
 chosen independently to ensure usage of independent symmetric keys.<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
@@ -2288,12 +2289,12 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
 </pre><a href="#section-4.5.1.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-4.5.1.1-4">Further conventions to be considered for PBKDF2 are specified in
-<span><a href="https://rfc-editor.org/rfc/rfc3370#section-4.4.1" class="relref">Section 4.4.1</a> of [<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8018#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1.1-4" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC3370" class="cite xref">RFC3370</a>]</span> and <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>.<a href="#section-4.5.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="key-derivation-with-kem-recipient-info">
+<div id="KDFKEM">
 <section id="section-4.5.2">
           <h4 id="name-key-derivation-with-kem-rec">
 <a href="#section-4.5.2" class="section-number selfRef">4.5.2. </a><a href="#name-key-derivation-with-kem-rec" class="section-name selfRef">Key Derivation with KEM Recipient Info</a>
@@ -2304,7 +2305,6 @@ chosen independently to ensure usage of independent symmetric keys.<a href="#sec
               <p id="section-4.5.2-2.1.1">kdf field of KemBMParameter and KEMRecipientInfo.<a href="#section-4.5.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-4.5.2-3">&lt; Check updates to the ASN.1 syntax, https://author-tools.ietf.org/iddiff?url1=rfc9480-00&amp;url2=rfc9810&amp;difftype=--html and RFC9629 &gt;<a href="#section-4.5.2-3" class="pilcrow">¶</a></p>
 <div id="HKDF">
 <section id="section-4.5.2.1">
             <h5 id="name-hkdf-with-sha2-and-sha3">
@@ -2471,7 +2471,8 @@ Section <a href="https://rfc-editor.org/rfc/rfc8018#section-7.1" class="relref">
         </h3>
 <p id="section-6.2-1">Symmetric key-based message authentication code (MAC) algorithms are used
 for deriving the symmetric encryption key when using PBKDF2, as described
-in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, as well as with password-based MAC, as described in <a href="#PBMac" class="auto internal xref">Section 6.1</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, with password-based MAC, as described in <a href="#PBMac" class="auto internal xref">Section 6.1</a>, and with
+kem-based MAC, as described in <a href="#KDFKEM" class="auto internal xref">Section 4.5.2</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">MAC algorithm identifiers are located in the:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.1">
@@ -2481,7 +2482,7 @@ in <a href="#PBKDF2" class="auto internal xref">Section 4.5.1.1</a>, as well as 
             <p id="section-6.2-3.2.1">messageAuthScheme field of PBMAC1,<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-3.3">
-            <p id="section-6.2-3.3.1">mac field of KemBMParameter and PBMParameter, and<a href="#section-6.2-3.3.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-3.3.1">mac field of PBMParameter and KemBMParameter, and<a href="#section-6.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.2-3.4">
             <p id="section-6.2-3.4.1">prf field of PBKDF2-params.<a href="#section-6.2-3.4.1" class="pilcrow">¶</a></p>
@@ -3135,6 +3136,11 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <span class="refAuthor">Kelsey, J.</span>, <span class="refAuthor">Change, S.</span>, and <span class="refAuthor">R. Perlner</span>, <span class="refTitle">"SHA-3 derived functions: cSHAKE, KMAC, TupleHash and ParallelHash"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-185</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-185">https://doi.org/10.6028/nist.sp.800-185</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-185</span>
         </dd>
 <dd class="break"></dd>
+<dt id="NIST.SP.800-186">[NIST.SP.800-186]</dt>
+        <dd>
+<span class="refAuthor">Chen, L.</span>, <span class="refAuthor">Moody, D.</span>, <span class="refAuthor">Regenscheid, A.</span>, <span class="refAuthor">Robinson, A.</span>, and <span class="refAuthor">K. Randall</span>, <span class="refTitle">"Recommendations for Discrete Logarithm-based Cryptography:: Elliptic Curve Domain Parameters"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-186</span>, <time datetime="2023-02" class="refDate">February 2023</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-186">https://doi.org/10.6028/nist.sp.800-186</a>&gt;</span>. <span class="annotation">NIST Special Publications (General) 800-186</span>
+        </dd>
+<dd class="break"></dd>
 <dt id="RFC2104">[RFC2104]</dt>
         <dd>
 <span class="refAuthor">Krawczyk, H.</span>, <span class="refAuthor">Bellare, M.</span>, and <span class="refAuthor">R. Canetti</span>, <span class="refTitle">"HMAC: Keyed-Hashing for Message Authentication"</span>, <span class="seriesInfo">RFC 2104</span>, <span class="seriesInfo">DOI 10.17487/RFC2104</span>, <time datetime="1997-02" class="refDate">February 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2104">https://www.rfc-editor.org/rfc/rfc2104</a>&gt;</span>. </dd>
@@ -3206,6 +3212,10 @@ scope of the profile.<a href="#section-9-5" class="pilcrow">¶</a></p>
 <dt id="RFC5758">[RFC5758]</dt>
         <dd>
 <span class="refAuthor">Dang, Q.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Moriarty, K.</span>, <span class="refAuthor">Brown, D.</span>, and <span class="refAuthor">T. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure: Additional Algorithms and Identifiers for DSA and ECDSA"</span>, <span class="seriesInfo">RFC 5758</span>, <span class="seriesInfo">DOI 10.17487/RFC5758</span>, <time datetime="2010-01" class="refDate">January 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5758">https://www.rfc-editor.org/rfc/rfc5758</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6033">[RFC6033]</dt>
+        <dd>
+<span class="refAuthor">Turner, S.</span>, <span class="refTitle">"Algorithms for Cryptographic Message Syntax (CMS) Encrypted Key Package Content Type"</span>, <span class="seriesInfo">RFC 6033</span>, <span class="seriesInfo">DOI 10.17487/RFC6033</span>, <time datetime="2010-12" class="refDate">December 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6033">https://www.rfc-editor.org/rfc/rfc6033</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8017">[RFC8017]</dt>
         <dd>
