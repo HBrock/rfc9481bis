@@ -80,7 +80,7 @@ informative:
   RFC4210:
   RFC5990:
   RFC9481:
-  I-D.ietf-pquip-pqc-engineers:
+  RFC9958:
 normative:
   ISO.18033-2:
     target: https://www.iso.org/standard/37971.html
@@ -89,6 +89,13 @@ normative:
     author:
     - org: ISO/IEC
     date: 2006-05
+  ISO.18033-2-AMD2:
+    target: https://www.iso.org/standard/86890.html
+    title: >
+      Information technology -- Security techniques -- Encryption algorithms -- Part 2: Asymmetric ciphers, Amendment 2
+    author:
+    - org: ISO/IEC
+    date: 2006-06
   NIST.FIPS.180-4:
     =: DOI.10.6028/NIST.FIPS.180-4
     ann: NIST Federal Information Processing Standards Publications 180-4
@@ -176,8 +183,6 @@ normative:
   I-D.ietf-lamps-cms-composite-sigs:
   I-D.ietf-lamps-fn-dsa-certificates:
   I-D.ietf-lamps-cms-fn-dsa:
-  I-D.ietf-lamps-kyber-certificates:
-  I-D.ietf-lamps-cms-kyber:
   I-D.ietf-lamps-pq-composite-kem:
   I-D.ietf-lamps-cms-composite-kem:
   I-D.longa-cfrg-frodokem:
@@ -213,7 +218,7 @@ problem, or the elliptic-curve discrete-logarithm problem can be easily broken b
 quantum computers, e.g., using the Shor's algorithm. The strength of symmetric cryptographic algorithms
 and hash functions is reduced by using the Grover's algorithm. However, the affected algorithms do not
 have to be completely replaced, the weakening can be addressed by increasing the key length used. For more
-information, please see [Post-Quantum Cryptography for Engineers](#I-D.ietf-pquip-pqc-engineers).
+information, please see [Post-Quantum Cryptography for Engineers](#RFC9958).
 
 {{Appendix C.2 of RFC9810}} refers to {{Section 7.1 of RFC9481}} for a set of algorithms that is
 mandatory to be supported by implementations conforming to {{Appendices C and D of RFC9810}}.
@@ -921,8 +926,8 @@ id‑rsa‑kem‑spki is introduced as an alias for id-rsa-kem.
 The algorithm identifier for RSA-KEM with KeyTransRecipientInfo is:
 
 ~~~~ asn.1
-   id-rsa-kem-spki OID ::= { iso(1) member-body(2) us(840) rsadsi(113549)
-      pkcs(1) pkcs-9(9) smime(16) alg(3) 14 }
+   id-rsa-kem-spki OID ::= { iso(1) member-body(2) us(840)
+      rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) alg(3) 14 }
 ~~~~
 
 Specific conventions to be considered are specified in {{RFC5990}} and {{RFC9690}}.
@@ -962,18 +967,124 @@ The algorithm identifier for RSA-KEM is:
 
 Specific conventions to be considered are specified in {{RFC9690}}.
 
-
 ### ML-KEM {#ML-KEM}
 
-[FIPS Pub 203](#NIST.FIPS.203), {{I-D.ietf-lamps-kyber-certificates}}, and {{I-D.ietf-lamps-cms-kyber}}
+The Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM) algorithm is
+defined in [FIPS Pub 203](#NIST.FIPS.203).
+
+The algorithm identifier for ML-KEM are:
+
+~~~~ asn.1
+   id-alg-ml-kem-512 OBJECT IDENTIFIER ::= { joint-iso-ccitt(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) kems(4) 1 }
+   id-alg-ml-kem-768 OBJECT IDENTIFIER ::= { joint-iso-ccitt(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) kems(4) 2 }
+   id-alg-ml-kem-1024 OBJECT IDENTIFIER ::= { joint-iso-ccitt(2)
+      country(16) us(840) organization(1) gov(101) csor(3)
+      nistAlgorithm(4) kems(4) 3 }
+~~~~
+
+Specific conventions to be considered are specified in {{RFC9935}} and {{RFC9936}}.
 
 ### Composite ML-KEM {#C-ML-KEM}
 
-{{I-D.ietf-lamps-pq-composite-kem}} and {{I-D.ietf-lamps-cms-composite-kem}}
+The Composite ML-KEM key encapsulation mechanism algorithm is defined in {{I-D.ietf-lamps-pq-composite-kem}}.
+
+The Composite ML-KEM key encapsulation mechanism algorithm combines of ML-KEM ({{ML-KEM}})
+with traditional algorithms RSA-OAEP ({{RSAEnc}}), ECDH ({{ECDH}}), and X25519/X448 ({{ECDH}}) to
+new PQ/T hybrid Key Encapsulation Mechanism (KEM) algorithms following the "Composite Design Philosophy"
+described in {{Section 1.2 of I-D.ietf-lamps-pq-composite-kem}}. A KEM combiner function is used to
+combine the two component shared secret keys into a single shared secret key. SHA3-256 ({{SHA3-SHAKE}})
+MAY be used as combiner construction for all combinations of algorithms.
+
+The Composite ML-DSA signature algorithm is identified by the following OIDs:
+
+~~~~ asn.1
+   id-MLKEM768-RSA2048-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 55 }
+   id-MLKEM768-RSA3072-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 56 }
+   id-MLKEM768-RSA4096-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 57 }
+   id-MLKEM768-X25519-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 58 }
+   id-MLKEM768-ECDH-P256-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 59 }
+   id-MLKEM768-ECDH-P384-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 60 }
+   id-MLKEM768-ECDH-brainpoolP256r1-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 61 }
+   id-MLKEM1024-RSA3072-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 62 }
+   id-MLKEM1024-ECDH-P384-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 63 }
+   id-MLKEM1024-ECDH-brainpoolP384r1-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 64 }
+   id-MLKEM1024-X448-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 65 }
+   id-MLKEM1024-ECDH-P521-SHA3-256 OBJECT IDENTIFIER ::= {
+      iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) alg(6) 66 }
+~~~~
+
+Specific conventions to be considered are specified in {{I-D.ietf-lamps-pq-composite-kem}}
+and {{I-D.ietf-lamps-cms-composite-kem}}.
+
 
 ### FrodoKEM {#FrodoKEM}
 
-{{I-D.longa-cfrg-frodokem}}, {{I-D.smyslov-lamps-frodokem-certificates}}, and {{I-D.chen-lamps-cms-frodokem}}
+The CCA-Secure Learning With Errors Key Encapsulation Mechanism (FrodoKEM) algorithm is
+defined in [ISO/IEC: 18033-2:2006/Amd2:2026](#ISO.18033-2-AMD2) and {{I-D.longa-cfrg-frodokem}}.
+
+The algorithm identifier for FrodoKEM using SHAKE 128 as pseudorandom generator (PRG) are:
+
+~~~~ asn.1
+   id-kem-frodokem976-shake OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 1 }
+   id-kem-frodokem1344-shake OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 2 }
+   id-kem-efrodokem976-shake OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 3 }
+   id-kem-efrodokem1344-shake OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 4 }
+~~~~
+
+The algorithm identifier for FrodoKEM using AES128 as pseudorandom generator (PRG) are:
+
+~~~~ asn.1
+   id-kem-frodokem976-aes OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 5 }
+   id-kem-frodokem1344-aes OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 6 }
+   id-kem-efrodokem976-aes OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 7 }
+   id-kem-efrodokem1344-aes OBJECT IDENTIFIER ::= { iso(1)
+      standard(0) encryption-algorithms(18033) part2(2)
+      key-encapsulation-mechanism(2) frodokem(7) 8 }
+~~~~
+
+Specific conventions to be considered are specified in {{I-D.smyslov-lamps-frodokem-certificates}}
+and {{I-D.chen-lamps-cms-frodokem}}.
 
 
 ## Symmetric Key-Encryption Algorithms {#SymKeyEnc}
@@ -1329,6 +1440,22 @@ Recommendations like those described in Table 2 of [NIST SP 800-57
 4.6 of [ECRYPT "Algorithms, Key Size and Protocols Report
 (2018)"](#ECRYPT.CSA.D5.4) provide general information on current
 cryptographic algorithms.
+
+< ToDo: add list of PQC algorithms with their cryptographic strength, while
+in general is difficult to do since there is no academic consensus on how
+to compare the "bits of security" against classical attackers and "qubits
+of security" against quantum attackers.
+
+See {{Appendix B of I-D.smyslov-lamps-frodokem-certificates}}
+Instead of defining the strength of a quantum algorithm in a traditional
+manner using the imprecise notion of bits of security, NIST has defined
+security levels by picking a reference scheme, which NIST expects to offer
+notable levels of resistance to both quantum and classical attack. To wit,
+a KEM algorithm that achieves NIST PQC security must require computational
+resources to break IND-CCA security comparable or greater than that required
+for key search on AES-128, AES-192, and AES-256 for Levels 1, 3, and 5,
+respectively. Levels 2 and 4 use collision search for SHA-256 and SHA-384
+as reference. >
 
 The overall cryptographic strength of CMP implementations will depend
 on several factors, including:
